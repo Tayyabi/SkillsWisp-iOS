@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct SettingsScreen: View {
+struct SettingsView: View {
+    
     var body: some View {
         
         //NavigationView {
@@ -28,12 +29,12 @@ struct SettingsScreen: View {
                             
                             VStack(alignment: .leading) {
                                 
-                                Text("John Smith")
+                                Text("\(UserDefaults.standard.string(forKey: "full_name") ?? "UnKnown")")
                                     .foregroundColor(.white)
                                     .fontWeight(.semibold)
                                     .font(.title2)
                                 
-                                Text("johnsmith@gmail.com")
+                                Text("\(UserDefaults.standard.string(forKey: "email") ?? "UnKnown")")
                                     .accentColor(.white)
                                     .font(.system(size: 14))
                                 
@@ -42,7 +43,7 @@ struct SettingsScreen: View {
                             Spacer()
                             
                             NavigationLink(destination: {
-                                MyProfileScreen()
+                                MyProfileView()
                             }, label: {
                                 Image("ic_right_arrow")
                             })
@@ -52,7 +53,7 @@ struct SettingsScreen: View {
                     }
                     
                     
-                    NavigationLink(destination: BookmarkScreen(), label: {
+                    NavigationLink(destination: BookmarkView(), label: {
                         HStack {
                             Text("Bookmarked Notes")
                                 .foregroundColor(Color.black)
@@ -90,7 +91,7 @@ struct SettingsScreen: View {
                     .padding(20)
                     .background(Color.gray.opacity(0.2).cornerRadius(10))
                     
-                    NavigationLink(destination: ContactUsScreen(), label: {
+                    NavigationLink(destination: ContactUsView(), label: {
                         HStack {
                             Text("Contact Us")
                                 .foregroundColor(Color.black)
@@ -105,7 +106,7 @@ struct SettingsScreen: View {
                     })
                     
                     
-                    NavigationLink(destination: AboutUsScreen(), label: {
+                    NavigationLink(destination: AboutUsView(), label: {
                     HStack {
                         Text("About Us")
                             .foregroundColor(Color.black)
@@ -119,7 +120,7 @@ struct SettingsScreen: View {
                     .background(Color.gray.opacity(0.2).cornerRadius(10))
                     })
                     
-                    NavigationLink(destination: TermsConditionScreen(), label: {
+                    NavigationLink(destination: TermsConditionView(), label: {
                         HStack {
                             Text("Privacy Policy")
                                 .foregroundColor(Color.black)
@@ -137,7 +138,7 @@ struct SettingsScreen: View {
                     
                     
                     NavigationLink(destination: {
-                        LoginScreen()
+                        LoginView()
                         
                     }, label: {
                         Text("Log out")
@@ -155,6 +156,6 @@ struct SettingsScreen: View {
 
 struct SettingsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsScreen()
+        SettingsView()
     }
 }

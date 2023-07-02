@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContactUsScreen: View {
+struct ContactUsView: View {
     
     @State var email: String = ""
     @State var message: String = "Message"
@@ -80,6 +80,6 @@ struct ContactUsScreen: View {
 
 struct ContactUsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ContactUsScreen()
+        ContactUsView()
     }
 }

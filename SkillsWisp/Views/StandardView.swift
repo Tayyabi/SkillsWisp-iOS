@@ -7,22 +7,14 @@
 
 import SwiftUI
 
-struct MatricScreen: View {
+struct StandardView: View {
     
     
-    @State var subjects: [Subject] = [
-        Subject(name: "Physics", background: "bg_physics"),
-        Subject(name: "Chemistry", background: "bg_chemistry"),
-        Subject(name: "Mathematics", background: "bg_maths"),
-        Subject(name: "Computer Science", background: "bg_cs"),
-        Subject(name: "Physics", background: "bg_physics"),
-        Subject(name: "Chemistry", background: "bg_chemistry"),
-        Subject(name: "Mathematics", background: "bg_maths"),
-        Subject(name: "Computer Science", background: "bg_cs")
-        
-    ]
+    @State var backgrounds: [String] = ["bg_physics","bg_chemistry","bg_maths","bg_cs"]
+    @State private var counter: Int = 0
     
     @Environment(\.presentationMode) var presentationMode
+    @StateObject var vm = StandardViewModel()
     
     var body: some View {
         
@@ -38,7 +30,6 @@ struct MatricScreen: View {
                         Image("bg_matric")
                             .aspectRatio(contentMode: .fit)
                             
-                        
                         
                         HStack {
                             
@@ -84,18 +75,22 @@ struct MatricScreen: View {
                     
                     ScrollView(showsIndicators: false) {
 
-                        ForEach(subjects, id: \.self) { subject in
+                        ForEach(vm.savedEntities.indices, id: \.self) { index in
 
-                            NavigationLink(destination: SubjectScreen(), label: {
+                            let subject = vm.savedEntities[index]
+                                
+                            
+                            NavigationLink(destination: SubjectView(), label: {
 
                                 ZStack {
 
-                                    Image("\(subject.background)")
-                                        .resizable()
+                                    Image("\(backgrounds[index % backgrounds.count])")
+                                                               .resizable()
+                                    
 
                                     VStack {
 
-                                        Text("\(subject.name)")
+                                        Text("\(subject.name ?? "")")
                                             .foregroundColor(.white)
                                             .fontWeight(.semibold)
                                             .frame(
@@ -107,12 +102,11 @@ struct MatricScreen: View {
                                         Text("Get solved notes by top professors of Pakistan")
                                             .foregroundColor(.white)
                                             .font(.system(size: 14))
-                                            .padding(.top, 1)
+                                            .padding(.top, 0.7)
                                             .frame(
                                                 minWidth: 0,
                                                 maxWidth: .infinity,
                                                 alignment: .leading
-
                                             )
 
                                     }
@@ -122,7 +116,7 @@ struct MatricScreen: View {
                                 .padding([.leading,.trailing])
                             })
 
-
+                           
 
                         }
 
@@ -137,10 +131,11 @@ struct MatricScreen: View {
         .navigationBarBackButtonHidden(true)
         
     }
+    
 }
 
 struct MatricScreen_Previews: PreviewProvider {
     static var previews: some View {
-        MatricScreen()
+        StandardView()
     }
 }

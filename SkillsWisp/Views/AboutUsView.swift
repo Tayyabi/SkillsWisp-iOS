@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AboutUsScreen: View {
+struct AboutUsView: View {
     var body: some View {
         
         ScrollView{
@@ -29,6 +29,6 @@ struct AboutUsScreen: View {
 
 struct AboutUsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        AboutUsScreen()
+        AboutUsView()
     }
 }

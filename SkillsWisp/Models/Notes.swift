@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct Classes: Identifiable  {
+struct Notes: Identifiable, Hashable  {
     
     let id: String = UUID().uuidString
     let name: String

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ReviewPopup: View {
+struct ReviewView: View {
     
     @State var selected: Int = -1
     
@@ -63,6 +63,6 @@ struct ReviewPopup: View {
 
 struct ReviewPopup_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewPopup()
+        ReviewView()
     }
 }

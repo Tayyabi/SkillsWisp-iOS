@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BookmarkScreen: View {
+struct BookmarkView: View {
     var body: some View {
     
         NavigationView {
@@ -90,6 +90,6 @@ struct BookmarkScreen: View {
 
 struct BookmarkScreen_Previews: PreviewProvider {
     static var previews: some View {
-        BookmarkScreen()
+        BookmarkView()
     }
 }

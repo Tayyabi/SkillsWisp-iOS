@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TermsConditionScreen: View {
+struct TermsConditionView: View {
     var body: some View {
         
         ScrollView{
@@ -55,6 +55,6 @@ struct TermsConditionScreen: View {
 
 struct TermsConditionScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TermsConditionScreen()
+        TermsConditionView()
     }
 }

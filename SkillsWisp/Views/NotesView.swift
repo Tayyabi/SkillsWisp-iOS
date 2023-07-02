@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NotesScreen: View {
+struct NotesView: View {
     
     
     @State var showView: Bool = false
@@ -48,7 +48,7 @@ struct NotesScreen: View {
                                     .background(Circle().foregroundColor(.white))
                             })
                             .popover(isPresented: $showView) {
-                                ReviewsScreen()
+                                ReviewsView()
 //                                    .cornerRadius(30)
 //                                    .frame(height: UIScreen.main.bounds.height*0.75)
 //                                    .transition(.move(edge: .bottom))
@@ -112,6 +112,6 @@ struct NotesScreen: View {
 
 struct NotesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NotesScreen()
+        NotesView()
     }
 }

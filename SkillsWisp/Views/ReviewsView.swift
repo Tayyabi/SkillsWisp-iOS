@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ReviewsScreen: View {
+struct ReviewsView: View {
     
     @State var selected: Int = -1
     @State var comment: String = ""
@@ -207,7 +207,7 @@ struct ReviewsScreen: View {
             }
             
             if self.showReview {
-                ReviewPopup()
+                ReviewView()
             }
         }
     }
@@ -215,6 +215,6 @@ struct ReviewsScreen: View {
 
 struct ReviewsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewsScreen()
+        ReviewsView()
     }
 }

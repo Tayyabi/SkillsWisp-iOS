@@ -7,10 +7,13 @@
 
 import SwiftUI
 
-struct LoginScreen: View {
+struct LoginView: View {
     
-    @State var email: String = ""
+    @State var email: String = "muhammadtayyab703@gmail.com"
     @State var password: String = ""
+    
+    
+    @StateObject var vm = LoginViewModel()
     
     var body: some View {
         
@@ -76,22 +79,31 @@ struct LoginScreen: View {
                     
                     Spacer()
                     
-                    NavigationLink(
-                        destination: HomeScreen(),
-                        label: {
-                            Text("Login")
-                                .font(.headline)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
-                                .padding(15)
-                                .frame(width: 300)
-                                .background(
-                                    Color("clr_purple_mimosa")
-                                        .cornerRadius(10)
-                                        .shadow(radius: 6)
-                                
-                            )
+                    Button(action: {
+                        guard !email.isEmpty else {
+                            return
+                        }
+                        vm.authenticateUser(email: email)
+                    }, label: {
+                        Text("Login")
+                            .font(.headline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .padding(15)
+                            .frame(width: 300)
+                            .background(
+                                Color("clr_purple_mimosa")
+                                    .cornerRadius(10)
+                                    .shadow(radius: 6)
+                            
+                        )
                     })
+                    
+                    NavigationLink(destination:HomeView(),isActive: $vm.shouldNavigate) {
+                        EmptyView()
+                    }
+                    .hidden()
+                    
                     
                     
                     HStack{
@@ -99,7 +111,7 @@ struct LoginScreen: View {
                         Text("Don't have account?")
                             .font(.system(size: 16))
                         
-                        NavigationLink(destination: CreateAccountScreen(), label: {
+                        NavigationLink(destination: CreateAccountView(), label: {
                             Text("SIGN UP")
                                 .foregroundColor(Color("clr_purple_mimosa"))
                         })
@@ -119,6 +131,6 @@ struct LoginScreen: View {
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LoginScreen()
+        LoginView()
     }
 }

@@ -31,7 +31,7 @@ struct CheckboxToggleStyle: ToggleStyle {
     }
 }
 
-struct CreateAccountScreen: View {
+struct CreateAccountView: View {
     
     @State var name: String = ""
     @State var email: String = ""
@@ -39,6 +39,7 @@ struct CreateAccountScreen: View {
     @State var password: String = ""
     
     @State private var isChecked = false
+    @StateObject var vm = CreateAccountViewModel()
     
     var body: some View {
         
@@ -132,6 +133,12 @@ struct CreateAccountScreen: View {
                     
                     Button(action:{
                         
+                        guard !name.isEmpty && !email.isEmpty && !phoneno.isEmpty else {
+                            return
+                        }
+                        
+                        vm.addUser(user: User(user_id: UUID(), full_name: name, email: email, phone_no: phoneno, pic_url: ""))
+                        
                     }, label: {
                         
                         Text("Register")
@@ -177,6 +184,6 @@ struct CreateAccountScreen: View {
 
 struct CreateAccountScreen_Previews: PreviewProvider {
     static var previews: some View {
-        CreateAccountScreen()
+        CreateAccountView()
     }
 }

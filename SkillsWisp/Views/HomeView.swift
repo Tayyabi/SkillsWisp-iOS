@@ -7,14 +7,27 @@
 
 import SwiftUI
 
-struct HomeScreen: View {
+struct HomeView: View {
+    
+    @State var icons: [String] = ["ic_matric","ic_inter","ic_bachelors"]
+    @State var backgrounds: [String] = ["clr_aqua_squeeze","clr_yellow_green","clr_tropical_blue"]
     
     @State var notes: String = ""
     
+    @StateObject var vm = HomeViewModel()
+    
     let columns: [GridItem] = [
         
-        GridItem(.flexible(), spacing: 6, alignment: nil),
-        GridItem(.flexible(), spacing: 6, alignment: nil),
+        GridItem(.flexible(), spacing: 15, alignment: nil),
+        GridItem(.flexible(), spacing: 15, alignment: nil),
+    ]
+    
+    
+    @State var classes: [Notes] = [
+        Notes(name: "9th Class Physics", background: "bn_class_1"),
+        Notes(name: "9th Class Physics", background: "bn_class_2"),
+        Notes(name: "9th Class Physics", background: "bn_class_3"),
+        Notes(name: "9th Class Physics", background: "bn_class_4")
     ]
     
     var body: some View {
@@ -61,58 +74,29 @@ struct HomeScreen: View {
                            
                             HStack {
                                 
-                                NavigationLink(destination: MatricScreen(), label: {
-                                    VStack {
+                                ForEach(vm.savedEntities.indices, id: \.self) { index in
+                                    
+                                    let standard = vm.savedEntities[index]
+                                    NavigationLink(destination: StandardView(), label: {
+                                        VStack {
+                                            
+                                            Image("\(icons[index % icons.count])")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 100, height: 100)
+                                            Text("\(standard.name ?? "")")
+                                                .foregroundColor(.black)
+                                                .font(.system(size: 14))
+                                        }
+                                        .padding()
+                                        .background(
+                                            Color("\(backgrounds[index % backgrounds.count])")
+                                                .cornerRadius(10)
+                                        )
                                         
-                                        Image("ic_matric")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 100, height: 100)
-                                        Text("Matriculation")
-                                            .foregroundColor(.black)
-                                            .font(.system(size: 14))
-                                    }
-                                    .padding()
-                                    .background(
-                                        Color("clr_aqua_squeeze")
-                                            .cornerRadius(10)
-                                    )
-                                    
-                                })
-                                
-                                
-                                VStack {
-                                    
-                                    Image("ic_inter")
-                                        .resizable()
-                                    .aspectRatio( contentMode: .fit)
-                                    .frame(width: 100, height: 100)
-                                    Text("Intermediate")
-                                        .font(.system(size: 14))
+                                    })
                                 }
-                                .padding()
-                                .background(
-                                    Color("clr_yellow_green")
-                                        .cornerRadius(10)
-                                )
                                 
-                                
-                                
-                                VStack {
-                                    
-                                    Image("ic_bachelors")
-                                        .resizable()
-                                        .aspectRatio( contentMode: .fit)
-                                        .frame(width: 100, height: 100)
-                    
-                                    Text("Bachelors")
-                                        .font(.system(size: 14))
-                                }
-                                .padding()
-                                .background(
-                                    Color("clr_tropical_blue")
-                                        .cornerRadius(10)
-                                )
                             }
                         }
                         .frame(height: 150)
@@ -123,28 +107,30 @@ struct HomeScreen: View {
                         
                         LazyVGrid(
                             columns: columns,
-                            spacing: 10,
+                            spacing: 15,
                             pinnedViews: [],
                             content: {
+                                
                                 HStack {
-                                    
                                     
                                     Image("ic_past_paper")
                                         .resizable()
                                         .frame(width: 20, height: 20)
-                                        .padding(10)
-                                        .background(Color("blue").cornerRadius(radius: 6, corners: .allCorners))
-                                        .shadow(radius: 0)
-                                    
+                                        .padding(8)
+                                        .background(Color("clr_tropical_blue").cornerRadius(radius: 6, corners: .allCorners))
                                     
                                     Text("Past Papers")
                                         .font(.system(size: 14))
                                     
                                 }
-                                .frame(width: 140)
+                                .frame(
+                                    minWidth: 0,
+                                    maxWidth: .infinity
+                                )
                                 .padding()
                                 .background(Color.white.cornerRadius(radius: 6, corners: .allCorners))
-                                .shadow(radius: 2)
+                                .shadow(radius: 1)
+                                
                             
                                 HStack {
                                     
@@ -152,20 +138,22 @@ struct HomeScreen: View {
                                     Image("ic_guess_paper")
                                         .resizable()
                                         .frame(width: 20, height: 20)
-                                        .padding(10)
+                                        .padding(8)
                                         .background(Color("clr_v_light_purple")
                                             .cornerRadius(radius: 6, corners: .allCorners))
-                                        .shadow(radius: 0)
                                     
                                     
                                     Text("Guess Papers")
                                         .font(.system(size: 14))
                                     
                                 }
-                                .frame(width: 140)
+                                .frame(
+                                    minWidth: 0,
+                                    maxWidth: .infinity
+                                )
                                 .padding()
                                 .background(Color.white.cornerRadius(radius: 6, corners: .allCorners))
-                                .shadow(radius: 2)
+                                .shadow(radius: 1)
                                 
                                 
                                 
@@ -173,24 +161,25 @@ struct HomeScreen: View {
                                 
                                 HStack {
                                     
-                                    
                                     Image("ic_date_sheet")
                                         .resizable()
                                         .frame(width: 20, height: 20)
-                                        .padding(10)
+                                        .padding(8)
                                         .background(Color("clr_light_orange")
                                             .cornerRadius(radius: 6, corners: .allCorners))
-                                        .shadow(radius: 0)
                                     
                                     
                                     Text("Date Sheet")
                                         .font(.system(size: 14))
                                     
                                 }
-                                .frame(width: 140)
+                                .frame(
+                                    minWidth: 0,
+                                    maxWidth: .infinity
+                                )
                                 .padding()
                                 .background(Color.white.cornerRadius(radius: 6, corners: .allCorners))
-                                .shadow(radius: 2)
+                                .shadow(radius: 1)
                                 
                                 
                                 HStack {
@@ -199,73 +188,78 @@ struct HomeScreen: View {
                                     Image("ic_bookmark")
                                         .resizable()
                                         .frame(width: 20, height: 20)
-                                        .padding(10)
+                                        .padding(8)
                                         .background(Color("clr_pale_pink")
                                             .cornerRadius(radius: 6, corners: .allCorners))
-                                        .shadow(radius: 0)
                                     
                                     
                                     Text("Bookmarked")
                                         .font(.system(size: 14))
                                     
                                 }
-                                .frame(width: 140)
+                                .frame(
+                                    minWidth: 0,
+                                    maxWidth: .infinity
+                                )
                                 .padding()
                                 .background(Color.white.cornerRadius(radius: 6, corners: .allCorners))
-                                .shadow(radius: 2)
+                                .shadow(radius: 1)
                                 
                             })
                         
-                        HStack {
-                            
-                            Image("ic_ai")
-                                .resizable()
-                                .frame(width: 110, height: 120)
-                            
-                            VStack(alignment: .leading) {
-                                Text("Ask AI")
-                                    
-                                    .fontWeight(.semibold)
-                                    .padding(0)
-                            
-                                Text("Ask the questions related to your study from Artificial Intelligence Model"
-                                    )
-                                .padding(0)
-                                .font(.system(size: 14))
-                                .foregroundColor(Color("clr_dark_grey"))
-                                .multilineTextAlignment(.leading)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .frame(height: 40)
+                        Text("Popular Notes")
+                            .fontWeight(.semibold)
+                            .padding(.top)
+                        
+                        
+                        ScrollView(.horizontal, showsIndicators: false)
+                        {
+                           
+                            HStack {
                                 
-                                
-                                Button(action: {
+                                ForEach(classes, id: \.self) { index in
                                     
-                                }, label: {
-                                    Text("Get in")
-                                        .foregroundColor(Color.orange)
-                                        .padding(12)
-                                        .padding([.leading, .trailing])
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 15)
-                                                .stroke(lineWidth: 1).foregroundColor(Color.orange)
+                                    //let standard = self.classes[index]
+                                    NavigationLink(destination: {}, label: {
+                                        
+                                        VStack(alignment: .leading, spacing: 10) {
+                                            
+                                            HStack(alignment: .center) {
+                                                
+                                                Image("ic_notes")
+                                                
+                                                Spacer()
+                                                
+                                                Image(systemName: "star.fill")
+                                                    .foregroundColor(.yellow)
+                                                Text("4.9")
+                                                    .foregroundColor(.black)
+                                                    .font(.system(size: 14))
+                                            }
+                                            
+                                            Text("9th Class Notes by Ali Asfand")
+                                                .font(.system(size: 16))
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .foregroundColor(.black)
+                                                .padding(.top)
+                                            
+                                            Text("14 Chapters | Solved Excercise")
+                                                .font(.system(size: 14))
+                                                .foregroundColor(.gray)
+                                        }
+                                        .padding()
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(Color("clr_purple_mimosa"), lineWidth: 1)
                                         )
-                                })
-                                .padding(.top, 10)
-                                
+                                        .padding(5)
+                                        
+                                    })
+                                }
+
                             }
-                            
-                            
                         }
-                        .frame(
-                              minWidth: 0,
-                              maxWidth: .infinity,
-                              minHeight: 0,
-                              maxHeight: .infinity,
-                              alignment: .topLeading
-                            )
-                        .padding()
-                        .background(Color("clr_light_orange").cornerRadius(radius: 6, corners: .allCorners))
-                        .shadow(radius: 2)
+                        .frame(height: 150)
                         
                         
                         Spacer()
@@ -278,14 +272,14 @@ struct HomeScreen: View {
             }
             
             .navigationBarItems(
-                leading: NavigationLink(destination: SettingsScreen(),label: {
+                leading: NavigationLink(destination: SettingsView(),label: {
                     
                     Image("ic_menu")
                         .resizable()
                         .frame(width: 30, height: 30)
                     
                 }),
-                trailing: NavigationLink(destination: MyProfileScreen(),label: {
+                trailing: NavigationLink(destination: MyProfileView(),label: {
                     
                     Image("ic_profile")
                         .resizable()
@@ -303,6 +297,6 @@ struct HomeScreen: View {
 
 struct HomeScreen_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreen()
+        HomeView()
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NotesCommentsScreen: View {
+struct NotesCommentsView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
@@ -74,6 +74,6 @@ struct NotesCommentsScreen: View {
 
 struct NotesCommentsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NotesCommentsScreen()
+        NotesCommentsView()
     }
 }

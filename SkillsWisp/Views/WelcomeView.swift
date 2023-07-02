@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WelcomeScreen: View {
+struct WelcomeView: View {
     
     
     var body: some View {
@@ -33,7 +33,7 @@ struct WelcomeScreen: View {
                         .font(.system(size: 14))
                         .padding(.all)
                     
-                    NavigationLink(destination: LoginScreen(), label: {
+                    NavigationLink(destination: LoginView(), label: {
                         
                         HStack {
                             
@@ -80,6 +80,6 @@ struct WelcomeScreen: View {
 
 struct WelcomeScreen_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeScreen()
+        WelcomeView()
     }
 }

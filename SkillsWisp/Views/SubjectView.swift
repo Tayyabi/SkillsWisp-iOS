@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SubjectScreen: View {
+struct SubjectView: View {
     
     
     var gridItems: [GridItem] = [
@@ -15,15 +15,15 @@ struct SubjectScreen: View {
         GridItem(.flexible(), spacing: 0, alignment: .leading)
     ]
     
-    @State var classes: [Classes] = [
-        Classes(name: "9th Class Physics", background: "bn_class_1"),
-        Classes(name: "9th Class Physics", background: "bn_class_2"),
-        Classes(name: "9th Class Physics", background: "bn_class_3"),
-        Classes(name: "9th Class Physics", background: "bn_class_4"),
-        Classes(name: "9th Class Physics", background: "bn_class_1"),
-        Classes(name: "9th Class Physics", background: "bn_class_2"),
-        Classes(name: "9th Class Physics", background: "bn_class_3"),
-        Classes(name: "9th Class Physics", background: "bn_class_4")
+    @State var classes: [Notes] = [
+        Notes(name: "9th Class Physics", background: "bn_class_1"),
+        Notes(name: "9th Class Physics", background: "bn_class_2"),
+        Notes(name: "9th Class Physics", background: "bn_class_3"),
+        Notes(name: "9th Class Physics", background: "bn_class_4"),
+        Notes(name: "9th Class Physics", background: "bn_class_1"),
+        Notes(name: "9th Class Physics", background: "bn_class_2"),
+        Notes(name: "9th Class Physics", background: "bn_class_3"),
+        Notes(name: "9th Class Physics", background: "bn_class_4")
     ]
     @Environment(\.presentationMode) var presentationMode
     
@@ -89,7 +89,7 @@ struct SubjectScreen: View {
                             
                             ForEach(classes) { classs in
                                 
-                                NavigationLink(destination: NotesScreen(), label: {
+                                NavigationLink(destination: NotesView(), label: {
                                    
     
                                         VStack(alignment: .leading) {
@@ -150,6 +150,6 @@ struct SubjectScreen: View {
 
 struct SubjectScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SubjectScreen()
+        SubjectView()
     }
 }

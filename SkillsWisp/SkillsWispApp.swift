@@ -13,7 +13,8 @@ struct SkillsWispApp: App {
 
     var body: some Scene {
         WindowGroup {
-            SplashScreen()
+            SplashView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

@@ -33,7 +33,7 @@ extension View {
     }
 }
 
-struct SplashScreen: View {
+struct SplashView: View {
     
     var body: some View {
         
@@ -90,7 +90,7 @@ struct SplashScreen: View {
                             
                             Spacer()
                             
-                            NavigationLink(destination: WelcomeScreen(), label: {
+                            NavigationLink(destination: WelcomeView(), label: {
                                 
                                 Text("Get Started")
                                     .font(.headline)
@@ -123,6 +123,6 @@ struct SplashScreen: View {
 
 struct SplashScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SplashScreen()
+        SplashView()
     }
 }
