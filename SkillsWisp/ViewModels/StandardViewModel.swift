@@ -11,17 +11,21 @@ import CoreData
 class StandardViewModel: ObservableObject {
     
     @Published var savedEntities: [SubjectEntity] = []
-    
+    @Published var data: String = ""
     
     private let persistenceController = PersistenceController.shared
     private var viewContext: NSManagedObjectContext {
         return persistenceController.container.viewContext
     }
     init() {
-        fetchSubjects()
+        //deleteAllEntities()
+        //fetchAllSubjects()
+    }
+    init(data: String) {
+        self.data = data
     }
     
-    func fetchSubjects(){
+    func fetchAllSubjects() {
         let fetchRequest: NSFetchRequest<SubjectEntity> = SubjectEntity.fetchRequest()
 
         do {
@@ -38,11 +42,48 @@ class StandardViewModel: ObservableObject {
         }
     }
     
+    func fetchSubjectsById(id: String) {
+        
+        let fetchRequest: NSFetchRequest<SubjectEntity> = SubjectEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "subject_id == %@", id)
+        
+        do {
+            
+            let matchingUsers = try viewContext.fetch(fetchRequest)
+            
+            if matchingUsers.isEmpty {
+                print("Email does not exist")
+                
+            } else {
+                print("Email exists")
+               
+                if let userEntity = matchingUsers.first {
+                    
+//                    print("User ID: \(userEntity.user_id?.uuidString ?? "")")
+//                    print("User Name: \(userEntity.full_name ?? "")")
+//                    print("User Email: \(userEntity.email ?? "")")
+//
+//                    UserDefaults.standard.set(userEntity.user_id?.uuidString ?? "", forKey: "user_id")
+//                    UserDefaults.standard.set(userEntity.full_name ?? "", forKey: "full_name")
+//                    UserDefaults.standard.set(userEntity.email ?? "", forKey: "email")
+//                    UserDefaults.standard.set(userEntity.phone_no ?? "", forKey: "phone_no")
+                    
+                }
+                
+            }
+            
+        } catch {
+            print("Error fetching users: \(error.localizedDescription)")
+            
+        }
+        
+    }
+    
     func saveData() {
         
         do {
             try viewContext.save()
-            fetchSubjects()
+            fetchAllSubjects()
             
         }
         catch let error {

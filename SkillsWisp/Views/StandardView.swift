@@ -16,119 +16,120 @@ struct StandardView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var vm = StandardViewModel()
     
+    
     var body: some View {
         
-        NavigationView {
+        
+        ZStack {
             
-            ZStack {
+            VStack(spacing: nil) {
                 
-                VStack(spacing: nil) {
+                
+                ZStack {
+                    
+                    Image("bg_matric")
+                        .aspectRatio(contentMode: .fit)
                     
                     
-                    ZStack {
+                    HStack {
                         
-                        Image("bg_matric")
-                            .aspectRatio(contentMode: .fit)
+                        VStack(alignment: .leading, spacing: 6) {
                             
-                        
-                        HStack {
+                            Button(action: {
+                                presentationMode.wrappedValue.dismiss()
+                            }, label: {
+                                Image("ic_left_arrow")
+                                    .padding(.bottom)
+                            })
                             
-                            VStack(alignment: .leading, spacing: 6) {
-                                
-                                Button(action: {
-                                    presentationMode.wrappedValue.dismiss()
-                                }, label: {
-                                    Image("ic_left_arrow")
-                                        .padding(.bottom)
-                                })
-                                
-                                
-                                Text("Matriculation")
-                                    .foregroundColor(.white)
-                                    .fontWeight(.semibold)
-                                    .font(.title2)
-                                
-                                Text("Get solved notes by top professors of Pakistan")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 14))
-                                
-                            }
                             
-                            Image("ic_math")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 200, height: 200)
+                            Text("Matriculation")
+                                .foregroundColor(.white)
+                                .fontWeight(.semibold)
+                                .font(.title2)
                             
+                            Text("Get solved notes by top professors of Pakistan")
+                                .foregroundColor(.white)
+                                .font(.system(size: 14))
                             
                         }
-                        .frame(
-                            minWidth: 0,
-                            maxWidth: .infinity
-                        )
+                        
+                        Image("ic_math")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 200, height: 200)
                         
                         
                     }
+                    .frame(
+                        minWidth: 0,
+                        maxWidth: .infinity
+                    )
                     
                     
-                    //Spacer()
+                }
+                
+                
+                //Spacer()
+                
+                
+                ScrollView(showsIndicators: false) {
                     
-                    
-                    ScrollView(showsIndicators: false) {
-
-                        ForEach(vm.savedEntities.indices, id: \.self) { index in
-
-                            let subject = vm.savedEntities[index]
-                                
+                    ForEach(vm.savedEntities.indices, id: \.self) { index in
+                        
+                        let subject = vm.savedEntities[index]
+                        
+                        
+                        NavigationLink(destination: SubjectView(), label: {
                             
-                            NavigationLink(destination: SubjectView(), label: {
-
-                                ZStack {
-
-                                    Image("\(backgrounds[index % backgrounds.count])")
-                                                               .resizable()
+                            ZStack {
+                                
+                                Image("\(backgrounds[index % backgrounds.count])")
+                                    .resizable()
+                                
+                                
+                                VStack {
                                     
-
-                                    VStack {
-
-                                        Text("\(subject.name ?? "")")
-                                            .foregroundColor(.white)
-                                            .fontWeight(.semibold)
-                                            .frame(
-                                                minWidth: 0,
-                                                maxWidth: .infinity,
-                                                alignment: .leading
-                                            )
-
-                                        Text("Get solved notes by top professors of Pakistan")
-                                            .foregroundColor(.white)
-                                            .font(.system(size: 14))
-                                            .padding(.top, 0.7)
-                                            .frame(
-                                                minWidth: 0,
-                                                maxWidth: .infinity,
-                                                alignment: .leading
-                                            )
-
-                                    }
-                                    .padding()
-
+                                    Text("\(subject.name ?? "")")
+                                        .foregroundColor(.white)
+                                        .fontWeight(.semibold)
+                                        .frame(
+                                            minWidth: 0,
+                                            maxWidth: .infinity,
+                                            alignment: .leading
+                                        )
+                                    
+                                    Text("Get solved notes by top professors of Pakistan")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 14))
+                                        .padding(.top, 0.7)
+                                        .frame(
+                                            minWidth: 0,
+                                            maxWidth: .infinity,
+                                            alignment: .leading
+                                        )
+                                    
                                 }
-                                .padding([.leading,.trailing])
-                            })
-
-                           
-
-                        }
-
+                                .padding()
+                                
+                            }
+                            .padding([.leading,.trailing])
+                        })
+                        
+                        
+                        
                     }
                     
                 }
                 
             }
-            .edgesIgnoringSafeArea([.leading, .trailing, .top])
             
         }
+        .edgesIgnoringSafeArea([.leading, .trailing, .top])
+        
         .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+        
         
     }
     

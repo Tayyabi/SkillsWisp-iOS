@@ -72,6 +72,12 @@
 		A31837352A507E000011810A /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
 		A31837372A51A5A30011810A /* StandardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardViewModel.swift; sourceTree = "<group>"; };
 		A31837392A51B5D00011810A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		A318375F2A5323CE0011810A /* UsersEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsersEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A31837602A5323CE0011810A /* UsersEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsersEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A31837612A5323CE0011810A /* SubjectEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubjectEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A31837622A5323CE0011810A /* SubjectEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubjectEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A31837632A5323CE0011810A /* StandardEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StandardEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A31837642A5323CE0011810A /* StandardEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StandardEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A344C7CC2A18F19700205657 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A344C7CE2A18FE1F00205657 /* login_gif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = login_gif.gif; sourceTree = "<group>"; };
 		A344C7D02A18FE7600205657 /* GifImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage.swift; sourceTree = "<group>"; };
@@ -188,10 +194,10 @@
 		A3EF5E132A0938C60044C2A6 /* SkillsWisp */ = {
 			isa = PBXGroup;
 			children = (
-				A318372E2A50457B0011810A /* ViewModels */,
 				A3E499572A47133200CA4A8B /* Utils */,
 				A3F8FF272A2B2E5D0080DD82 /* Models */,
 				A3F8FF242A2B2DAE0080DD82 /* Views */,
+				A318372E2A50457B0011810A /* ViewModels */,
 				A344C7CE2A18FE1F00205657 /* login_gif.gif */,
 				A38A7A292A17D2B20011CD8A /* Info.plist */,
 				A38A7A262A17D13B0011CD8A /* Fonts */,
@@ -258,6 +264,12 @@
 		A3F8FF272A2B2E5D0080DD82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A318375F2A5323CE0011810A /* UsersEntity+CoreDataClass.swift */,
+				A31837602A5323CE0011810A /* UsersEntity+CoreDataProperties.swift */,
+				A31837612A5323CE0011810A /* SubjectEntity+CoreDataClass.swift */,
+				A31837622A5323CE0011810A /* SubjectEntity+CoreDataProperties.swift */,
+				A31837632A5323CE0011810A /* StandardEntity+CoreDataClass.swift */,
+				A31837642A5323CE0011810A /* StandardEntity+CoreDataProperties.swift */,
 				A3A26D2C2A1BCD5D005C9B1C /* Subject.swift */,
 				A3A26D302A1E5B8D005C9B1C /* Notes.swift */,
 				A31837312A504B0E0011810A /* User.swift */,

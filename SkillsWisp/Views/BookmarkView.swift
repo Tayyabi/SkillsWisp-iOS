@@ -9,82 +9,79 @@ import SwiftUI
 
 struct BookmarkView: View {
     var body: some View {
-    
-        NavigationView {
-            ScrollView(showsIndicators: false) {
-                VStack {
+        
+        ScrollView(showsIndicators: false) {
+            VStack {
+                
+                
+                ForEach(1..<10){ index in
                     
-                    
-                    ForEach(1..<10){ index in
+                    HStack {
                         
-                        HStack {
+                        Image("bn_maths")
+                            .renderingMode(.original)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 90,height: 90)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .overlay(RoundedRectangle(cornerRadius: 20))
+                        
+                        
+                        VStack(alignment: .leading) {
                             
-                            Image("bn_maths")
-                                .renderingMode(.original)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 90,height: 90)
-                                .clipShape(RoundedRectangle(cornerRadius: 20))
-                                .overlay(RoundedRectangle(cornerRadius: 20))
+                            Text("9th Class Physics")
+                                .foregroundColor(.black)
+                                .fontWeight(.semibold)
+                                .font(.title3)
                             
+                            Text("All Chapters")
+                                .foregroundColor(.gray)
+                            Spacer()
                             
-                            VStack(alignment: .leading) {
+                        }
+                        .padding(.top, 8)
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .trailing) {
+                            HStack {
+                                Image(systemName: "star.fill")
+                                    .foregroundColor(.yellow)
                                 
-                                Text("9th Class Physics")
-                                    .foregroundColor(.black)
-                                    .fontWeight(.semibold)
-                                    .font(.title3)
-                                
-                                Text("All Chapters")
-                                    .foregroundColor(.gray)
-                                Spacer()
-                                
+                                Text("4.9")
+                                    .font(.system(size: 14))
                             }
                             .padding(.top, 8)
                             
+                            
                             Spacer()
                             
-                            VStack(alignment: .trailing) {
-                                HStack {
-                                    Image(systemName: "star.fill")
-                                        .foregroundColor(.yellow)
-                                    
-                                    Text("4.9")
-                                        .font(.system(size: 14))
-                                }
-                                .padding(.top, 8)
+                            Button(action: {
                                 
                                 
-                                Spacer()
+                            }, label: {
                                 
-                                Button(action: {
-                                    
-                                    
-                                }, label: {
-                                    
-                                    Image("ic_bookmark")
-                                    
-                                })
+                                Image("ic_bookmark")
                                 
-                            }
-                            
+                            })
                             
                         }
-                        .frame(height: 100)
-                        .padding()
-                        .background(Color.white.cornerRadius(20))
-                        .padding([.top, .leading, .trailing], 10)
                         
                         
                     }
-                    Spacer()
+                    .frame(height: 100)
+                    .padding()
+                    .background(Color.white.cornerRadius(20))
+                    .padding([.top, .leading, .trailing], 10)
                     
                     
                 }
-                .background(Color.gray.opacity(0.1))
+                Spacer()
+                
+                
             }
+            .background(Color.gray.opacity(0.1))
         }
-        .navigationBarHidden(false)
     }
 }
 

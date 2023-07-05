@@ -14,98 +14,88 @@ struct NotesView: View {
     
     var body: some View {
         
-        NavigationView {
+        
+        ZStack(alignment: .bottom) {
             
-            ZStack(alignment: .bottom) {
+            VStack {
                 
-                VStack {
+                ZStack(alignment: .bottomTrailing) {
                     
-                    ZStack(alignment: .bottomTrailing) {
+                    Color.gray.opacity(0.1)
+                    
+                    
+                    VStack{
                         
-                        Color.gray.opacity(0.1)
+                        Button(action: {}, label: {
+                            
+                            Image(systemName: "hand.thumbsup")
+                                .foregroundColor(.black)
+                                .padding()
+                                .background(Circle().foregroundColor(.white))
+                        })
+                        Text("1.5k")
                         
-                        
-                        VStack{
+                        Button(action: {
                             
-                            Button(action: {}, label: {
-                                
-                                Image(systemName: "hand.thumbsup")
-                                    .foregroundColor(.black)
-                                    .padding()
-                                    .background(Circle().foregroundColor(.white))
-                            })
-                            Text("1.5k")
+                            showView.toggle()
                             
-                            Button(action: {
-                                
-                                showView.toggle()
-                                
-                            }, label: {
-                                
-                                Image(systemName: "message")
-                                    .foregroundColor(.black)
-                                    .padding()
-                                    .background(Circle().foregroundColor(.white))
-                            })
-                            .popover(isPresented: $showView) {
-                                ReviewsView()
-//                                    .cornerRadius(30)
-//                                    .frame(height: UIScreen.main.bounds.height*0.75)
-//                                    .transition(.move(edge: .bottom))
-//                                    .animation(.easeOut)
-                                
-                            }
-                            Text("1.5k")
+                        }, label: {
                             
+                            Image(systemName: "message")
+                                .foregroundColor(.black)
+                                .padding()
+                                .background(Circle().foregroundColor(.white))
+                        })
+                        .popover(isPresented: $showView) {
+                            ReviewsView()
                         }
-                        .padding()
+                        Text("1.5k")
                         
-                    }
-                    
-                    HStack {
-                        Spacer()
-                        Button(action: {}, label: {
-                            
-                            Image(systemName: "square.and.arrow.down")
-                                .foregroundColor(.black)
-                                .padding()
-                                .background(Circle().foregroundColor(.white))
-                        })
-                        
-                        Spacer()
-                        
-                        Button(action: {}, label: {
-                            
-                            Image(systemName: "bookmark")
-                                .foregroundColor(.black)
-                                .padding()
-                                .background(Circle().foregroundColor(.white))
-                        })
-                        
-                        Spacer()
-                        
-                        Button(action: {}, label: {
-                            
-                            Image(systemName: "arrowshape.turn.up.forward")
-                                .foregroundColor(.black)
-                                .padding()
-                                .background(Circle().foregroundColor(.white))
-                        })
-                        Spacer()
                     }
                     .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.gray.opacity(0.1))
+                    
                 }
                 
-                
+                HStack {
+                    Spacer()
+                    Button(action: {}, label: {
+                        
+                        Image(systemName: "square.and.arrow.down")
+                            .foregroundColor(.black)
+                            .padding()
+                            .background(Circle().foregroundColor(.white))
+                    })
+                    
+                    Spacer()
+                    
+                    Button(action: {}, label: {
+                        
+                        Image(systemName: "bookmark")
+                            .foregroundColor(.black)
+                            .padding()
+                            .background(Circle().foregroundColor(.white))
+                    })
+                    
+                    Spacer()
+                    
+                    Button(action: {}, label: {
+                        
+                        Image(systemName: "arrowshape.turn.up.forward")
+                            .foregroundColor(.black)
+                            .padding()
+                            .background(Circle().foregroundColor(.white))
+                    })
+                    Spacer()
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.gray.opacity(0.1))
             }
-            .navigationTitle("Notes")
-            .navigationBarTitleDisplayMode(.inline)
-            //.navigationBarHidden(true)
+            
             
         }
-        
+        .navigationTitle("Notes")
+        .navigationBarTitleDisplayMode(.inline)
         
     }
 }

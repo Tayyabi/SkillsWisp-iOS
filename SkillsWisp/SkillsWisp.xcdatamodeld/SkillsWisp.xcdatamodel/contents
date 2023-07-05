@@ -4,7 +4,7 @@
         <attribute name="descrip" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="standard_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="subject_id" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectEntity" inverseName="standard_id" inverseEntity="SubjectEntity"/>
+        <relationship name="subject_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SubjectEntity" inverseName="standard_id" inverseEntity="SubjectEntity"/>
     </entity>
     <entity name="SubjectEntity" representedClassName="SubjectEntity" syncable="YES" codeGenerationType="class">
         <attribute name="descrip" optional="YES" attributeType="String"/>

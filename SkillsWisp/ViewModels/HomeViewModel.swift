@@ -11,6 +11,7 @@ import CoreData
 class HomeViewModel: ObservableObject {
     
     @Published var savedEntities: [StandardEntity] = []
+    @Published var data: String = ""
     
     
     private let persistenceController = PersistenceController.shared
@@ -19,6 +20,8 @@ class HomeViewModel: ObservableObject {
     }
     
     init() {
+        //deleteAllEntities()
+        //addStandard()
         fetchStandards()
     }
     
@@ -67,20 +70,60 @@ class HomeViewModel: ObservableObject {
     
     func addStandard() {
         
-        let newStandard0 = StandardEntity(context: viewContext)
-        newStandard0.standard_id = UUID()
-        newStandard0.name = "Matriculation"
-        newStandard0.descrip = "nil"
+        
+        
+        
+        
+        let newSubject0 = SubjectEntity(context: viewContext)
+        newSubject0.subject_id = UUID()
+        newSubject0.name = "Physics"
+        newSubject0.descrip = "Get solved notes by top professors of Pakistan"
+        
+        let newSubject = SubjectEntity(context: viewContext)
+        newSubject.subject_id = UUID()
+        newSubject.name = "Chemistry"
+        newSubject.descrip = "Get solved notes by top professors of Pakistan"
+        
+        let newSubject1 = SubjectEntity(context: viewContext)
+        newSubject1.subject_id = UUID()
+        newSubject1.name = "Mathematics"
+        newSubject1.descrip = "Get solved notes by top professors of Pakistan"
+        
+        let newSubject2 = SubjectEntity(context: viewContext)
+        newSubject2.subject_id = UUID()
+        newSubject2.name = "Computer Science"
+        newSubject2.descrip = "Get solved notes by top professors of Pakistan"
+        
+        
+//        let newStandard0 = StandardEntity(context: viewContext)
+//        newStandard0.standard_id = UUID()
+//        newStandard0.name = "Matriculation"
+//        newStandard0.descrip = "nil"
+//        newStandard0.addToSubject_id(newSubject0)
+//        newStandard0.addToSubject_id(newSubject)
+//        newStandard0.addToSubject_id(newSubject1)
+//        newStandard0.addToSubject_id(newSubject2)
+
         
         let newStandard = StandardEntity(context: viewContext)
         newStandard.standard_id = UUID()
         newStandard.name = "Intermediate"
         newStandard.descrip = "nil"
+        newStandard.addToSubject_id(newSubject0)
+        newStandard.addToSubject_id(newSubject)
+        newStandard.addToSubject_id(newSubject1)
+        newStandard.addToSubject_id(newSubject2)
         
+
         let newStandard1 = StandardEntity(context: viewContext)
         newStandard1.standard_id = UUID()
         newStandard1.name = "Bachelors"
         newStandard1.descrip = "nil"
+        newStandard1.addToSubject_id(newSubject0)
+        newStandard1.addToSubject_id(newSubject)
+        newStandard1.addToSubject_id(newSubject1)
+        newStandard1.addToSubject_id(newSubject2)
+        
         
         saveData()
         

@@ -7,7 +7,10 @@
 
 import SwiftUI
 
+
+
 struct HomeView: View {
+    
     
     @State var icons: [String] = ["ic_matric","ic_inter","ic_bachelors"]
     @State var backgrounds: [String] = ["clr_aqua_squeeze","clr_yellow_green","clr_tropical_blue"]
@@ -71,7 +74,7 @@ struct HomeView: View {
                         
                         ScrollView(.horizontal, showsIndicators: false)
                         {
-                           
+                            
                             HStack {
                                 
                                 ForEach(vm.savedEntities.indices, id: \.self) { index in
@@ -131,7 +134,7 @@ struct HomeView: View {
                                 .background(Color.white.cornerRadius(radius: 6, corners: .allCorners))
                                 .shadow(radius: 1)
                                 
-                            
+                                
                                 HStack {
                                     
                                     
@@ -214,7 +217,7 @@ struct HomeView: View {
                         
                         ScrollView(.horizontal, showsIndicators: false)
                         {
-                           
+                            
                             HStack {
                                 
                                 ForEach(classes, id: \.self) { index in
@@ -239,6 +242,7 @@ struct HomeView: View {
                                             
                                             Text("9th Class Notes by Ali Asfand")
                                                 .font(.system(size: 16))
+                                                .fontWeight(.semibold)
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .foregroundColor(.black)
                                                 .padding(.top)
@@ -250,13 +254,13 @@ struct HomeView: View {
                                         .padding()
                                         .background(
                                             RoundedRectangle(cornerRadius: 10)
-                                                        .stroke(Color("clr_purple_mimosa"), lineWidth: 1)
+                                                .stroke(Color("clr_purple_mimosa"), lineWidth: 1.5)
                                         )
                                         .padding(5)
                                         
                                     })
                                 }
-
+                                
                             }
                         }
                         .frame(height: 150)
@@ -272,7 +276,9 @@ struct HomeView: View {
             }
             
             .navigationBarItems(
-                leading: NavigationLink(destination: SettingsView(),label: {
+                leading: NavigationLink(destination: {
+                    SettingsView()
+                },label: {
                     
                     Image("ic_menu")
                         .resizable()
@@ -290,8 +296,8 @@ struct HomeView: View {
                 })
             )
         }
-        
         .navigationBarHidden(true)
+        
     }
 }
 

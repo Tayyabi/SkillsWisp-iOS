@@ -9,69 +9,56 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @State private var logout = false
+    
+    
     var body: some View {
         
-        //NavigationView {
-            ZStack {
+        ZStack {
+            
+            VStack{
                 
-                VStack{
-                    
-                    ZStack {
-                        Image("bg_maths")
-                            .resizable()
-                            .frame(height: 130)
-                        
-                        HStack {
-                            Image("ic_setting_profile")
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 80, height: 80)
-                                .clipShape(Circle())
-                            
-                            VStack(alignment: .leading) {
-                                
-                                Text("\(UserDefaults.standard.string(forKey: "full_name") ?? "UnKnown")")
-                                    .foregroundColor(.white)
-                                    .fontWeight(.semibold)
-                                    .font(.title2)
-                                
-                                Text("\(UserDefaults.standard.string(forKey: "email") ?? "UnKnown")")
-                                    .accentColor(.white)
-                                    .font(.system(size: 14))
-                                
-                            }
-                            
-                            Spacer()
-                            
-                            NavigationLink(destination: {
-                                MyProfileView()
-                            }, label: {
-                                Image("ic_right_arrow")
-                            })
-                            
-                        }
-                        .padding(20)
-                    }
-                    
-                    
-                    NavigationLink(destination: BookmarkView(), label: {
-                        HStack {
-                            Text("Bookmarked Notes")
-                                .foregroundColor(Color.black)
-                            Spacer()
-                            Image("ic_right_arrow")
-                                .renderingMode(.template)
-                                .accentColor(.black)
-                                .foregroundColor(.black)
-                        }
-                        .padding(20)
-                        .background(Color.gray.opacity(0.2).cornerRadius(10))
-                        .padding(.top)
-                    })
-                    
-                    
+                ZStack {
+                    Image("bg_maths")
+                        .resizable()
+                        .frame(height: 130)
                     
                     HStack {
-                        Text("Invite Friends")
+                        Image("ic_setting_profile")
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 80, height: 80)
+                            .clipShape(Circle())
+                        
+                        VStack(alignment: .leading) {
+                            
+                            Text("\(UserDefaults.standard.string(forKey: "full_name") ?? "UnKnown")")
+                                .foregroundColor(.white)
+                                .fontWeight(.semibold)
+                                .font(.title3)
+                            
+                            Text("\(UserDefaults.standard.string(forKey: "email") ?? "UnKnown")")
+                                .accentColor(.white)
+                                .font(.system(size: 14))
+                                .foregroundColor(.white)
+                            
+                        }
+                        
+                        Spacer()
+                        
+                        NavigationLink(destination: {
+                            MyProfileView()
+                        }, label: {
+                            Image("ic_right_arrow")
+                        })
+                        
+                    }
+                    .padding(20)
+                }
+                
+                
+                NavigationLink(destination: BookmarkView(), label: {
+                    HStack {
+                        Text("Bookmarked Notes")
                             .foregroundColor(Color.black)
                         Spacer()
                         Image("ic_right_arrow")
@@ -81,32 +68,48 @@ struct SettingsView: View {
                     }
                     .padding(20)
                     .background(Color.gray.opacity(0.2).cornerRadius(10))
+                    .padding(.top)
+                })
+                
+                
+                
+                HStack {
+                    Text("Invite Friends")
+                        .foregroundColor(Color.black)
+                    Spacer()
+                    Image("ic_right_arrow")
+                        .renderingMode(.template)
+                        .accentColor(.black)
+                        .foregroundColor(.black)
+                }
+                .padding(20)
+                .background(Color.gray.opacity(0.2).cornerRadius(10))
+                
+                HStack {
+                    Text("Push Notifications")
+                        .foregroundColor(Color.black)
+                    Spacer()
                     
+                }
+                .padding(20)
+                .background(Color.gray.opacity(0.2).cornerRadius(10))
+                
+                NavigationLink(destination: ContactUsView(), label: {
                     HStack {
-                        Text("Push Notifications")
+                        Text("Contact Us")
                             .foregroundColor(Color.black)
                         Spacer()
-                        
+                        Image("ic_right_arrow")
+                            .renderingMode(.template)
+                            .accentColor(.black)
+                            .foregroundColor(.black)
                     }
                     .padding(20)
                     .background(Color.gray.opacity(0.2).cornerRadius(10))
-                    
-                    NavigationLink(destination: ContactUsView(), label: {
-                        HStack {
-                            Text("Contact Us")
-                                .foregroundColor(Color.black)
-                            Spacer()
-                            Image("ic_right_arrow")
-                                .renderingMode(.template)
-                                .accentColor(.black)
-                                .foregroundColor(.black)
-                        }
-                        .padding(20)
-                        .background(Color.gray.opacity(0.2).cornerRadius(10))
-                    })
-                    
-                    
-                    NavigationLink(destination: AboutUsView(), label: {
+                })
+                
+                
+                NavigationLink(destination: AboutUsView(), label: {
                     HStack {
                         Text("About Us")
                             .foregroundColor(Color.black)
@@ -118,39 +121,40 @@ struct SettingsView: View {
                     }
                     .padding(20)
                     .background(Color.gray.opacity(0.2).cornerRadius(10))
-                    })
-                    
-                    NavigationLink(destination: TermsConditionView(), label: {
-                        HStack {
-                            Text("Privacy Policy")
-                                .foregroundColor(Color.black)
-                            Spacer()
-                            Image("ic_right_arrow")
-                                .renderingMode(.template)
-                                .accentColor(.black)
-                                .foregroundColor(.black)
-                        }
-                        .padding(20)
-                        .background(Color.gray.opacity(0.2).cornerRadius(10))
-                    })
-                    
-                    Spacer()
-                    
-                    
-                    NavigationLink(destination: {
-                        LoginView()
-                        
-                    }, label: {
-                        Text("Log out")
-                            .foregroundColor(.red)
-                    })
-                    
-                }
-                .padding()
+                })
+                
+                NavigationLink(destination: TermsConditionView(), label: {
+                    HStack {
+                        Text("Privacy Policy")
+                            .foregroundColor(Color.black)
+                        Spacer()
+                        Image("ic_right_arrow")
+                            .renderingMode(.template)
+                            .accentColor(.black)
+                            .foregroundColor(.black)
+                    }
+                    .padding(20)
+                    .background(Color.gray.opacity(0.2).cornerRadius(10))
+                })
+                
+                Spacer()
+                
+                
+                Button(action: {
+                    logout = true
+                }, label: {
+                    Text("Log out")
+                        .foregroundColor(.red)
+                })
                 
             }
-//        }
-//        .navigationBarHidden(false)
+            .padding()
+            
+        }
+        .fullScreenCover(isPresented: $logout, content: {
+            LoginView()
+        })
+        
     }
 }
 

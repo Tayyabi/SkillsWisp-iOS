@@ -23,8 +23,8 @@ struct AboutUsView: View {
             .padding()
         }
     }
-            
-            
+    
+    
 }
 
 struct AboutUsScreen_Previews: PreviewProvider {

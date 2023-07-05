@@ -17,7 +17,7 @@ struct MyProfileView: View {
     @StateObject var vm = MyProfileViewModel()
     
     var body: some View {
-       
+        
         VStack(alignment: .leading) {
             
             ZStack {
@@ -27,7 +27,7 @@ struct MyProfileView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(height: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
-                    
+                
                 VStack {
                     
                     Image("ic_profile_img")
@@ -62,8 +62,8 @@ struct MyProfileView: View {
                     get: { vm.userDetails?.phone_no ?? "" },
                     set: { vm.userDetails?.phone_no = $0 }
                 ))
-                    .font(.system(size: 15))
-                    .disabled(!isEditable)
+                .font(.system(size: 15))
+                .disabled(!isEditable)
                 
             }
             .padding(.top)
@@ -82,8 +82,8 @@ struct MyProfileView: View {
                     get: { vm.userDetails?.email ?? "" },
                     set: { vm.userDetails?.email = $0 }
                 ))
-                    .font(.system(size: 15))
-                    .disabled(!isEditable)
+                .font(.system(size: 15))
+                .disabled(!isEditable)
                 
             }
             .padding(.top)
@@ -92,7 +92,7 @@ struct MyProfileView: View {
                 .padding(.top)
             
             
-           
+            
             Button(action: {
                 
             }, label: {
@@ -150,8 +150,8 @@ struct MyProfileView: View {
                 .padding(5)
                 .foregroundColor(.black)
                 .background(Circle().foregroundColor(.gray).opacity(0.2))
-
-            })
+            
+        })
     }
 }
 
