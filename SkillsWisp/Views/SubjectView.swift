@@ -9,22 +9,16 @@ import SwiftUI
 
 struct SubjectView: View {
     
+    @ObservedObject var dataStore: DataStore
+    @StateObject var vm = SubjectViewModel()
+    @State var shouldNavigate = false
     
     var gridItems: [GridItem] = [
         GridItem(.flexible(), spacing: 0, alignment: .leading),
         GridItem(.flexible(), spacing: 0, alignment: .leading)
     ]
     
-    @State var classes: [Notes] = [
-        Notes(name: "9th Class Physics", background: "bn_class_1"),
-        Notes(name: "9th Class Physics", background: "bn_class_2"),
-        Notes(name: "9th Class Physics", background: "bn_class_3"),
-        Notes(name: "9th Class Physics", background: "bn_class_4"),
-        Notes(name: "9th Class Physics", background: "bn_class_1"),
-        Notes(name: "9th Class Physics", background: "bn_class_2"),
-        Notes(name: "9th Class Physics", background: "bn_class_3"),
-        Notes(name: "9th Class Physics", background: "bn_class_4")
-    ]
+    @State var thumbnails: [String] = ["bn_class_1","bn_class_2", "bn_class_3", "bn_class_4"]
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -85,49 +79,64 @@ struct SubjectView: View {
                     
                     LazyVGrid(columns: gridItems) {
                         
-                        ForEach(classes) { classs in
+                        ForEach(vm.savedEntities.indices, id: \.self) { index in
                             
-                            NavigationLink(destination: NotesView(), label: {
-                                
-                                
-                                VStack(alignment: .leading) {
-                                    
-                                    
-                                    Image("\(classs.background)")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(height: 180)
-                                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                                    
-                                    HStack {
-                                        Text("\(classs.name)")
-                                            .font(.system(size: 16))
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .foregroundColor(.black)
+                            let note = vm.savedEntities[index]
+                            
+                            VStack{
+                                Button(action: {
+                                    if let note_id = note.notes_id {
+                                        dataStore.id = note_id
+                                        shouldNavigate = true
+                                    }
+                                }, label: {
+                                    VStack(alignment: .leading) {
                                         
-                                        Spacer()
-                                        Image(systemName: "star.fill")
-                                            .foregroundColor(.yellow)
                                         
-                                        Text("4.9")
-                                            .foregroundColor(.black)
+                                        Image("\(thumbnails[index % thumbnails.count])")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(height: 180)
+                                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                                        
+                                        HStack {
+                                            Text(note.name ?? "")
+                                                .font(.system(size: 15))
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .foregroundColor(.black)
+                                            
+                                            Spacer()
+                                            Image(systemName: "star.fill")
+                                                .foregroundColor(.yellow)
+                                            
+                                            Text("\(String(format: "%.1f", note.rating))")
+                                                .foregroundColor(.black)
+                                                .font(.system(size: 14))
+                                            
+                                        }
+                                        .frame(
+                                            maxWidth: .infinity
+                                        )
+                                        
+                                        Text("\(note.chapter ?? "")")
                                             .font(.system(size: 14))
+                                            .foregroundColor(.gray)
+                                        
                                         
                                     }
-                                    .frame(
-                                        maxWidth: .infinity
-                                    )
-                                    
-                                    Text("All Chapters")
-                                        .font(.system(size: 14))
-                                        .foregroundColor(.gray)
-                                    
-                                    
+                                    .padding(4)
+                                })
+                                
+                                NavigationLink(destination:NotesView(dataStore: dataStore),isActive: $shouldNavigate) {
+                                    EmptyView()
                                 }
-                                .padding(4)
-                                
-                                
-                            })
+                                .hidden()
+                            }
+                            
+//                            NavigationLink(destination: NotesView(), label: {
+//
+//
+//                            })
                             
                         }
                         
@@ -136,6 +145,9 @@ struct SubjectView: View {
                 
             }
             
+        }
+        .onAppear{
+            vm.fetchNotesById(id: dataStore.id)
         }.edgesIgnoringSafeArea([.leading,.trailing,.top])
         
             .navigationBarBackButtonHidden(true)
@@ -145,6 +157,6 @@ struct SubjectView: View {
 
 struct SubjectScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SubjectView()
+        SubjectView(dataStore: DataStore())
     }
 }

@@ -137,7 +137,7 @@ struct CreateAccountView: View {
                             return
                         }
                         
-                        vm.addUser(user: User(user_id: UUID(), full_name: name, email: email, phone_no: phoneno, pic_url: ""))
+                        vm.addUser(full_name: name, email: email, phone_no: phoneno, pic_url: "")
                         
                     }, label: {
                         

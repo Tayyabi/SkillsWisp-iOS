@@ -19,14 +19,14 @@ class CreateAccountViewModel: ObservableObject {
     }
     
     
-    func addUser(user: User){
+    func addUser(full_name: String, email: String, phone_no: String, pic_url: String){
      
         let newUser = UsersEntity(context: viewContext)
         newUser.user_id = UUID()
-        newUser.full_name = user.full_name
-        newUser.email = user.email
-        newUser.phone_no = user.phone_no
-        newUser.pic_url = user.pic_url
+        newUser.full_name = full_name
+        newUser.email = email
+        newUser.phone_no = phone_no
+        newUser.pic_url = pic_url
         saveData()
     }
     

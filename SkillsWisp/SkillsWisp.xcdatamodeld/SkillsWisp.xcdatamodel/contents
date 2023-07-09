@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="StandardEntity" representedClassName="StandardEntity" syncable="YES" codeGenerationType="class">
+    <entity name="NotesEntity" representedClassName="NotesEntity" syncable="YES">
+        <attribute name="bookmark" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="chapter" optional="YES" attributeType="String"/>
+        <attribute name="likes_count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="local_url" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="subject_id" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubjectEntity" inverseName="notes_id" inverseEntity="SubjectEntity"/>
+    </entity>
+    <entity name="StandardEntity" representedClassName="StandardEntity" syncable="YES">
         <attribute name="descrip" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="standard_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="subject_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SubjectEntity" inverseName="standard_id" inverseEntity="SubjectEntity"/>
     </entity>
-    <entity name="SubjectEntity" representedClassName="SubjectEntity" syncable="YES" codeGenerationType="class">
+    <entity name="SubjectEntity" representedClassName="SubjectEntity" syncable="YES">
         <attribute name="descrip" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="subject_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="notes_id" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NotesEntity" inverseName="subject_id" inverseEntity="NotesEntity"/>
         <relationship name="standard_id" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StandardEntity" inverseName="subject_id" inverseEntity="StandardEntity"/>
     </entity>
-    <entity name="UsersEntity" representedClassName="UsersEntity" syncable="YES" codeGenerationType="class">
+    <entity name="UsersEntity" representedClassName="UsersEntity" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="full_name" optional="YES" attributeType="String"/>
         <attribute name="phone_no" optional="YES" attributeType="String"/>

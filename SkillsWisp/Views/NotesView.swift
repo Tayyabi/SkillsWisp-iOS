@@ -6,22 +6,33 @@
 //
 
 import SwiftUI
+import PDFKit
+
 
 struct NotesView: View {
     
+    //let pdfURL = Bundle.main.url(forResource: "example", withExtension: "pdf")!
+    @ObservedObject var dataStore: DataStore
+    @StateObject var vm = NotesViewModel()
+    @State var shouldNavigate = false
     
     @State var showView: Bool = false
     
     var body: some View {
         
         
+        
+        
         ZStack(alignment: .bottom) {
+            
             
             VStack {
                 
                 ZStack(alignment: .bottomTrailing) {
                     
                     Color.gray.opacity(0.1)
+                    PDFViewWrapper(pdfURL: URL(string: "https://d1.islamhouse.com/data/en/ih_books/single/en_Sahih_Al-Bukhari.pdf")!)
+                                .edgesIgnoringSafeArea(.all)
                     
                     
                     VStack{
@@ -33,7 +44,8 @@ struct NotesView: View {
                                 .padding()
                                 .background(Circle().foregroundColor(.white))
                         })
-                        Text("1.5k")
+                        Text("\(vm.savedEntity?.likes_count ?? 0)")
+                            .font(.system(size: 14))
                         
                         Button(action: {
                             
@@ -50,6 +62,7 @@ struct NotesView: View {
                             ReviewsView()
                         }
                         Text("1.5k")
+                            .font(.system(size: 14))
                         
                     }
                     .padding()
@@ -70,8 +83,8 @@ struct NotesView: View {
                     
                     Button(action: {}, label: {
                         
-                        Image(systemName: "bookmark")
-                            .foregroundColor(.black)
+                        Image(systemName: vm.savedEntity!.bookmark ? "bookmark.fill": "bookmark")
+                            .foregroundColor(vm.savedEntity!.bookmark ? .red: .black)
                             .padding()
                             .background(Circle().foregroundColor(.white))
                     })
@@ -94,14 +107,32 @@ struct NotesView: View {
             
             
         }
+        .onAppear{
+            vm.fetchNoteById(id: dataStore.id)
+        }
         .navigationTitle("Notes")
         .navigationBarTitleDisplayMode(.inline)
         
     }
 }
 
+struct PDFViewWrapper: UIViewRepresentable {
+    let pdfURL: URL
+
+    func makeUIView(context: Context) -> PDFView {
+        
+        let pdfView = PDFView()
+        pdfView.document = PDFDocument(url: pdfURL)
+        pdfView.displayMode = .singlePageContinuous // or .continuous
+        pdfView.autoScales = true
+        return pdfView
+    }
+
+    func updateUIView(_ pdfView: PDFView, context: Context) {}
+}
+
 struct NotesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NotesView()
+        NotesView(dataStore: DataStore())
     }
 }

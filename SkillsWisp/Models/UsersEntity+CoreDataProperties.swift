@@ -2,7 +2,7 @@
 //  UsersEntity+CoreDataProperties.swift
 //  SkillsWisp
 //
-//  Created by M Tayyab on 03/07/2023.
+//  Created by M Tayyab on 09/07/2023.
 //
 //
 

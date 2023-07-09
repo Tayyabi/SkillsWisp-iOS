@@ -1,17 +1,17 @@
 //
-//  StandardViewModel.swift
+//  SubjectViewModel.swift
 //  SkillsWisp
 //
-//  Created by M Tayyab on 02/07/2023.
+//  Created by M Tayyab on 08/07/2023.
 //
 
 import Foundation
 import CoreData
 import SwiftUI
 
-class StandardViewModel: ObservableObject {
+class SubjectViewModel: ObservableObject {
     
-    @Published var savedEntities: [SubjectEntity] = []
+    @Published var savedEntities: [NotesEntity] = []
     
     
     private let persistenceController = PersistenceController.shared
@@ -23,15 +23,15 @@ class StandardViewModel: ObservableObject {
         //fetchAllSubjects()
     }
     
-    func fetchAllSubjects() {
-        let fetchRequest: NSFetchRequest<SubjectEntity> = SubjectEntity.fetchRequest()
+    func fetchAllNotes(){
+        let fetchRequest: NSFetchRequest<NotesEntity> = NotesEntity.fetchRequest()
         
         do {
-            let fetchedSubjects = try self.viewContext.fetch(fetchRequest)
+            let fetchedNotes = try self.viewContext.fetch(fetchRequest)
             
-            savedEntities = fetchedSubjects
-            for subject in fetchedSubjects {
-                let name = subject.name
+            savedEntities = fetchedNotes
+            for note in fetchedNotes {
+                let name = note.name
                 //let description = subject.descrip
             }
             
@@ -40,26 +40,26 @@ class StandardViewModel: ObservableObject {
         }
     }
     
-    func fetchSubjectsById(id: UUID) {
+    func fetchNotesById(id: UUID) {
         
         
-        let fetchRequest: NSFetchRequest<StandardEntity> = StandardEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "standard_id == %@", id.uuidString)
+        let fetchRequest: NSFetchRequest<SubjectEntity> = SubjectEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "notes_id.@count > 0 ", id.uuidString)
         fetchRequest.sortDescriptors = []
         
         do {
             
-            let standards = try viewContext.fetch(fetchRequest)
+            let subjects = try viewContext.fetch(fetchRequest)
             
-            if standards.isEmpty {
-                print("Email does not exist")
+            if subjects.isEmpty {
+                print("Notes does not exist")
                 
             } else {
-                print("Email exists")
+                print("Notes exists")
                 
-                if let standard = standards.first {
-                    if let subjects = standard.subject_id as? Set<SubjectEntity> {
-                        savedEntities = Array(subjects)
+                if let subjects = subjects.first {
+                    if let notes = subjects.notes_id as? Set<NotesEntity> {
+                        savedEntities = Array(notes)
                     }
                 }
             }
@@ -156,7 +156,6 @@ class StandardViewModel: ObservableObject {
         do {
             try viewContext.save()
             //fetchAllSubjects()
-            
         }
         catch let error {
             print("Error saving. \(error)")
@@ -164,42 +163,42 @@ class StandardViewModel: ObservableObject {
         
     }
     
-    func deleteAllEntities() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "SubjectEntity")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try persistenceController.container.persistentStoreCoordinator.execute(deleteRequest, with: viewContext)
-            try viewContext.save()
-        } catch {
-            print("Error deleting entities: \(error.localizedDescription)")
-        }
-    }
+//    func deleteAllEntities() {
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "NotesEntity")
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//
+//        do {
+//            try persistenceController.container.persistentStoreCoordinator.execute(deleteRequest, with: viewContext)
+//            try viewContext.save()
+//        } catch {
+//            print("Error deleting entities: \(error.localizedDescription)")
+//        }
+//    }
     
-    func addSubjects() {
-        
-        let newStandard0 = SubjectEntity(context: viewContext)
-        newStandard0.subject_id = UUID()
-        newStandard0.name = "Physics"
-        newStandard0.descrip = "Get solved notes by top professors of Pakistan"
-        
-        let newStandard = SubjectEntity(context: viewContext)
-        newStandard.subject_id = UUID()
-        newStandard.name = "Chemistry"
-        newStandard.descrip = "Get solved notes by top professors of Pakistan"
-        
-        let newStandard1 = SubjectEntity(context: viewContext)
-        newStandard1.subject_id = UUID()
-        newStandard1.name = "Mathematics"
-        newStandard1.descrip = "Get solved notes by top professors of Pakistan"
-        
-        let newStandard2 = SubjectEntity(context: viewContext)
-        newStandard2.subject_id = UUID()
-        newStandard2.name = "Computer Science"
-        newStandard2.descrip = "Get solved notes by top professors of Pakistan"
-        saveData()
-        
-    }
+//    func addSubjects() {
+//
+//        let newStandard0 = SubjectEntity(context: viewContext)
+//        newStandard0.subject_id = UUID()
+//        newStandard0.name = "Physics"
+//        newStandard0.descrip = "Get solved notes by top professors of Pakistan"
+//
+//        let newStandard = SubjectEntity(context: viewContext)
+//        newStandard.subject_id = UUID()
+//        newStandard.name = "Chemistry"
+//        newStandard.descrip = "Get solved notes by top professors of Pakistan"
+//
+//        let newStandard1 = SubjectEntity(context: viewContext)
+//        newStandard1.subject_id = UUID()
+//        newStandard1.name = "Mathematics"
+//        newStandard1.descrip = "Get solved notes by top professors of Pakistan"
+//
+//        let newStandard2 = SubjectEntity(context: viewContext)
+//        newStandard2.subject_id = UUID()
+//        newStandard2.name = "Computer Science"
+//        newStandard2.descrip = "Get solved notes by top professors of Pakistan"
+//        saveData()
+//
+//    }
     
     
     

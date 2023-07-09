@@ -9,12 +9,14 @@ import SwiftUI
 
 struct StandardView: View {
     
-    
+    @ObservedObject var dataStore: DataStore
+    @State var shouldNavigate = false
     @State var backgrounds: [String] = ["bg_physics","bg_chemistry","bg_maths","bg_cs"]
     @State private var counter: Int = 0
     
     @Environment(\.presentationMode) var presentationMode
     @StateObject var vm = StandardViewModel()
+    
     
     
     var body: some View {
@@ -80,42 +82,54 @@ struct StandardView: View {
                         let subject = vm.savedEntities[index]
                         
                         
-                        NavigationLink(destination: SubjectView(), label: {
-                            
-                            ZStack {
+                        VStack{
+                            Button(action: {
+                                if let subject_id = subject.subject_id {
+                                    dataStore.id = subject_id
+                                    shouldNavigate = true
+                                }
                                 
-                                Image("\(backgrounds[index % backgrounds.count])")
-                                    .resizable()
-                                
-                                
-                                VStack {
+                            }, label: {
+                                ZStack {
                                     
-                                    Text("\(subject.name ?? "")")
-                                        .foregroundColor(.white)
-                                        .fontWeight(.semibold)
-                                        .frame(
-                                            minWidth: 0,
-                                            maxWidth: .infinity,
-                                            alignment: .leading
-                                        )
+                                    Image("\(backgrounds[index % backgrounds.count])")
+                                        .resizable()
                                     
-                                    Text("Get solved notes by top professors of Pakistan")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 14))
-                                        .padding(.top, 0.7)
-                                        .frame(
-                                            minWidth: 0,
-                                            maxWidth: .infinity,
-                                            alignment: .leading
-                                        )
+                                    
+                                    VStack {
+                                        
+                                        Text("\(subject.name ?? "")")
+                                            .foregroundColor(.white)
+                                            .fontWeight(.semibold)
+                                            .frame(
+                                                minWidth: 0,
+                                                maxWidth: .infinity,
+                                                alignment: .leading
+                                            )
+                                        
+                                        Text("Get solved notes by top professors of Pakistan")
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 14))
+                                            .padding(.top, 0.7)
+                                            .frame(
+                                                minWidth: 0,
+                                                maxWidth: .infinity,
+                                                alignment: .leading
+                                            )
+                                        
+                                    }
+                                    .padding()
                                     
                                 }
-                                .padding()
-                                
+                                .padding([.leading,.trailing])
+                            })
+                            
+                            NavigationLink(destination:SubjectView(dataStore: dataStore),isActive: $shouldNavigate) {
+                                EmptyView()
                             }
-                            .padding([.leading,.trailing])
-                        })
-                        
+                            .hidden()
+                        }
+                        .padding(.bottom, 5)
                         
                         
                     }
@@ -124,6 +138,10 @@ struct StandardView: View {
                 
             }
             
+        }
+        .onAppear{
+            vm.fetchSubjectsById(id: dataStore.id)
+            //vm.updateEntity(id: dataStore.standards_id)
         }
         .edgesIgnoringSafeArea([.leading, .trailing, .top])
         
@@ -137,6 +155,6 @@ struct StandardView: View {
 
 struct MatricScreen_Previews: PreviewProvider {
     static var previews: some View {
-        StandardView()
+        StandardView(dataStore: DataStore())
     }
 }

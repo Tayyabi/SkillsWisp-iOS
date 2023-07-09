@@ -7,15 +7,19 @@
 
 import SwiftUI
 
-
+class DataStore: ObservableObject {
+    @Published var id: UUID = UUID()
+}
 
 struct HomeView: View {
     
+    @StateObject private var dataStore = DataStore()
     
     @State var icons: [String] = ["ic_matric","ic_inter","ic_bachelors"]
     @State var backgrounds: [String] = ["clr_aqua_squeeze","clr_yellow_green","clr_tropical_blue"]
     
     @State var notes: String = ""
+    @State var shouldNavigate = false
     
     @StateObject var vm = HomeViewModel()
     
@@ -26,12 +30,12 @@ struct HomeView: View {
     ]
     
     
-    @State var classes: [Notes] = [
-        Notes(name: "9th Class Physics", background: "bn_class_1"),
-        Notes(name: "9th Class Physics", background: "bn_class_2"),
-        Notes(name: "9th Class Physics", background: "bn_class_3"),
-        Notes(name: "9th Class Physics", background: "bn_class_4")
-    ]
+//    @State var classes: [Notes] = [
+//        Notes(name: "9th Class Physics", background: "bn_class_1"),
+//        Notes(name: "9th Class Physics", background: "bn_class_2"),
+//        Notes(name: "9th Class Physics", background: "bn_class_3"),
+//        Notes(name: "9th Class Physics", background: "bn_class_4")
+//    ]
     
     var body: some View {
         
@@ -80,24 +84,39 @@ struct HomeView: View {
                                 ForEach(vm.savedEntities.indices, id: \.self) { index in
                                     
                                     let standard = vm.savedEntities[index]
-                                    NavigationLink(destination: StandardView(), label: {
-                                        VStack {
-                                            
-                                            Image("\(icons[index % icons.count])")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: 100, height: 100)
-                                            Text("\(standard.name ?? "")")
-                                                .foregroundColor(.black)
-                                                .font(.system(size: 14))
-                                        }
-                                        .padding()
-                                        .background(
-                                            Color("\(backgrounds[index % backgrounds.count])")
-                                                .cornerRadius(10)
-                                        )
+                                    
+                                    VStack {
                                         
-                                    })
+                                        Button(action: {
+                                            if let standard_id = standard.standard_id {
+                                                dataStore.id = standard_id
+                                                shouldNavigate = true
+                                            }
+                                            
+                                            
+                                        }, label: {
+                                            VStack {
+                                                
+                                                Image("\(icons[index % icons.count])")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: 100, height: 100)
+                                                Text("\(standard.name ?? "")")
+                                                    .foregroundColor(.black)
+                                                    .font(.system(size: 14))
+                                            }
+                                            .padding()
+                                            .background(
+                                                Color("\(backgrounds[index % backgrounds.count])")
+                                                    .cornerRadius(10)
+                                            )
+                                        })
+                                        
+                                        NavigationLink(destination:StandardView(dataStore: dataStore),isActive: $shouldNavigate) {
+                                            EmptyView()
+                                        }
+                                        .hidden()
+                                    }.padding(.trailing,10)
                                 }
                                 
                             }
@@ -220,7 +239,7 @@ struct HomeView: View {
                             
                             HStack {
                                 
-                                ForEach(classes, id: \.self) { index in
+                                ForEach(1..<5, id: \.self) { index in
                                     
                                     //let standard = self.classes[index]
                                     NavigationLink(destination: {}, label: {
