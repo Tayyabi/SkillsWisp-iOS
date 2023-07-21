@@ -83,6 +83,9 @@ struct LoginView: View {
                         guard !email.isEmpty else {
                             return
                         }
+                        guard !password.isEmpty else {
+                            return
+                        }
                         vm.authenticateUser(email: email)
                     }, label: {
                         Text("Login")
