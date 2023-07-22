@@ -12,6 +12,8 @@ struct LoginView: View {
     @State var email: String = "muhammadtayyab703@gmail.com"
     @State var password: String = ""
     
+    @State private var isEmailValid = false
+    @State private var isPasswordValid = false
     
     @StateObject var vm = LoginViewModel()
     
@@ -40,25 +42,46 @@ struct LoginView: View {
                         
                         Image(systemName: "envelope")
                             .foregroundColor(Color.gray)
-                        
-                        TextField("Email", text: $email)
-                            .font(.system(size: 15))
+                        VStack(alignment: .leading) {
+                            TextField("Email", text: $email)
+                                .font(.system(size: 15))
+                            if isEmailValid {
+                                Text("Please enter email")
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.red)
+                            }
+                        }
                         
                     }
                     .padding(14)
-                    .background(Color("clr_light_grey").cornerRadius(radius: 10, corners: .allCorners))
+                    .background(Color("clr_light_grey").cornerRadius(10))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(isEmailValid ? .red : Color.clear, lineWidth: 1)
+                    )
                     
                     HStack{
                         
                         Image(systemName: "lock")
                             .foregroundColor(Color.gray)
-                        SecureField("Password", text: $password)
-                            .font(.system(size: 15))
+                        VStack(alignment: .leading) {
+                            SecureField("Password", text: $password)
+                                .font(.system(size: 15))
+                            if isEmailValid {
+                                Text("Please enter valid password")
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.red)
+                            }
+                        }
                         
                         
                     }
                     .padding(14)
-                    .background(Color("clr_light_grey").cornerRadius(radius: 10, corners: .allCorners))
+                    .background(Color("clr_light_grey").cornerRadius(10))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(isEmailValid ? .red : Color.clear, lineWidth: 1)
+                    )
                     
                     HStack{
                         Button(action: {
@@ -80,13 +103,14 @@ struct LoginView: View {
                     Spacer()
                     
                     Button(action: {
-                        guard !email.isEmpty else {
+                        if validation() {
                             return
                         }
-                        guard !password.isEmpty else {
-                            return
+                        vm.isLoading = true
+                        Task {
+                            //vm.authenticateUser(email: email)
+                            try await vm.signIn(email: email, password: password)
                         }
-                        vm.authenticateUser(email: email)
                     }, label: {
                         Text("Login")
                             .font(.headline)
@@ -125,10 +149,30 @@ struct LoginView: View {
                 }
                 .padding()
                 
+                
+                if vm.isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                        .scaleEffect(2)
+                }
             }
         }
         .navigationBarHidden(true)
         
+    }
+    func validation() -> Bool {
+        var chk = false
+        
+        if email.isEmpty {
+            chk = true
+            isEmailValid = true
+        }
+        if password.isEmpty {
+            chk = true
+            isPasswordValid = true
+        }
+        
+        return chk
     }
 }
 

@@ -231,9 +231,13 @@ struct CreateAccountView: View {
                             }
                             
                             vm.isLoading = true
-                            //vm.addUser(full_name: name, email: email, phone_no: phoneno, pic_url: "")
                             Task {
-                                try await vm.createUser(full_name: name, email: email, password: password, phone_no: phoneno, pic_url: "")
+                                try? await vm.createUser(fullName: name, email: email, password: password, phoneNo: phoneno, picUrl: "")
+                                
+                                name = ""
+                                email = ""
+                                password = ""
+                                phoneno = ""
                             }
                             
                         }, label: {

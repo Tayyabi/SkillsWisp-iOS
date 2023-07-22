@@ -48,8 +48,8 @@
 		A3931CAE2A6588F2009D5925 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A3931CAD2A6588F2009D5925 /* FirebaseFirestoreSwift */; };
 		A3931CB02A6588F2009D5925 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A3931CAF2A6588F2009D5925 /* FirebaseStorage */; };
 		A3931CB22A6588F2009D5925 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = A3931CB12A6588F2009D5925 /* FirebaseStorageCombine-Community */; };
-		A3931CB42A658DFF009D5925 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3931CB32A658DFF009D5925 /* AuthenticationManager.swift */; };
-		A3931CB62A66EC66009D5925 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3931CB52A66EC66009D5925 /* UserManager.swift */; };
+		A3931CB42A658DFF009D5925 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3931CB32A658DFF009D5925 /* UserDataService.swift */; };
+		A3945AD52A6C0378004E87F4 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3945AD42A6C0378004E87F4 /* UserModel.swift */; };
 		A3A011F72A36081D00F59BB6 /* ReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A011F62A36081C00F59BB6 /* ReviewsView.swift */; };
 		A3A011F92A361AC400F59BB6 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A011F82A361AC400F59BB6 /* NotesView.swift */; };
 		A3A26D2F2A1D140C005C9B1C /* SubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D2E2A1D140C005C9B1C /* SubjectView.swift */; };
@@ -119,8 +119,8 @@
 		A38A7A292A17D2B20011CD8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A38A7A2A2A17D5B80011CD8A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		A3931C982A6586D4009D5925 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A3931CB32A658DFF009D5925 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
-		A3931CB52A66EC66009D5925 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		A3931CB32A658DFF009D5925 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
+		A3945AD42A6C0378004E87F4 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		A3A011F62A36081C00F59BB6 /* ReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsView.swift; sourceTree = "<group>"; };
 		A3A011F82A361AC400F59BB6 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		A3A26D2E2A1D140C005C9B1C /* SubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectView.swift; sourceTree = "<group>"; };
@@ -211,6 +211,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A3945AD12A6C008C004E87F4 /* DataServices */ = {
+			isa = PBXGroup;
+			children = (
+				A3931CB32A658DFF009D5925 /* UserDataService.swift */,
+			);
+			path = DataServices;
+			sourceTree = "<group>";
+		};
 		A3E499572A47133200CA4A8B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				A3E499572A47133200CA4A8B /* Utils */,
+				A3945AD12A6C008C004E87F4 /* DataServices */,
 				A3F8FF272A2B2E5D0080DD82 /* Models */,
 				A3F8FF242A2B2DAE0080DD82 /* Views */,
 				A318372E2A50457B0011810A /* ViewModels */,
@@ -260,8 +269,6 @@
 				A3EF5E1D2A0938CA0044C2A6 /* Persistence.swift */,
 				A3EF5E1A2A0938CA0044C2A6 /* Preview Content */,
 				A38A79E12A0A26AE0011CD8A /* ShapesBootcamp.swift */,
-				A3931CB32A658DFF009D5925 /* AuthenticationManager.swift */,
-				A3931CB52A66EC66009D5925 /* UserManager.swift */,
 			);
 			path = SkillsWisp;
 			sourceTree = "<group>";
@@ -326,6 +333,7 @@
 				A31837D42A5AB4710011810A /* SubjectEntity+CoreDataProperties.swift */,
 				A31837D52A5AB4710011810A /* NotesEntity+CoreDataClass.swift */,
 				A31837D62A5AB4710011810A /* NotesEntity+CoreDataProperties.swift */,
+				A3945AD42A6C0378004E87F4 /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -485,7 +493,7 @@
 				A3A011F92A361AC400F59BB6 /* NotesView.swift in Sources */,
 				A318373A2A51B5D00011810A /* HomeViewModel.swift in Sources */,
 				A31837DD2A5AB4710011810A /* NotesEntity+CoreDataClass.swift in Sources */,
-				A3931CB42A658DFF009D5925 /* AuthenticationManager.swift in Sources */,
+				A3931CB42A658DFF009D5925 /* UserDataService.swift in Sources */,
 				A3A26D372A210857005C9B1C /* AboutUsView.swift in Sources */,
 				A31837D72A5AB4710011810A /* StandardEntity+CoreDataClass.swift in Sources */,
 				A38A79E02A0A20780011CD8A /* TextBootcamp.swift in Sources */,
@@ -510,12 +518,12 @@
 				A31837DB2A5AB4710011810A /* SubjectEntity+CoreDataClass.swift in Sources */,
 				A344C7CD2A18F19700205657 /* LoginView.swift in Sources */,
 				A31837362A507E000011810A /* MyProfileViewModel.swift in Sources */,
-				A3931CB62A66EC66009D5925 /* UserManager.swift in Sources */,
 				A31837342A504D340011810A /* CreateAccountViewModel.swift in Sources */,
 				A3A26D2F2A1D140C005C9B1C /* SubjectView.swift in Sources */,
 				A38A79E22A0A26AE0011CD8A /* ShapesBootcamp.swift in Sources */,
 				A3EF5E152A0938C60044C2A6 /* SkillsWispApp.swift in Sources */,
 				A3A26D3F2A2123B3005C9B1C /* NotesCommentsView.swift in Sources */,
+				A3945AD52A6C0378004E87F4 /* UserModel.swift in Sources */,
 				A31837762A597C310011810A /* SubjectViewModel.swift in Sources */,
 				A344C7D32A1902B100205657 /* CreateAccountView.swift in Sources */,
 				A31837DA2A5AB4710011810A /* UsersEntity+CoreDataProperties.swift in Sources */,
