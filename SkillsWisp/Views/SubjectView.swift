@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+class DataStore1: ObservableObject {
+    @Published var standard_id: String?
+    @Published var subject_id: String?
+    @Published var note_id: String?
+    @Published var selectedNote: NoteModel?
+}
 
 struct SubjectView: View {
     
-    @ObservedObject var dataStore: DataStore
+    @ObservedObject var dataStore: DataStore1
+    //@ObservedObject var dataStore: DataStore
     @StateObject var vm = SubjectViewModel()
     @State var shouldNavigate = false
     
@@ -86,7 +93,8 @@ struct SubjectView: View {
                             VStack{
                                 Button(action: {
                                     if let note_id = note.notes_id {
-                                        dataStore.id = note_id
+                                        dataStore.note_id = note_id
+                                        dataStore.selectedNote = note
                                         shouldNavigate = true
                                     }
                                 }, label: {
@@ -147,7 +155,10 @@ struct SubjectView: View {
             
         }
         .onAppear{
-            vm.fetchNotesById(id: dataStore.id)
+            Task{
+                //vm.fetchNotesById(id: dataStore.id ?? "")
+                await vm.fetchNotesFromDB(standard_id: dataStore.standard_id ?? "", subject_id: dataStore.subject_id ?? "")
+            }
         }.edgesIgnoringSafeArea([.leading,.trailing,.top])
         
             .navigationBarBackButtonHidden(true)
@@ -157,6 +168,6 @@ struct SubjectView: View {
 
 struct SubjectScreen_Previews: PreviewProvider {
     static var previews: some View {
-        SubjectView(dataStore: DataStore())
+        SubjectView(dataStore: DataStore1())
     }
 }

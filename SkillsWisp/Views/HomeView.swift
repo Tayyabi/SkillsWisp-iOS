@@ -8,12 +8,12 @@
 import SwiftUI
 
 class DataStore: ObservableObject {
-    @Published var id: UUID = UUID()
+    @Published var id: String?
 }
 
 struct HomeView: View {
     
-    @StateObject private var dataStore = DataStore()
+    @StateObject private var dataStore = DataStore1()
     
     @State var icons: [String] = ["ic_matric","ic_inter","ic_bachelors"]
     @State var backgrounds: [String] = ["clr_aqua_squeeze","clr_yellow_green","clr_tropical_blue"]
@@ -89,7 +89,7 @@ struct HomeView: View {
                                         
                                         Button(action: {
                                             if let standard_id = standard.standard_id {
-                                                dataStore.id = standard_id
+                                                dataStore.standard_id = standard_id
                                                 shouldNavigate = true
                                             }
                                             
@@ -291,6 +291,11 @@ struct HomeView: View {
                     
                     
                     
+                }
+            }
+            .onAppear{
+                Task {
+                    await vm.fetchStandardsFromDB()
                 }
             }
             

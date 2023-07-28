@@ -12,14 +12,13 @@ import PDFKit
 struct NotesView: View {
     
     //let pdfURL = Bundle.main.url(forResource: "example", withExtension: "pdf")!
-    @ObservedObject var dataStore: DataStore
+    @ObservedObject var dataStore: DataStore1
     @StateObject var vm = NotesViewModel()
     @State var shouldNavigate = false
     
     @State var showView: Bool = false
     
     var body: some View {
-        
         
         
         
@@ -31,7 +30,7 @@ struct NotesView: View {
                 ZStack(alignment: .bottomTrailing) {
                     
                     Color.gray.opacity(0.1)
-                    PDFViewWrapper(pdfURL: URL(string: "https://d1.islamhouse.com/data/en/ih_books/single/en_Sahih_Al-Bukhari.pdf")!)
+                    PDFViewWrapper(pdfURL: URL(string: vm.savedEntity?.local_url ?? "https://d1.islamhouse.com/data/en/ih_books/single/en_Sahih_Al-Bukhari.pdf")!)
                                 .edgesIgnoringSafeArea(.all)
                     
                     
@@ -59,7 +58,7 @@ struct NotesView: View {
                                 .background(Circle().foregroundColor(.white))
                         })
                         .popover(isPresented: $showView) {
-                            ReviewsView()
+                            ReviewsView(dataStore: dataStore)
                         }
                         Text("1.5k")
                             .font(.system(size: 14))
@@ -83,8 +82,8 @@ struct NotesView: View {
                     
                     Button(action: {}, label: {
                         
-                        Image(systemName: vm.savedEntity!.bookmark ? "bookmark.fill": "bookmark")
-                            .foregroundColor(vm.savedEntity!.bookmark ? .red: .black)
+                        Image(systemName: vm.savedEntity?.bookmark ?? false ? "bookmark.fill": "bookmark")
+                            .foregroundColor(vm.savedEntity?.bookmark ?? false ? .red: .black)
                             .padding()
                             .background(Circle().foregroundColor(.white))
                     })
@@ -108,7 +107,10 @@ struct NotesView: View {
             
         }
         .onAppear{
-            vm.fetchNoteById(id: dataStore.id)
+            //vm.fetchNoteById(id: dataStore.note_id ?? "")
+            if let note = dataStore.selectedNote {
+                vm.populateNote(note: note)
+            }
         }
         .navigationTitle("Notes")
         .navigationBarTitleDisplayMode(.inline)
@@ -133,6 +135,6 @@ struct PDFViewWrapper: UIViewRepresentable {
 
 struct NotesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NotesView(dataStore: DataStore())
+        NotesView(dataStore: DataStore1())
     }
 }

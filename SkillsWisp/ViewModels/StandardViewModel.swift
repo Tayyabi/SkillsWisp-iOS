@@ -11,8 +11,9 @@ import SwiftUI
 
 class StandardViewModel: ObservableObject {
     
-    @Published var savedEntities: [SubjectEntity] = []
+    @Published var savedEntities: [SubjectModel] = []
     
+    let homeDataService = HomeDataService()
     
     private let persistenceController = PersistenceController.shared
     private var viewContext: NSManagedObjectContext {
@@ -23,20 +24,27 @@ class StandardViewModel: ObservableObject {
         //fetchAllSubjects()
     }
     
+    func fetchSubjectsFromDB(standard_id: String) async {
+        try? await homeDataService.fetchSubjectsFromDB(standard_id: standard_id) { subjects in
+            guard let subjects = subjects else {
+                return
+            }
+            self.savedEntities = subjects
+        }
+    }
+    
     func fetchAllSubjects() {
         let fetchRequest: NSFetchRequest<SubjectEntity> = SubjectEntity.fetchRequest()
         
         do {
             let fetchedSubjects = try self.viewContext.fetch(fetchRequest)
             
-            savedEntities = fetchedSubjects
             for subject in fetchedSubjects {
-                let name = subject.name
-                //let description = subject.descrip
+                savedEntities.append(SubjectModel(subject_id: subject.subject_id?.uuidString, name: subject.name, description: subject.descrip))
             }
             
         } catch {
-            print("Error fetching users: \(error.localizedDescription)")
+            print("Error: fetchAllSubjects \(error.localizedDescription)")
         }
     }
     
@@ -52,19 +60,23 @@ class StandardViewModel: ObservableObject {
             let standards = try viewContext.fetch(fetchRequest)
             
             if standards.isEmpty {
-                print("Email does not exist")
+                print("Standards does not exist")
                 
             } else {
-                print("Email exists")
+                print("Standards exists")
                 
                 if let standard = standards.first {
                     if let subjects = standard.subject_id as? Set<SubjectEntity> {
-                        savedEntities = Array(subjects)
+                        //savedEntities = Array(subjects)
+                        
+                        for subject in subjects {
+                            savedEntities.append(SubjectModel(subject_id: subject.subject_id?.uuidString, name: subject.name, description: subject.descrip))
+                        }
                     }
                 }
             }
         } catch {
-            print("Error fetching users: \(error.localizedDescription)")
+            print("Error: fetchSubjectsById \(error.localizedDescription)")
             
         }
         

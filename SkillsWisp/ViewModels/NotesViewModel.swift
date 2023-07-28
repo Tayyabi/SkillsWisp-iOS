@@ -11,7 +11,7 @@ import SwiftUI
 
 class NotesViewModel: ObservableObject {
     
-    @Published var savedEntity: NotesEntity?
+    @Published var savedEntity: NoteModel?
     
     
     private let persistenceController = PersistenceController.shared
@@ -20,7 +20,7 @@ class NotesViewModel: ObservableObject {
     }
     
     init() {
-        savedEntity = NotesEntity(context: viewContext)
+        //savedEntity = NotesEntity(context: viewContext)
     }
     
 //    func fetchAllNotes(){
@@ -40,11 +40,15 @@ class NotesViewModel: ObservableObject {
 //        }
 //    }
     
-    func fetchNoteById(id: UUID) {
+    func populateNote(note: NoteModel) {
+        print("populateNote: "+(note.local_url ?? ""))
+        savedEntity = note
+    }
+    func fetchNoteById(id: String) {
         
         
         let fetchRequest: NSFetchRequest<NotesEntity> = NotesEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "notes_id == %@", id.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "notes_id == %@", id)
         fetchRequest.sortDescriptors = []
         
         do {
@@ -58,7 +62,7 @@ class NotesViewModel: ObservableObject {
                 print("Notes exists")
                 
                 if let note = notes.first {
-                    savedEntity = note
+                    savedEntity = NoteModel(notes_id: note.notes_id?.uuidString, name: note.name, chapter: note.chapter, rating: note.rating, local_url: note.local_url, likes_count: note.likes_count, bookmark: note.bookmark, thumbnail: "")
                 }
             }
         } catch {

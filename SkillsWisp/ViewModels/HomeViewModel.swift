@@ -10,9 +10,10 @@ import CoreData
 
 class HomeViewModel: ObservableObject {
     
-    @Published var savedEntities: [StandardEntity] = []
+    @Published var savedEntities: [StandardModel] = []
     @Published var data: String = ""
     
+    let homeDataService = HomeDataService()
     
     private let persistenceController = PersistenceController.shared
     private var viewContext: NSManagedObjectContext {
@@ -22,24 +23,30 @@ class HomeViewModel: ObservableObject {
     init() {
         //deleteAllEntities()
         //addStandard()
-        fetchStandards()
+        //fetchStandards()
     }
     
     
+    func fetchStandardsFromDB() async {
+        try? await homeDataService.fetchStandardsFromDB { standards in
+            guard let standards = standards else {
+                return
+            }
+            self.savedEntities = standards
+        }
+    }
+    
     func fetchStandards(){
         let fetchRequest: NSFetchRequest<StandardEntity> = StandardEntity.fetchRequest()
-
+        
         do {
             let fetchedStandards = try self.viewContext.fetch(fetchRequest)
-
-            savedEntities = fetchedStandards
+            
             for standard in fetchedStandards {
-                let name = standard.name // Access the email attribute
-                let description = standard.descrip // Access other attributes
+                savedEntities.append(StandardModel(standard_id: standard.standard_id?.uuidString, name: standard.name, description: standard.descrip))
             }
         } catch {
-            // Handle the error appropriately
-            print("Error fetching users: \(error.localizedDescription)")
+            print("Error fetchStandards: \(error.localizedDescription)")
         }
     }
     
@@ -59,7 +66,7 @@ class HomeViewModel: ObservableObject {
     func deleteAllEntities() {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "StandardEntity")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
+        
         do {
             try persistenceController.container.persistentStoreCoordinator.execute(deleteRequest, with: viewContext)
             try viewContext.save()
@@ -69,9 +76,6 @@ class HomeViewModel: ObservableObject {
     }
     
     func addStandard() {
-        
-        
-        
         
         
         let newSubject0 = SubjectEntity(context: viewContext)
@@ -95,15 +99,15 @@ class HomeViewModel: ObservableObject {
         newSubject2.descrip = "Get solved notes by top professors of Pakistan"
         
         
-//        let newStandard0 = StandardEntity(context: viewContext)
-//        newStandard0.standard_id = UUID()
-//        newStandard0.name = "Matriculation"
-//        newStandard0.descrip = "nil"
-//        newStandard0.addToSubject_id(newSubject0)
-//        newStandard0.addToSubject_id(newSubject)
-//        newStandard0.addToSubject_id(newSubject1)
-//        newStandard0.addToSubject_id(newSubject2)
-
+        //        let newStandard0 = StandardEntity(context: viewContext)
+        //        newStandard0.standard_id = UUID()
+        //        newStandard0.name = "Matriculation"
+        //        newStandard0.descrip = "nil"
+        //        newStandard0.addToSubject_id(newSubject0)
+        //        newStandard0.addToSubject_id(newSubject)
+        //        newStandard0.addToSubject_id(newSubject1)
+        //        newStandard0.addToSubject_id(newSubject2)
+        
         
         let newStandard = StandardEntity(context: viewContext)
         newStandard.standard_id = UUID()
@@ -114,7 +118,7 @@ class HomeViewModel: ObservableObject {
         newStandard.addToSubject_id(newSubject1)
         newStandard.addToSubject_id(newSubject2)
         
-
+        
         let newStandard1 = StandardEntity(context: viewContext)
         newStandard1.standard_id = UUID()
         newStandard1.name = "Bachelors"

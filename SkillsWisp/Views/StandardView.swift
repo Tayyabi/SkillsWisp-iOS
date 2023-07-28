@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct StandardView: View {
-    
-    @ObservedObject var dataStore: DataStore
+    @ObservedObject var dataStore: DataStore1
     @State var shouldNavigate = false
     @State var backgrounds: [String] = ["bg_physics","bg_chemistry","bg_maths","bg_cs"]
     @State private var counter: Int = 0
@@ -85,7 +84,8 @@ struct StandardView: View {
                         VStack{
                             Button(action: {
                                 if let subject_id = subject.subject_id {
-                                    dataStore.id = subject_id
+                                    print("standard_id: \(dataStore.standard_id)")
+                                    dataStore.subject_id = subject_id
                                     shouldNavigate = true
                                 }
                                 
@@ -140,8 +140,11 @@ struct StandardView: View {
             
         }
         .onAppear{
-            vm.fetchSubjectsById(id: dataStore.id)
-            //vm.updateEntity(id: dataStore.standards_id)
+            Task {
+                await vm.fetchSubjectsFromDB(standard_id: dataStore.standard_id ?? "")
+                //vm.fetchSubjectsById(id: dataStore.id)
+                //vm.updateEntity(id: dataStore.standards_id)
+            }
         }
         .edgesIgnoringSafeArea([.leading, .trailing, .top])
         
@@ -155,6 +158,6 @@ struct StandardView: View {
 
 struct MatricScreen_Previews: PreviewProvider {
     static var previews: some View {
-        StandardView(dataStore: DataStore())
+        StandardView(dataStore: DataStore1())
     }
 }

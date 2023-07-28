@@ -13,6 +13,8 @@ struct ReviewsView: View {
     @State var comment: String = ""
     @State var showReview: Bool = false
     
+    @ObservedObject var dataStore: DataStore1
+    @StateObject var vm = ReviewsViewModel()
     
     var body: some View {
         
@@ -134,7 +136,9 @@ struct ReviewsView: View {
                     VStack {
                         
                         
-                        ForEach(1..<10) { index in
+                        ForEach(vm.savedEntities.indices, id: \.self) { index in
+                                
+                                let review = vm.savedEntities[index]
                             
                             
                             VStack {
@@ -162,7 +166,7 @@ struct ReviewsView: View {
                                             
                                         }
                                         
-                                        Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.")
+                                        Text(review.review ?? "")
                                             .foregroundColor(.gray)
                                             .font(.system(size: 13))
                                     }
@@ -189,7 +193,20 @@ struct ReviewsView: View {
                     //                Image(systemName: "person")
                     //                    .foregroundColor(Color.gray)
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        
+                        guard let noteid = dataStore.note_id,
+                              let standard_id = dataStore.standard_id,
+                              let subject_id = dataStore.subject_id,
+                              !comment.isEmpty else {
+                            return
+                        }
+                        Task {
+                            try? await vm.addReview(standard_id: standard_id, subject_id: subject_id, note_id: noteid, review: comment)
+                            
+                            comment = ""
+                        }
+                    }, label: {
                         
                         Text("Submit")
                             .foregroundColor(.white)
@@ -207,7 +224,25 @@ struct ReviewsView: View {
             }
             
             if self.showReview {
-                ReviewView()
+                RatingView()
+            }
+            
+            
+            if vm.isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                    .scaleEffect(2)
+            }
+        }
+        .onAppear{
+            Task {
+                guard let noteid = dataStore.note_id,
+                      let standard_id = dataStore.standard_id,
+                      let subject_id = dataStore.subject_id else {
+                    return
+                }
+            
+                await vm.fetchReviews(standard_id:standard_id, subject_id: subject_id, note_id:noteid)
             }
         }
     }
@@ -215,6 +250,6 @@ struct ReviewsView: View {
 
 struct ReviewsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewsView()
+        ReviewsView(dataStore: DataStore1())
     }
 }

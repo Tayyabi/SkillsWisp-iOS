@@ -11,8 +11,9 @@ import SwiftUI
 
 class SubjectViewModel: ObservableObject {
     
-    @Published var savedEntities: [NotesEntity] = []
+    @Published var savedEntities: [NoteModel] = []
     
+    let homeDataService = HomeDataService()
     
     private let persistenceController = PersistenceController.shared
     private var viewContext: NSManagedObjectContext {
@@ -23,28 +24,35 @@ class SubjectViewModel: ObservableObject {
         //fetchAllSubjects()
     }
     
+    func fetchNotesFromDB(standard_id: String, subject_id: String) async {
+        try? await homeDataService.fetchNotesFromDB(standard_id: standard_id, subject_id: subject_id) { notes in
+            guard let notes = notes else {
+                return
+            }
+            self.savedEntities = notes
+        }
+    }
+    
     func fetchAllNotes(){
         let fetchRequest: NSFetchRequest<NotesEntity> = NotesEntity.fetchRequest()
         
         do {
             let fetchedNotes = try self.viewContext.fetch(fetchRequest)
             
-            savedEntities = fetchedNotes
+            //savedEntities = fetchedNotes
             for note in fetchedNotes {
-                let name = note.name
-                //let description = subject.descrip
+                savedEntities.append(NoteModel(notes_id: note.notes_id?.uuidString, name: note.name, chapter: note.chapter, rating: note.rating, local_url: note.local_url, likes_count: note.likes_count, bookmark: note.bookmark, thumbnail: ""))
             }
-            
         } catch {
             print("Error fetching users: \(error.localizedDescription)")
         }
     }
     
-    func fetchNotesById(id: UUID) {
+    func fetchNotesById(id: String) {
         
         
         let fetchRequest: NSFetchRequest<SubjectEntity> = SubjectEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "notes_id.@count > 0 ", id.uuidString)
+        fetchRequest.predicate = NSPredicate(format: "notes_id.@count > 0 ", id)
         fetchRequest.sortDescriptors = []
         
         do {
@@ -59,7 +67,10 @@ class SubjectViewModel: ObservableObject {
                 
                 if let subjects = subjects.first {
                     if let notes = subjects.notes_id as? Set<NotesEntity> {
-                        savedEntities = Array(notes)
+                        //savedEntities = Array(notes)
+                        for note in notes {
+                            savedEntities.append(NoteModel(notes_id: note.notes_id?.uuidString, name: note.name, chapter: note.chapter, rating: note.rating, local_url: note.local_url, likes_count: note.likes_count, bookmark: note.bookmark, thumbnail: ""))
+                        }
                     }
                 }
             }
