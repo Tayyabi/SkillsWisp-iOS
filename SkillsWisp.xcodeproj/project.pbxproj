@@ -57,6 +57,7 @@
 		A3945ADF2A72C31B004E87F4 /* ReviewsDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3945ADE2A72C31A004E87F4 /* ReviewsDataService.swift */; };
 		A3945AE12A72CCFF004E87F4 /* ReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3945AE02A72CCFF004E87F4 /* ReviewsViewModel.swift */; };
 		A3945AE32A742BFC004E87F4 /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3945AE22A742BFB004E87F4 /* ReviewModel.swift */; };
+		A3945AE52A751898004E87F4 /* RatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3945AE42A751897004E87F4 /* RatingViewModel.swift */; };
 		A3A011F72A36081D00F59BB6 /* ReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A011F62A36081C00F59BB6 /* ReviewsView.swift */; };
 		A3A011F92A361AC400F59BB6 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A011F82A361AC400F59BB6 /* NotesView.swift */; };
 		A3A26D2F2A1D140C005C9B1C /* SubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D2E2A1D140C005C9B1C /* SubjectView.swift */; };
@@ -68,6 +69,7 @@
 		A3A26D3D2A211A52005C9B1C /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D3C2A211A51005C9B1C /* MyProfileView.swift */; };
 		A3A26D3F2A2123B3005C9B1C /* NotesCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D3E2A2123B3005C9B1C /* NotesCommentsView.swift */; };
 		A3A26D412A212C09005C9B1C /* OTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D402A212C09005C9B1C /* OTPTextField.swift */; };
+		A3A4F50B2A7ABA9700873675 /* RatingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F50A2A7ABA9700873675 /* RatingModel.swift */; };
 		A3E4995A2A502C7E00CA4A8B /* SkillsWisp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3E499582A502C7E00CA4A8B /* SkillsWisp.xcdatamodeld */; };
 		A3EF5E152A0938C60044C2A6 /* SkillsWispApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EF5E142A0938C60044C2A6 /* SkillsWispApp.swift */; };
 		A3EF5E192A0938CA0044C2A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3EF5E182A0938CA0044C2A6 /* Assets.xcassets */; };
@@ -135,6 +137,7 @@
 		A3945ADE2A72C31A004E87F4 /* ReviewsDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsDataService.swift; sourceTree = "<group>"; };
 		A3945AE02A72CCFF004E87F4 /* ReviewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewModel.swift; sourceTree = "<group>"; };
 		A3945AE22A742BFB004E87F4 /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
+		A3945AE42A751897004E87F4 /* RatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewModel.swift; sourceTree = "<group>"; };
 		A3A011F62A36081C00F59BB6 /* ReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsView.swift; sourceTree = "<group>"; };
 		A3A011F82A361AC400F59BB6 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		A3A26D2E2A1D140C005C9B1C /* SubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectView.swift; sourceTree = "<group>"; };
@@ -146,6 +149,7 @@
 		A3A26D3C2A211A51005C9B1C /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		A3A26D3E2A2123B3005C9B1C /* NotesCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCommentsView.swift; sourceTree = "<group>"; };
 		A3A26D402A212C09005C9B1C /* OTPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPTextField.swift; sourceTree = "<group>"; };
+		A3A4F50A2A7ABA9700873675 /* RatingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingModel.swift; sourceTree = "<group>"; };
 		A3E499592A502C7E00CA4A8B /* SkillsWisp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillsWisp.xcdatamodel; sourceTree = "<group>"; };
 		A3EF5E112A0938C60044C2A6 /* SkillsWisp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillsWisp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3EF5E142A0938C60044C2A6 /* SkillsWispApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsWispApp.swift; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 				A31837732A59728A0011810A /* NotesViewModel.swift */,
 				A31837752A597C310011810A /* SubjectViewModel.swift */,
 				A3945AE02A72CCFF004E87F4 /* ReviewsViewModel.swift */,
+				A3945AE42A751897004E87F4 /* RatingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 				A3945ADA2A6D4C70004E87F4 /* SubjectModel.swift */,
 				A3945ADC2A6D5D3A004E87F4 /* NoteModel.swift */,
 				A3945AE22A742BFB004E87F4 /* ReviewModel.swift */,
+				A3A4F50A2A7ABA9700873675 /* RatingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -515,6 +521,7 @@
 				A3945ADF2A72C31B004E87F4 /* ReviewsDataService.swift in Sources */,
 				A3A011F92A361AC400F59BB6 /* NotesView.swift in Sources */,
 				A318373A2A51B5D00011810A /* HomeViewModel.swift in Sources */,
+				A3A4F50B2A7ABA9700873675 /* RatingModel.swift in Sources */,
 				A31837DD2A5AB4710011810A /* NotesEntity+CoreDataClass.swift in Sources */,
 				A3945ADD2A6D5D3B004E87F4 /* NoteModel.swift in Sources */,
 				A3931CB42A658DFF009D5925 /* UserDataService.swift in Sources */,
@@ -542,6 +549,7 @@
 				A38A7A2B2A17D5B80011CD8A /* WelcomeView.swift in Sources */,
 				A3A26D352A210708005C9B1C /* TermsConditionView.swift in Sources */,
 				A31837DB2A5AB4710011810A /* SubjectEntity+CoreDataClass.swift in Sources */,
+				A3945AE52A751898004E87F4 /* RatingViewModel.swift in Sources */,
 				A344C7CD2A18F19700205657 /* LoginView.swift in Sources */,
 				A31837362A507E000011810A /* MyProfileViewModel.swift in Sources */,
 				A31837342A504D340011810A /* CreateAccountViewModel.swift in Sources */,

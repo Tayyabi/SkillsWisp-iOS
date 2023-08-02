@@ -9,7 +9,11 @@ import SwiftUI
 
 struct RatingView: View {
     
+    @Binding var confirm: Bool
     @State var selected: Int = -1
+    
+    @ObservedObject var dataStore: DataStore1
+    @StateObject var vm = RatingViewModel()
     
     var body: some View {
         
@@ -32,14 +36,23 @@ struct RatingView: View {
                             .frame(width: 22, height: 22)
                             .foregroundColor(self.selected >= i ? .yellow : .gray)
                             .onTapGesture {
-                                self.selected = i
+                                self.selected = i + 1
                             }
                     }
                 }
                 .padding()
                 
                 Button(action: {
+                    print("stars count: \(selected)")
                     
+                    guard let noteid = dataStore.note_id,
+                          selected != -1 else {
+                        return
+                    }
+                    Task {
+                        try? await vm.addRating(note_id:noteid, rating:selected)
+                    }
+                    confirm.toggle()
                 }, label: {
                     
                     Text("Confirm")
@@ -62,7 +75,8 @@ struct RatingView: View {
 }
 
 struct ReviewPopup_Previews: PreviewProvider {
+    @State static var confirm: Bool = false
     static var previews: some View {
-        RatingView()
+        RatingView(confirm: $confirm, dataStore: DataStore1())
     }
 }

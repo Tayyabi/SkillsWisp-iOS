@@ -24,13 +24,13 @@ struct ReviewsView: View {
                 HStack {
                     VStack {
                         
-                        Text("4.9")
+                        Text("\(String(format: "%.1f", vm.totalRating))")
                             .font(.system(size: 45))
                             .fontWeight(.semibold)
                             .foregroundColor(.black)
                         
                         
-                        Text("48 Reviews")
+                        Text("\(vm.savedRatings.count) Reviews")
                             .font(.system(size: 14))
                             .foregroundColor(.gray)
                     }
@@ -39,64 +39,71 @@ struct ReviewsView: View {
                     VStack {
                         
                         HStack(spacing: 10){
-                            ForEach(0..<5){ i in
+                            ForEach(1..<6){ i in
                                 
                                 Image(systemName: "star.fill").resizable()
                                     .frame(width: 22, height: 22)
-                                    .foregroundColor(self.selected >= i ? .yellow : .gray)
-                                    .onTapGesture {
-                                        self.selected = i
-                                    }
+                                    .foregroundColor(5 >= i ? .yellow : .gray)
+                                    
                             }
+                            
+                            Text("(\(vm.fiveStar))")
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
                         }
                         
                         HStack(spacing: 10){
-                            ForEach(0..<5){ i in
+                            ForEach(1..<6){ i in
                                 
                                 Image(systemName: "star.fill").resizable()
                                     .frame(width: 22, height: 22)
-                                    .foregroundColor(self.selected >= i ? .yellow : .gray)
-                                    .onTapGesture {
-                                        self.selected = i
-                                    }
+                                    .foregroundColor(4 >= i ? .yellow : .gray)
+                                   
                             }
+                            Text("(\(vm.fourStar))")
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
                         }
                         HStack(spacing: 10){
-                            ForEach(0..<5){ i in
+                            ForEach(1..<6){ i in
                                 
                                 Image(systemName: "star.fill").resizable()
                                     .frame(width: 22, height: 22)
-                                    .foregroundColor(self.selected >= i ? .yellow : .gray)
-                                    .onTapGesture {
-                                        self.selected = i
-                                    }
+                                    .foregroundColor(3 >= i ? .yellow : .gray)
+                                    
                             }
+                            Text("(\(vm.threeStar))")
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
                         }
                         HStack(spacing: 10){
-                            ForEach(0..<5){ i in
+                            ForEach(1..<6){ i in
                                 
                                 Image(systemName: "star.fill").resizable()
                                     .frame(width: 22, height: 22)
-                                    .foregroundColor(self.selected >= i ? .yellow : .gray)
-                                    .onTapGesture {
-                                        self.selected = i
-                                    }
+                                    .foregroundColor(2 >= i ? .yellow : .gray)
+                                    
                             }
+                            Text("(\(vm.twoStar))")
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
                         }
                         HStack(spacing: 10){
-                            ForEach(0..<5){ i in
+                            ForEach(1..<6){ i in
                                 
                                 Image(systemName: "star.fill").resizable()
                                     .frame(width: 22, height: 22)
-                                    .foregroundColor(self.selected >= i ? .yellow : .gray)
-                                    .onTapGesture {
-                                        self.selected = i
-                                    }
+                                    .foregroundColor(1 >= i ? .yellow : .gray)
+                                    
                             }
+                            Text("(\(vm.oneStar))")
+                                .font(.system(size: 14))
+                                .foregroundColor(.gray)
                             
                         }
                     }
                     .padding(.leading, 20)
+                    .frame(maxWidth: .infinity)
                     
                     
                 }
@@ -196,13 +203,11 @@ struct ReviewsView: View {
                     Button(action: {
                         
                         guard let noteid = dataStore.note_id,
-                              let standard_id = dataStore.standard_id,
-                              let subject_id = dataStore.subject_id,
                               !comment.isEmpty else {
                             return
                         }
                         Task {
-                            try? await vm.addReview(standard_id: standard_id, subject_id: subject_id, note_id: noteid, review: comment)
+                            try? await vm.addReview(note_id: noteid, review: comment)
                             
                             comment = ""
                         }
@@ -224,7 +229,7 @@ struct ReviewsView: View {
             }
             
             if self.showReview {
-                RatingView()
+                RatingView(confirm: $showReview, dataStore: dataStore)
             }
             
             
@@ -236,13 +241,13 @@ struct ReviewsView: View {
         }
         .onAppear{
             Task {
-                guard let noteid = dataStore.note_id,
-                      let standard_id = dataStore.standard_id,
-                      let subject_id = dataStore.subject_id else {
+                guard let noteid = dataStore.note_id else {
                     return
                 }
             
-                await vm.fetchReviews(standard_id:standard_id, subject_id: subject_id, note_id:noteid)
+                await vm.fetchReviews(note_id:noteid)
+                await vm.fetchRatings(note_id: noteid)
+                
             }
         }
     }
