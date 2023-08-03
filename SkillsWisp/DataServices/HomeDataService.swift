@@ -85,7 +85,7 @@ final class HomeDataService {
             for document in querySnapshot!.documents {
                 let data = document.data()
                 
-                let note = NoteModel(notes_id: data["note_id"] as? String ?? "UNKNOWN", name: data["name"] as? String ?? "UNKNOWN", chapter: data["chapter"] as? String ?? "UNKNOWN", rating: data["rating"] as? Double ?? 0.0, local_url: data["url"] as? String ?? "UNKNOWN", likes_count: data["likes_count"] as? Int64 ?? 0, bookmark: data["bookmark"] as? Bool ?? false,
+                let note = NoteModel(notes_id: data["note_id"] as? String ?? "UNKNOWN", name: data["name"] as? String ?? "UNKNOWN", chapter: data["chapter"] as? String ?? "UNKNOWN", rating: data["rating"] as? Double ?? 0.0, local_url: data["url"] as? String ?? "UNKNOWN", likes_count: data["likes_count"] as? Int64 ?? 0, review_count: data["review_count"] as? Int64 ?? 0, bookmark: data["bookmark"] as? Bool ?? false,
                                      thumbnail: data["thumbnail"] as? String ?? "UNKNOWN")
                 
                 notes.append(note)

@@ -30,20 +30,31 @@ struct NotesView: View {
                 ZStack(alignment: .bottomTrailing) {
                     
                     Color.gray.opacity(0.1)
-                    PDFViewWrapper(pdfURL: URL(string: vm.savedEntity?.local_url ?? "https://d1.islamhouse.com/data/en/ih_books/single/en_Sahih_Al-Bukhari.pdf")!)
+                    PDFViewWrapper(pdfURL: URL(string: vm.noteModel?.local_url ?? "https://d1.islamhouse.com/data/en/ih_books/single/en_Sahih_Al-Bukhari.pdf")!)
                                 .edgesIgnoringSafeArea(.all)
                     
                     
                     VStack{
                         
-                        Button(action: {}, label: {
+                        Button(action: {
+                            guard let noteId = dataStore.note_id,
+                                  let subjectId = dataStore.subject_id,
+                                  let standardId = dataStore.standard_id,
+                                  let likeCount = vm.noteModel?.likes_count else {
+                                return
+                            }
+                            Task {
+                                await vm.addLike(note_id:noteId, like:true)
+                                await vm.updateLikesCount(standard_id: standardId, subject_id: subjectId, note_id: noteId, count: likeCount)
+                            }
+                        }, label: {
                             
                             Image(systemName: "hand.thumbsup")
                                 .foregroundColor(.black)
                                 .padding()
                                 .background(Circle().foregroundColor(.white))
                         })
-                        Text("\(vm.savedEntity?.likes_count ?? 0)")
+                        Text("\(vm.noteModel?.likes_count ?? 0)")
                             .font(.system(size: 14))
                         
                         Button(action: {
@@ -60,7 +71,7 @@ struct NotesView: View {
                         .popover(isPresented: $showView) {
                             ReviewsView(dataStore: dataStore)
                         }
-                        Text("1.5k")
+                        Text("\(vm.noteModel?.review_count ?? 0)")
                             .font(.system(size: 14))
                         
                     }
@@ -82,8 +93,8 @@ struct NotesView: View {
                     
                     Button(action: {}, label: {
                         
-                        Image(systemName: vm.savedEntity?.bookmark ?? false ? "bookmark.fill": "bookmark")
-                            .foregroundColor(vm.savedEntity?.bookmark ?? false ? .red: .black)
+                        Image(systemName: vm.noteModel?.bookmark ?? false ? "bookmark.fill": "bookmark")
+                            .foregroundColor(vm.noteModel?.bookmark ?? false ? .red: .black)
                             .padding()
                             .background(Circle().foregroundColor(.white))
                     })

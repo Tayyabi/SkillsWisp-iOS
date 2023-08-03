@@ -15,11 +15,12 @@ struct NoteModel: Codable {
     let rating: Double
     let local_url: String?
     let likes_count: Int64
+    let review_count: Int64
     let bookmark: Bool
     let thumbnail: String?
     
     init(notes_id: String?, name: String?, chapter: String?, rating: Double,
-         local_url: String?, likes_count: Int64, bookmark: Bool, thumbnail: String?) {
+         local_url: String?, likes_count: Int64,review_count: Int64, bookmark: Bool, thumbnail: String?) {
         
         self.notes_id = notes_id
         self.name = name
@@ -27,6 +28,7 @@ struct NoteModel: Codable {
         self.rating = rating
         self.local_url = local_url
         self.likes_count = likes_count
+        self.review_count = review_count
         self.bookmark = bookmark
         self.thumbnail = thumbnail
     }

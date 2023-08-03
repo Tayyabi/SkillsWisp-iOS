@@ -70,6 +70,9 @@
 		A3A26D3F2A2123B3005C9B1C /* NotesCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D3E2A2123B3005C9B1C /* NotesCommentsView.swift */; };
 		A3A26D412A212C09005C9B1C /* OTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D402A212C09005C9B1C /* OTPTextField.swift */; };
 		A3A4F50B2A7ABA9700873675 /* RatingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F50A2A7ABA9700873675 /* RatingModel.swift */; };
+		A3A4F50D2A7BFFBA00873675 /* NotesDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F50C2A7BFFBA00873675 /* NotesDataService.swift */; };
+		A3A4F50F2A7C00D300873675 /* LikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F50E2A7C00D300873675 /* LikeModel.swift */; };
+		A3A4F5112A7C03C800873675 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F5102A7C03C800873675 /* BookmarkModel.swift */; };
 		A3E4995A2A502C7E00CA4A8B /* SkillsWisp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3E499582A502C7E00CA4A8B /* SkillsWisp.xcdatamodeld */; };
 		A3EF5E152A0938C60044C2A6 /* SkillsWispApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EF5E142A0938C60044C2A6 /* SkillsWispApp.swift */; };
 		A3EF5E192A0938CA0044C2A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3EF5E182A0938CA0044C2A6 /* Assets.xcassets */; };
@@ -150,6 +153,9 @@
 		A3A26D3E2A2123B3005C9B1C /* NotesCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCommentsView.swift; sourceTree = "<group>"; };
 		A3A26D402A212C09005C9B1C /* OTPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPTextField.swift; sourceTree = "<group>"; };
 		A3A4F50A2A7ABA9700873675 /* RatingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingModel.swift; sourceTree = "<group>"; };
+		A3A4F50C2A7BFFBA00873675 /* NotesDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDataService.swift; sourceTree = "<group>"; };
+		A3A4F50E2A7C00D300873675 /* LikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeModel.swift; sourceTree = "<group>"; };
+		A3A4F5102A7C03C800873675 /* BookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkModel.swift; sourceTree = "<group>"; };
 		A3E499592A502C7E00CA4A8B /* SkillsWisp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillsWisp.xcdatamodel; sourceTree = "<group>"; };
 		A3EF5E112A0938C60044C2A6 /* SkillsWisp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillsWisp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3EF5E142A0938C60044C2A6 /* SkillsWispApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsWispApp.swift; sourceTree = "<group>"; };
@@ -237,6 +243,7 @@
 				A3931CB32A658DFF009D5925 /* UserDataService.swift */,
 				A3945AD62A6C2061004E87F4 /* HomeDataService.swift */,
 				A3945ADE2A72C31A004E87F4 /* ReviewsDataService.swift */,
+				A3A4F50C2A7BFFBA00873675 /* NotesDataService.swift */,
 			);
 			path = DataServices;
 			sourceTree = "<group>";
@@ -361,6 +368,8 @@
 				A3945ADC2A6D5D3A004E87F4 /* NoteModel.swift */,
 				A3945AE22A742BFB004E87F4 /* ReviewModel.swift */,
 				A3A4F50A2A7ABA9700873675 /* RatingModel.swift */,
+				A3A4F50E2A7C00D300873675 /* LikeModel.swift */,
+				A3A4F5102A7C03C800873675 /* BookmarkModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -556,15 +565,18 @@
 				A3945AD92A6C3417004E87F4 /* StandardModel.swift in Sources */,
 				A3A26D2F2A1D140C005C9B1C /* SubjectView.swift in Sources */,
 				A38A79E22A0A26AE0011CD8A /* ShapesBootcamp.swift in Sources */,
+				A3A4F50D2A7BFFBA00873675 /* NotesDataService.swift in Sources */,
 				A3EF5E152A0938C60044C2A6 /* SkillsWispApp.swift in Sources */,
 				A3A26D3F2A2123B3005C9B1C /* NotesCommentsView.swift in Sources */,
 				A3945AD52A6C0378004E87F4 /* UserModel.swift in Sources */,
 				A31837762A597C310011810A /* SubjectViewModel.swift in Sources */,
 				A344C7D32A1902B100205657 /* CreateAccountView.swift in Sources */,
+				A3A4F5112A7C03C800873675 /* BookmarkModel.swift in Sources */,
 				A31837DA2A5AB4710011810A /* UsersEntity+CoreDataProperties.swift in Sources */,
 				A3945ADB2A6D4C70004E87F4 /* SubjectModel.swift in Sources */,
 				A31837E02A5AD8340011810A /* ImagePicker.swift in Sources */,
 				A3A26D392A2108D0005C9B1C /* ContactUsView.swift in Sources */,
+				A3A4F50F2A7C00D300873675 /* LikeModel.swift in Sources */,
 				A31837D82A5AB4710011810A /* StandardEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
