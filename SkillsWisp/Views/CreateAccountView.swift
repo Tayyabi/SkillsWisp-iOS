@@ -40,7 +40,7 @@ struct CreateAccountView: View {
     
     @State var name: String = ""
     @State var email: String = ""
-    @State var phoneno: String = ""
+    @State var phoneNo: String = ""
     @State var password: String = ""
     
     @State private var isNameValid = false
@@ -159,9 +159,9 @@ struct CreateAccountView: View {
                             Image(systemName: "phone")
                                 .foregroundColor(Color.gray)
                             VStack(alignment: .leading) {
-                                TextField("Phone Number", text: $phoneno)
+                                TextField("Phone Number", text: $phoneNo)
                                     .font(.system(size: 15))
-                                    .onChange(of: phoneno) { newValue in
+                                    .onChange(of: phoneNo) { newValue in
                                         isPhoneValid = false
                                     }
                                 if isPhoneValid {
@@ -234,12 +234,12 @@ struct CreateAccountView: View {
                             
                             vm.isLoading = true
                             Task {
-                                try? await vm.createUser(fullName: name, email: email, password: password, phoneNo: phoneno, picUrl: "")
+                                try? await vm.createUser(fullName: name, email: email, password: password, phoneNo: phoneNo, picUrl: "")
                                 
                                 name = ""
                                 email = ""
                                 password = ""
-                                phoneno = ""
+                                phoneNo = ""
                             }
                             
                         }, label: {
@@ -318,7 +318,7 @@ struct CreateAccountView: View {
             chk = true
             isEmailValid = true
         }
-        if phoneno.isEmpty {
+        if phoneNo.isEmpty {
             chk = true
             isPhoneValid = true
         }

@@ -9,28 +9,43 @@ import Foundation
 
 struct NoteModel: Codable {
     
-    let notes_id: String?
+    let notesId: String
     let name: String?
     let chapter: String?
     let rating: Double
-    let local_url: String?
-    let likes_count: Int64
-    let review_count: Int64
-    let bookmark: Bool
+    let localUrl: String?
+    let likesCount: Int?
+    let reviewCount: Int?
+    let bookmark: Bool?
     let thumbnail: String?
     
-    init(notes_id: String?, name: String?, chapter: String?, rating: Double,
-         local_url: String?, likes_count: Int64,review_count: Int64, bookmark: Bool, thumbnail: String?) {
+    init(notesId: String, name: String?, chapter: String?, rating: Double,
+         localUrl: String?, likesCount: Int,reviewCount: Int, bookmark: Bool, thumbnail: String?) {
         
-        self.notes_id = notes_id
+        self.notesId = notesId
         self.name = name
         self.chapter = chapter
         self.rating = rating
-        self.local_url = local_url
-        self.likes_count = likes_count
-        self.review_count = review_count
+        self.localUrl = localUrl
+        self.likesCount = likesCount
+        self.reviewCount = reviewCount
         self.bookmark = bookmark
         self.thumbnail = thumbnail
+    }
+    
+    
+    init(data: [String: Any]) {
+        
+        self.notesId = data["notes_id"] as? String ?? "UNKNOWN"
+        self.name = data["name"] as? String
+        self.chapter = data["chapter"] as? String
+        self.rating = data["rating"] as! Double
+        self.localUrl = data["local_url"] as? String
+        self.likesCount = data["likes_count"] as? Int
+        self.reviewCount = data["review_count"] as? Int
+        self.bookmark = data["bookmark"] as? Bool
+        self.thumbnail = data["thumbnail"] as? String
+        
     }
     
 }

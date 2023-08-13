@@ -41,7 +41,7 @@ class SubjectViewModel: ObservableObject {
             
             //savedEntities = fetchedNotes
             for note in fetchedNotes {
-                savedEntities.append(NoteModel(notes_id: note.notes_id?.uuidString, name: note.name, chapter: note.chapter, rating: note.rating, local_url: note.local_url, likes_count: note.likes_count, review_count: 0, bookmark: note.bookmark, thumbnail: ""))
+                savedEntities.append(NoteModel(notesId: note.notes_id?.uuidString ?? "UNKNOWN", name: note.name, chapter: note.chapter, rating: note.rating, localUrl: note.local_url, likesCount: Int(note.likes_count), reviewCount: 0, bookmark: note.bookmark, thumbnail: ""))
             }
         } catch {
             print("Error fetching users: \(error.localizedDescription)")
@@ -69,7 +69,7 @@ class SubjectViewModel: ObservableObject {
                     if let notes = subjects.notes_id as? Set<NotesEntity> {
                         //savedEntities = Array(notes)
                         for note in notes {
-                            savedEntities.append(NoteModel(notes_id: note.notes_id?.uuidString, name: note.name, chapter: note.chapter, rating: note.rating, local_url: note.local_url, likes_count: note.likes_count, review_count: 0, bookmark: note.bookmark, thumbnail: ""))
+                            savedEntities.append(NoteModel(notesId: note.notes_id?.uuidString ?? "UNKNOWN", name: note.name, chapter: note.chapter, rating: note.rating, localUrl: note.local_url, likesCount: Int(note.likes_count), reviewCount: 0, bookmark: note.bookmark, thumbnail: ""))
                         }
                     }
                 }

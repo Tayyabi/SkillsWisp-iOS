@@ -9,14 +9,25 @@ import Foundation
 
 struct ReviewModel: Codable {
     
-    let review_id: String?
+    let reviewId: String
     let review: String?
     let name: String?
+    let picUrl: String?
     
-    init(review_id: String?, review: String?, name: String?) {
-        self.review_id = review_id
+    init(reviewId: String, review: String?, name: String?, picUrl: String?) {
+        self.reviewId = reviewId
         self.review = review
         self.name = name
+        self.picUrl = picUrl
+    }
+    
+    
+    init(data: [String: Any]) {
+        self.reviewId = data["review_id"] as? String ?? "UNKNOWN"
+        self.review = data["review"] as? String
+        self.name = data["name"] as? String
+        self.picUrl = data["pic_url"] as? String
+        
     }
     
 }

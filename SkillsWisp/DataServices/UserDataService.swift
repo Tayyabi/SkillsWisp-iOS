@@ -23,7 +23,23 @@ final class UserDataService {
     }
     
     
-    
+    func createUserInDB(user: UserModel, completion: @escaping (Bool) -> ()) {
+        
+        do {
+            try userDocument(userId: user.userId).setData(from: user, merge: false, encoder: Coders.encoder){ error in
+                if let error = error {
+                    print("Error createUserInDB: \(error)")
+                    completion(false)
+                } else {
+                    print("Account Created")
+                    return completion(true)
+                }
+            }
+        }
+        catch {
+            print(error)
+        }
+    }
     
     func createUserInDB(userId: String, email: String?, full_name: String, phone_no: String, photoUrl: String?, completion: @escaping (Bool) -> ()) {
         
@@ -82,36 +98,35 @@ final class UserDataService {
         }
     }
     
-    
-    func fetchUserFromDB(userId: String, completion: @escaping (UserModel?) -> Void)  async throws {
-        
-        userDocument(userId: userId).getDocument { (document, error) in
-            guard error == nil else {
-                print("error", error ?? "")
-                completion(nil)
-                return
-            }
-            
-            if let document = document, document.exists {
-                let data = document.data()
-                if let data = data {
-                    print("data", data)
-                    
-                    
-                    let user = UserModel(user_id: userId,
-                                         full_name: data["full_name"] as? String ?? "UNKNOWN",
-                                         email:data["email"] as? String ?? "UNKNOWN",
-                                         phone_no: data["phone_no"] as? String ?? "UNKNOWN",
-                                         pic_url: data["photo_url"] as? String ?? "UNKNOWN")
-                    completion(user)
-                    
-                }
-            }
-            else {
-                completion(nil)
-            }
-        }
+    func fetchUserFromDB(userId: String) async throws -> UserModel? {
+        return try await userDocument(userId: userId).getDocument(as: UserModel.self, decoder: Coders.decoder)
     }
+    
+//    func fetchUserFrom DB(userId: String, completion: @escaping (UserModel?) -> Void)  async throws {
+//
+//        userDocument(userId: userId).getDocument { (document, error) in
+//            guard error == nil else {
+//                print("error", error ?? "")
+//                completion(nil)
+//                return
+//            }
+//
+//            guard let document = document else {
+//                print("Document does not exist")
+//                completion(nil)
+//                return
+//            }
+//
+//            if let data = document.data() {
+//                let user = try self.decoder.decode(UserModel.self, from: data)
+//                print("User: \(user)")
+//            }
+//
+//            else {
+//                completion(nil)
+//            }
+//        }
+//    }
     
     
     
@@ -120,20 +135,20 @@ final class UserDataService {
             throw URLError(.badServerResponse)
         }
         
-        return UserModel(user_id: user.uid , email: user.email ?? "")
+        return UserModel(userId: user.uid , email: user.email ?? "")
     }
     
     func createUser(email: String, password: String) async throws -> UserModel {
         
         let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
-        return UserModel(user_id: authDataResult.user.uid , email: authDataResult.user.email ?? "")
+        return UserModel(userId: authDataResult.user.uid , email: authDataResult.user.email ?? "")
         
     }
     
     func signIn(email: String, password: String) async throws -> UserModel {
         
         let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
-        return UserModel(user_id: authDataResult.user.uid , email: authDataResult.user.email ?? "")
+        return UserModel(userId: authDataResult.user.uid , email: authDataResult.user.email ?? "")
         
     }
     

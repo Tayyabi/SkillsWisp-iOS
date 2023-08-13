@@ -61,7 +61,7 @@ class NotesViewModel: ObservableObject {
         
     }
     
-    func updateLikesCount(standard_id: String, subject_id: String, note_id: String, count: Int64) async {
+    func updateLikesCount(standard_id: String, subject_id: String, note_id: String, count: Int) async {
         
         do {
             try await notesDataService.updateLikesCountInDB(standard_id: standard_id,
@@ -129,7 +129,7 @@ class NotesViewModel: ObservableObject {
 //    }
     
     func populateNote(note: NoteModel) {
-        print("populateNote: "+(note.local_url ?? ""))
+        print("populateNote: "+(note.localUrl ?? ""))
         noteModel = note
     }
     func fetchNoteById(id: String) {
@@ -150,7 +150,7 @@ class NotesViewModel: ObservableObject {
                 print("Notes exists")
                 
                 if let note = notes.first {
-                    noteModel = NoteModel(notes_id: note.notes_id?.uuidString, name: note.name, chapter: note.chapter, rating: note.rating, local_url: note.local_url, likes_count: note.likes_count, review_count: 0, bookmark: note.bookmark, thumbnail: "")
+                    noteModel = NoteModel(notesId: note.notes_id?.uuidString ?? "UNKNOWN", name: note.name, chapter: note.chapter, rating: note.rating, localUrl: note.local_url, likesCount: Int(note.likes_count), reviewCount: 0, bookmark: note.bookmark, thumbnail: "")
                 }
             }
         } catch {

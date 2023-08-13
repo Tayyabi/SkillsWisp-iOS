@@ -8,15 +8,23 @@
 import Foundation
 struct StandardModel: Codable {
     
-    let standard_id: String?
+    let standardId: String?
     let name: String?
     let description: String?
     
     
-    init(standard_id: String?, name: String?, description: String?) {
-        self.standard_id = standard_id
+    init(standardId: String?, name: String?, description: String?) {
+        self.standardId = standardId
         self.name = name
         self.description = description
+    }
+    
+    
+    init(data: [String: Any]) {
+        self.standardId = data["standard_id"] as? String
+        self.name = data["name"] as? String
+        self.description = data["description"] as? String
+        
     }
     
 }

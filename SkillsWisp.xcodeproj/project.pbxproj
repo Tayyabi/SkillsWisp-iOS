@@ -30,6 +30,7 @@
 		A344C7D52A19161400205657 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A344C7D42A19161300205657 /* HomeView.swift */; };
 		A344C7D72A1A0B2500205657 /* StandardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A344C7D62A1A0B2500205657 /* StandardView.swift */; };
 		A34521E02A88DEFD00D2DD57 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34521DF2A88DEFD00D2DD57 /* RemoteImage.swift */; };
+		A34C200E2A89065B00FCFCF5 /* Coders.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34C200D2A89065B00FCFCF5 /* Coders.swift */; };
 		A34D1E4F2A4359230090C0DE /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34D1E4E2A4359230090C0DE /* RatingView.swift */; };
 		A38A79E02A0A20780011CD8A /* TextBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38A79DF2A0A20780011CD8A /* TextBootcamp.swift */; };
 		A38A79E22A0A26AE0011CD8A /* ShapesBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38A79E12A0A26AE0011CD8A /* ShapesBootcamp.swift */; };
@@ -126,6 +127,7 @@
 		A344C7D42A19161300205657 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A344C7D62A1A0B2500205657 /* StandardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardView.swift; sourceTree = "<group>"; };
 		A34521DF2A88DEFD00D2DD57 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
+		A34C200D2A89065B00FCFCF5 /* Coders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coders.swift; sourceTree = "<group>"; };
 		A34D1E4E2A4359230090C0DE /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		A38A79DF2A0A20780011CD8A /* TextBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBootcamp.swift; sourceTree = "<group>"; };
 		A38A79E12A0A26AE0011CD8A /* ShapesBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesBootcamp.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				A3A26D402A212C09005C9B1C /* OTPTextField.swift */,
 				A31837DF2A5AD8340011810A /* ImagePicker.swift */,
 				A34521DF2A88DEFD00D2DD57 /* RemoteImage.swift */,
+				A34C200D2A89065B00FCFCF5 /* Coders.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				A3945ADD2A6D5D3B004E87F4 /* NoteModel.swift in Sources */,
 				A3931CB42A658DFF009D5925 /* UserDataService.swift in Sources */,
 				A3A26D372A210857005C9B1C /* AboutUsView.swift in Sources */,
+				A34C200E2A89065B00FCFCF5 /* Coders.swift in Sources */,
 				A31837D72A5AB4710011810A /* StandardEntity+CoreDataClass.swift in Sources */,
 				A38A79E02A0A20780011CD8A /* TextBootcamp.swift in Sources */,
 				A344C7D72A1A0B2500205657 /* StandardView.swift in Sources */,

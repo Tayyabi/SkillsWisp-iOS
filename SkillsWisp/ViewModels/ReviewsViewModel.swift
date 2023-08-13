@@ -32,6 +32,8 @@ class ReviewsViewModel: ObservableObject {
     func addReview(standardId: String, subjectId: String, noteId: String, review: String) async throws {
         
         do {
+            
+            
             try await reviewDataService.addReviewInDB(note_id: noteId, review: review)
             
             await fetchReviews(standard_id: standardId, subject_id: subjectId, note_id: noteId)

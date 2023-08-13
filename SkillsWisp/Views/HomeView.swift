@@ -88,7 +88,7 @@ struct HomeView: View {
                                     VStack {
                                         
                                         Button(action: {
-                                            if let standard_id = standard.standard_id {
+                                            if let standard_id = standard.standardId {
                                                 dataStore.standard_id = standard_id
                                                 shouldNavigate = true
                                             }

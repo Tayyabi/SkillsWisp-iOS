@@ -32,35 +32,36 @@ class CreateAccountViewModel: ObservableObject {
         do {
             
             isLoading = true
+            
             let user = try await userDataService.createUser(email: email, password: password)
             
+            var userModel = UserModel(userId: user.userId , fullName: fullName, email: email ,phoneNo: phoneNo, picUrl: "")
             if let imageData = imageData {
                 
-                try await userDataService.uploadProfileImageToFirebase(imageData: imageData) { imageUrl in
+                try await userDataService.uploadProfileImageToFirebase(imageData: imageData) { [weak self] imageUrl in
+                    
                     guard let imageUrl = imageUrl else {
                         return
                     }
                     
-                    self.userDataService.createUserInDB(userId: user.user_id ?? "", email: email, full_name: fullName, phone_no: phoneNo, photoUrl: imageUrl, completion: { isSuccess in
+                    userModel.picUrl = imageUrl
+                    
+                    self?.userDataService.createUserInDB(user: userModel, completion: { isSuccess in
                         
-                        self.isSuccessfull = isSuccess
-                        self.saveCache(user_id: user.user_id ?? "", full_name: fullName ,
-                                       email: user.email ?? "", phone_no: phoneNo,
-                                       picture_url: imageUrl)
+                        self?.isSuccessfull = isSuccess
+                        self?.saveCache(user: userModel)
                     })
                 }
                 
-                
             }
             else {
-                userDataService.createUserInDB(userId: user.user_id ?? "", email: user.email, full_name: fullName, phone_no: phoneNo, photoUrl: "", completion: { isSuccess in
-                    self.isSuccessfull = isSuccess
-                    self.saveCache(user_id: user.user_id ?? "", full_name: fullName,
-                                   email: user.email ?? "", phone_no: phoneNo, picture_url: "")
+                userDataService.createUserInDB(user: userModel, completion: { [weak self] isSuccess in
+                    self?.isSuccessfull = isSuccess
+                    self?.saveCache(user: userModel)
                 })
             }
             
-            addUser(userId: user.user_id ?? "", fullName: user.full_name ?? "", email: user.email ?? "", phoneNo: phoneNo, picUrl: picUrl)
+            addUser(userId: user.userId, fullName: user.fullName ?? "", email: user.email , phoneNo: phoneNo, picUrl: picUrl)
             
         }
         catch{
@@ -72,12 +73,12 @@ class CreateAccountViewModel: ObservableObject {
         
     }
     
-    func saveCache(user_id: String, full_name: String, email: String, phone_no: String, picture_url: String) {
-        UserDefaults.standard.set(user_id, forKey: "user_id")
-        UserDefaults.standard.set(full_name, forKey: "full_name")
-        UserDefaults.standard.set(email, forKey: "email")
-        UserDefaults.standard.set(phone_no, forKey: "phone_no")
-        UserDefaults.standard.set(picture_url, forKey: "picture_url")
+    func saveCache(user: UserModel) {
+        UserDefaults.standard.set(user.userId, forKey: "user_id")
+        UserDefaults.standard.set(user.fullName, forKey: "full_name")
+        UserDefaults.standard.set(user.email, forKey: "email")
+        UserDefaults.standard.set(user.phoneNo, forKey: "phone_no")
+        UserDefaults.standard.set(user.picUrl, forKey: "picture_url")
     }
     
     // Local - Core Data method

@@ -34,7 +34,7 @@ class MyProfileViewModel: ObservableObject {
             return
         }
         
-        userModel = UserModel(user_id: user_id, full_name: full_name, email: email, phone_no: phone_no, pic_url: picture_url)
+        userModel = UserModel(userId: user_id, fullName: full_name, email: email, phoneNo: phone_no, picUrl: picture_url)
         
     }
     

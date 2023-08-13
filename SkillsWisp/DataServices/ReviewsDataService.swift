@@ -17,6 +17,47 @@ final class ReviewsDataService {
     private let standardsCollection = Firestore.firestore().collection("standards")
     
     
+    func addReviewInDB(note_id: String, review: ReviewModel) async throws {
+        
+        
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badServerResponse)
+        }
+        
+        let name = UserDefaults.standard.string(forKey: "full_name") ?? "UnKnown"
+        let reviewData: [String: Any] = [
+            
+            "name": name,
+            "pic_url": "",
+            "review": review,
+            "date_created": Timestamp(),
+        ]
+        let userID: [String: Any] = [
+            "user_id": user.uid
+        ]
+        
+        
+        
+        
+        try await ratingsreviewsCollection.document(note_id).collection("user_id").document(user.uid).setData(userID, merge: false)
+        let reviewDocRef = ratingsreviewsCollection.document(note_id).collection("user_id").document(user.uid).collection("user_reviews")
+        
+        
+        var ref: DocumentReference? = nil
+        ref = reviewDocRef.addDocument(data: reviewData) { error in
+            if let error = error {
+                print("Error: addReviewInDB: \(error)")
+            } else {
+                print("addReviewInDB: Review added with ID: \(ref!.documentID)")
+            }
+        }
+        
+        print("addReviewInDB: Review Created")
+        
+        
+    }
+    
+    
     func addReviewInDB(note_id: String, review: String) async throws {
         
         
@@ -84,7 +125,7 @@ final class ReviewsDataService {
                     for postDocument in reviewQuerySnapshot!.documents {
                         let data = postDocument.data()
                         
-                        let review = ReviewModel(review_id: data["review_id"] as? String ?? "UNKNOWN", review: data["review"] as? String ?? "UNKNOWN", name: data["name"] as? String ?? "UNKNOWN")
+                        let review = ReviewModel(data: data)
                         reviews.append(review)
                     }
                     
@@ -120,7 +161,7 @@ final class ReviewsDataService {
                     for postDocument in reviewQuerySnapshot!.documents {
                         let data = postDocument.data()
                         
-                        let rating = RatingModel(rating_id: data["review_id"] as? String ?? "UNKNOWN", rating: data["rating"] as? Int ?? 0)
+                        let rating = RatingModel(data: data)
                         ratings.append(rating)
                     }
                     

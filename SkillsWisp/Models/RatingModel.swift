@@ -9,12 +9,17 @@ import Foundation
 
 struct RatingModel: Codable {
     
-    let rating_id: String?
+    let ratingId: String
     let rating: Int?
     
-    init(rating_id: String?, rating: Int?) {
-        self.rating_id = rating_id
+    init(ratingId: String, rating: Int?) {
+        self.ratingId = ratingId
         self.rating = rating
     }
     
+    
+    init(data: [String: Any]) {
+        self.ratingId = data["rating_id"] as? String ?? "UNKNOWN"
+        self.rating = data["review"] as? Int
+    }
 }

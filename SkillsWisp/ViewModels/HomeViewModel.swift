@@ -43,7 +43,7 @@ class HomeViewModel: ObservableObject {
             let fetchedStandards = try self.viewContext.fetch(fetchRequest)
             
             for standard in fetchedStandards {
-                savedEntities.append(StandardModel(standard_id: standard.standard_id?.uuidString, name: standard.name, description: standard.descrip))
+                savedEntities.append(StandardModel(standardId: standard.standard_id?.uuidString, name: standard.name, description: standard.descrip))
             }
         } catch {
             print("Error fetchStandards: \(error.localizedDescription)")

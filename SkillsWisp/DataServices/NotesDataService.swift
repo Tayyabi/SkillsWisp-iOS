@@ -178,7 +178,7 @@ final class NotesDataService {
         }
     }
     
-    func updateLikesCountInDB(standard_id: String, subject_id: String, note_id: String, count: Int64) async throws {
+    func updateLikesCountInDB(standard_id: String, subject_id: String, note_id: String, count: Int) async throws {
         
         standardsCollection.document(standard_id).collection("subjects").document(subject_id).collection("notes").document(note_id).updateData(["likes_count": count]){ error in
                 if let error = error {

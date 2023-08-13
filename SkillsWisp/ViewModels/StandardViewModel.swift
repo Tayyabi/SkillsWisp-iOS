@@ -40,7 +40,7 @@ class StandardViewModel: ObservableObject {
             let fetchedSubjects = try self.viewContext.fetch(fetchRequest)
             
             for subject in fetchedSubjects {
-                savedEntities.append(SubjectModel(subject_id: subject.subject_id?.uuidString, name: subject.name, description: subject.descrip))
+                savedEntities.append(SubjectModel(subjectId: subject.subject_id?.uuidString ?? "UNKNOWN", name: subject.name, description: subject.descrip))
             }
             
         } catch {
@@ -70,7 +70,7 @@ class StandardViewModel: ObservableObject {
                         //savedEntities = Array(subjects)
                         
                         for subject in subjects {
-                            savedEntities.append(SubjectModel(subject_id: subject.subject_id?.uuidString, name: subject.name, description: subject.descrip))
+                            savedEntities.append(SubjectModel(subjectId: subject.subject_id?.uuidString ?? "UNKNOWN", name: subject.name, description: subject.descrip))
                         }
                     }
                 }

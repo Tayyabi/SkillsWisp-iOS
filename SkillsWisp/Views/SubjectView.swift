@@ -92,11 +92,11 @@ struct SubjectView: View {
                             
                             VStack{
                                 Button(action: {
-                                    if let note_id = note.notes_id {
-                                        dataStore.note_id = note_id
+                                    //if let note_id = note.notesId {
+                                        dataStore.note_id = note.notesId
                                         dataStore.selectedNote = note
                                         shouldNavigate = true
-                                    }
+                                    //}
                                 }, label: {
                                     VStack(alignment: .leading) {
                                         

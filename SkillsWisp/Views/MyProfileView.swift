@@ -52,8 +52,8 @@ struct MyProfileView: View {
                     }
                     else {
                         
-                        if ((vm.userModel?.pic_url) != nil){
-                            RemoteImage(url: URL(string: vm.userModel?.pic_url ?? "")!)
+                        if ((vm.userModel?.picUrl) != nil){
+                            RemoteImage(url: URL(string: vm.userModel?.picUrl ?? "")!)
                                 .frame(width: 120, height: 120)
                                 .onTapGesture {
                                     isShowingImagePicker = true
@@ -70,7 +70,7 @@ struct MyProfileView: View {
                     }
                     
                     
-                    Text(vm.userModel?.full_name ?? "Unknown")
+                    Text(vm.userModel?.fullName ?? "Unknown")
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
@@ -93,8 +93,8 @@ struct MyProfileView: View {
                     .foregroundColor(Color.gray)
                 
                 TextField("Phone number", text: Binding(
-                    get: { vm.userModel?.phone_no ?? "" },
-                    set: { vm.userModel?.phone_no = $0 }
+                    get: { vm.userModel?.phoneNo ?? "" },
+                    set: { vm.userModel?.phoneNo = $0 }
                 ))
                 .font(.system(size: 15))
                 .disabled(!isEditable)

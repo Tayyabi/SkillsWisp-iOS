@@ -30,7 +30,7 @@ struct NotesView: View {
                 ZStack(alignment: .bottomTrailing) {
                     
                     Color.gray.opacity(0.1)
-                    PDFViewWrapper(pdfURL: URL(string: vm.noteModel?.local_url ?? "https://d1.islamhouse.com/data/en/ih_books/single/en_Sahih_Al-Bukhari.pdf")!)
+                    PDFViewWrapper(pdfURL: URL(string: vm.noteModel?.localUrl ?? "https://d1.islamhouse.com/data/en/ih_books/single/en_Sahih_Al-Bukhari.pdf")!)
                                 .edgesIgnoringSafeArea(.all)
                     
                     
@@ -40,7 +40,7 @@ struct NotesView: View {
                             guard let noteId = dataStore.note_id,
                                   let subjectId = dataStore.subject_id,
                                   let standardId = dataStore.standard_id,
-                                  let likeCount = vm.noteModel?.likes_count else {
+                                  let likeCount = vm.noteModel?.likesCount else {
                                 return
                             }
                             Task {
@@ -54,7 +54,7 @@ struct NotesView: View {
                                 .padding()
                                 .background(Circle().foregroundColor(.white))
                         })
-                        Text("\(vm.noteModel?.likes_count ?? 0)")
+                        Text("\(vm.noteModel?.likesCount ?? 0)")
                             .font(.system(size: 14))
                         
                         Button(action: {
@@ -71,7 +71,7 @@ struct NotesView: View {
                         .popover(isPresented: $showView) {
                             ReviewsView(dataStore: dataStore)
                         }
-                        Text("\(vm.noteModel?.review_count ?? 0)")
+                        Text("\(vm.noteModel?.reviewCount ?? 0)")
                             .font(.system(size: 14))
                         
                     }

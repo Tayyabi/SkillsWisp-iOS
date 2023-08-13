@@ -30,16 +30,12 @@ class LoginViewModel: ObservableObject {
         do {
             let user = try await userDataService.signIn(email: email, password: password)
             
-            try await userDataService.fetchUserFromDB(userId: user.user_id ?? "") { user in
-                
-                if let user = user {
-                    self.saveCache(user_id: user.user_id ?? "", full_name: user.full_name ?? "",
-                                   email: user.email ?? "", phone_no: user.phone_no ?? "", picture_url: user.pic_url ?? "")
-                }
-                else {
-                    print("Error: fetchUserFromDB")
-                }
+            let user1 = try await userDataService.fetchUserFromDB(userId: user.userId )
+            
+            if let usr = user1 {
+                self.saveCache(user: usr)
             }
+            
             
             await MainActor.run {
                 self.isLoading = false
@@ -77,8 +73,8 @@ class LoginViewModel: ObservableObject {
                     print("User Name: \(userEntity.full_name ?? "")")
                     print("User Email: \(userEntity.email ?? "")")
                     
-                    saveCache(user_id: userEntity.user_id?.uuidString ?? "", full_name: userEntity.full_name ?? "",
-                              email: userEntity.email ?? "", phone_no: userEntity.phone_no ?? "", picture_url: "")
+                    //saveCache(user_id: userEntity.user_id?.uuidString ?? "", full_name: userEntity.full_name ?? "",
+                      //        email: userEntity.email ?? "", phone_no: userEntity.phone_no ?? "", picture_url: "")
                     
                 }
                 
@@ -91,12 +87,13 @@ class LoginViewModel: ObservableObject {
         
     }
     
-    func saveCache(user_id: String, full_name: String, email: String, phone_no: String, picture_url: String) {
-        UserDefaults.standard.set(user_id, forKey: "user_id")
-        UserDefaults.standard.set(full_name, forKey: "full_name")
-        UserDefaults.standard.set(email, forKey: "email")
-        UserDefaults.standard.set(phone_no, forKey: "phone_no")
-        UserDefaults.standard.set(picture_url, forKey: "picture_url")
+    func saveCache(user: UserModel) {
+        
+        UserDefaults.standard.set(user.userId, forKey: "user_id")
+        UserDefaults.standard.set(user.fullName, forKey: "full_name")
+        UserDefaults.standard.set(user.email, forKey: "email")
+        UserDefaults.standard.set(user.phoneNo, forKey: "phone_no")
+        UserDefaults.standard.set(user.picUrl, forKey: "picture_url")
     }
     
     

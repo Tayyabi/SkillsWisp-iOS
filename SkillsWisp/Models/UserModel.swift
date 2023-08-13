@@ -9,19 +9,18 @@ import Foundation
 
 struct UserModel: Codable {
     
-    let user_id: String?
-    var full_name: String?
-    var email: String?
-    var phone_no: String?
-    var pic_url: String?
+    let userId: String
+    var fullName: String?
+    var email: String
+    var phoneNo: String?
+    var picUrl: String?
     
-    init(user_id: String = "",full_name: String = "",email: String = "",phone_no: String = "",pic_url: String = "") {
-        self.user_id = user_id
-        self.full_name = full_name
+    init(userId: String = "",fullName: String = "",email: String = "",phoneNo: String = "",picUrl: String = "") {
+        self.userId = userId
+        self.fullName = fullName
         self.email = email
-        self.phone_no = phone_no
-        self.pic_url = pic_url
-        
+        self.phoneNo = phoneNo
+        self.picUrl = picUrl
     }
     
 }
