@@ -34,7 +34,7 @@ class LoginViewModel: ObservableObject {
                 
                 if let user = user {
                     self.saveCache(user_id: user.user_id ?? "", full_name: user.full_name ?? "",
-                                   email: user.email ?? "", phone_no: user.phone_no ?? "")
+                                   email: user.email ?? "", phone_no: user.phone_no ?? "", picture_url: user.pic_url ?? "")
                 }
                 else {
                     print("Error: fetchUserFromDB")
@@ -78,7 +78,7 @@ class LoginViewModel: ObservableObject {
                     print("User Email: \(userEntity.email ?? "")")
                     
                     saveCache(user_id: userEntity.user_id?.uuidString ?? "", full_name: userEntity.full_name ?? "",
-                              email: userEntity.email ?? "", phone_no: userEntity.phone_no ?? "")
+                              email: userEntity.email ?? "", phone_no: userEntity.phone_no ?? "", picture_url: "")
                     
                 }
                 
@@ -91,11 +91,12 @@ class LoginViewModel: ObservableObject {
         
     }
     
-    func saveCache(user_id: String, full_name: String, email: String, phone_no: String) {
+    func saveCache(user_id: String, full_name: String, email: String, phone_no: String, picture_url: String) {
         UserDefaults.standard.set(user_id, forKey: "user_id")
         UserDefaults.standard.set(full_name, forKey: "full_name")
         UserDefaults.standard.set(email, forKey: "email")
         UserDefaults.standard.set(phone_no, forKey: "phone_no")
+        UserDefaults.standard.set(picture_url, forKey: "picture_url")
     }
     
     

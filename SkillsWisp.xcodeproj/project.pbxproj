@@ -29,6 +29,7 @@
 		A344C7D32A1902B100205657 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A344C7D22A1902B100205657 /* CreateAccountView.swift */; };
 		A344C7D52A19161400205657 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A344C7D42A19161300205657 /* HomeView.swift */; };
 		A344C7D72A1A0B2500205657 /* StandardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A344C7D62A1A0B2500205657 /* StandardView.swift */; };
+		A34521E02A88DEFD00D2DD57 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34521DF2A88DEFD00D2DD57 /* RemoteImage.swift */; };
 		A34D1E4F2A4359230090C0DE /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34D1E4E2A4359230090C0DE /* RatingView.swift */; };
 		A38A79E02A0A20780011CD8A /* TextBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38A79DF2A0A20780011CD8A /* TextBootcamp.swift */; };
 		A38A79E22A0A26AE0011CD8A /* ShapesBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38A79E12A0A26AE0011CD8A /* ShapesBootcamp.swift */; };
@@ -73,6 +74,7 @@
 		A3A4F50D2A7BFFBA00873675 /* NotesDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F50C2A7BFFBA00873675 /* NotesDataService.swift */; };
 		A3A4F50F2A7C00D300873675 /* LikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F50E2A7C00D300873675 /* LikeModel.swift */; };
 		A3A4F5112A7C03C800873675 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F5102A7C03C800873675 /* BookmarkModel.swift */; };
+		A3A4F5132A7FF03400873675 /* AccountSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F5122A7FF03400873675 /* AccountSuccessView.swift */; };
 		A3E4995A2A502C7E00CA4A8B /* SkillsWisp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3E499582A502C7E00CA4A8B /* SkillsWisp.xcdatamodeld */; };
 		A3EF5E152A0938C60044C2A6 /* SkillsWispApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EF5E142A0938C60044C2A6 /* SkillsWispApp.swift */; };
 		A3EF5E192A0938CA0044C2A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3EF5E182A0938CA0044C2A6 /* Assets.xcassets */; };
@@ -123,6 +125,7 @@
 		A344C7D22A1902B100205657 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		A344C7D42A19161300205657 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A344C7D62A1A0B2500205657 /* StandardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardView.swift; sourceTree = "<group>"; };
+		A34521DF2A88DEFD00D2DD57 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		A34D1E4E2A4359230090C0DE /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		A38A79DF2A0A20780011CD8A /* TextBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBootcamp.swift; sourceTree = "<group>"; };
 		A38A79E12A0A26AE0011CD8A /* ShapesBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesBootcamp.swift; sourceTree = "<group>"; };
@@ -156,6 +159,7 @@
 		A3A4F50C2A7BFFBA00873675 /* NotesDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDataService.swift; sourceTree = "<group>"; };
 		A3A4F50E2A7C00D300873675 /* LikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeModel.swift; sourceTree = "<group>"; };
 		A3A4F5102A7C03C800873675 /* BookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkModel.swift; sourceTree = "<group>"; };
+		A3A4F5122A7FF03400873675 /* AccountSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSuccessView.swift; sourceTree = "<group>"; };
 		A3E499592A502C7E00CA4A8B /* SkillsWisp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillsWisp.xcdatamodel; sourceTree = "<group>"; };
 		A3EF5E112A0938C60044C2A6 /* SkillsWisp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillsWisp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3EF5E142A0938C60044C2A6 /* SkillsWispApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsWispApp.swift; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 				A344C7D02A18FE7600205657 /* GifImage.swift */,
 				A3A26D402A212C09005C9B1C /* OTPTextField.swift */,
 				A31837DF2A5AD8340011810A /* ImagePicker.swift */,
+				A34521DF2A88DEFD00D2DD57 /* RemoteImage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 				A3A26D322A1E66D4005C9B1C /* SettingsView.swift */,
 				A3A26D342A210707005C9B1C /* TermsConditionView.swift */,
 				A38A7A2A2A17D5B80011CD8A /* WelcomeView.swift */,
+				A3A4F5122A7FF03400873675 /* AccountSuccessView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -531,6 +537,7 @@
 				A3A011F92A361AC400F59BB6 /* NotesView.swift in Sources */,
 				A318373A2A51B5D00011810A /* HomeViewModel.swift in Sources */,
 				A3A4F50B2A7ABA9700873675 /* RatingModel.swift in Sources */,
+				A3A4F5132A7FF03400873675 /* AccountSuccessView.swift in Sources */,
 				A31837DD2A5AB4710011810A /* NotesEntity+CoreDataClass.swift in Sources */,
 				A3945ADD2A6D5D3B004E87F4 /* NoteModel.swift in Sources */,
 				A3931CB42A658DFF009D5925 /* UserDataService.swift in Sources */,
@@ -574,6 +581,7 @@
 				A3A4F5112A7C03C800873675 /* BookmarkModel.swift in Sources */,
 				A31837DA2A5AB4710011810A /* UsersEntity+CoreDataProperties.swift in Sources */,
 				A3945ADB2A6D4C70004E87F4 /* SubjectModel.swift in Sources */,
+				A34521E02A88DEFD00D2DD57 /* RemoteImage.swift in Sources */,
 				A31837E02A5AD8340011810A /* ImagePicker.swift in Sources */,
 				A3A26D392A2108D0005C9B1C /* ContactUsView.swift in Sources */,
 				A3A4F50F2A7C00D300873675 /* LikeModel.swift in Sources */,

@@ -29,12 +29,14 @@ class ReviewsViewModel: ObservableObject {
     
     
     
-    func addReview(note_id: String, review: String) async throws {
+    func addReview(standardId: String, subjectId: String, noteId: String, review: String) async throws {
         
         do {
-            try await reviewDataService.addReviewInDB(note_id: note_id, review: review)
+            try await reviewDataService.addReviewInDB(note_id: noteId, review: review)
             
-            await fetchReviews(note_id: note_id)
+            await fetchReviews(standard_id: standardId, subject_id: subjectId, note_id: noteId)
+            
+            try await reviewDataService.updateReviewCountInDB(standard_id: standardId, subject_id: subjectId, note_id: noteId, count: Int64(savedEntities.count))
         }
         catch{
             print("Error createUser: \(error)")
@@ -42,7 +44,7 @@ class ReviewsViewModel: ObservableObject {
         
     }
     
-    func fetchReviews(note_id: String) async {
+    func fetchReviews(standard_id:String, subject_id: String, note_id: String) async {
         
         do {
             try await reviewDataService.fetchReviewFromDB(note_id: note_id, completion: { reviews in
@@ -55,6 +57,7 @@ class ReviewsViewModel: ObservableObject {
                 
                 self.isLoading = false
             })
+            
         }
         catch {
             print("Error fetchReviews: \(error)")

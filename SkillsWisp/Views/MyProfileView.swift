@@ -14,6 +14,9 @@ struct MyProfileView: View {
     @State var password: String = ""
     @State var isEditable: Bool = false
     
+    @State private var selectedImage: UIImage?
+    @State private var isShowingImagePicker = false
+    
     @StateObject var vm = MyProfileViewModel()
     
     var body: some View {
@@ -30,18 +33,49 @@ struct MyProfileView: View {
                 
                 VStack {
                     
-                    Image("ic_profile_img")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
+//                    if ((vm.userModel?.pic_url) != nil){
+//                        RemoteImage(url: URL(string: vm.userModel?.pic_url ?? "")!)
+//                            .frame(width: 100, height: 100)
+//                    }
                     
-                    Text(vm.userDetails?.full_name ?? "Unknown")
+                    if let image = selectedImage {
+                        
+                        
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fit)
+                            .clipShape(Circle())
+                            .onTapGesture {
+                                isShowingImagePicker = true
+                            }
+                    }
+                    else {
+                        
+                        if ((vm.userModel?.pic_url) != nil){
+                            RemoteImage(url: URL(string: vm.userModel?.pic_url ?? "")!)
+                                .frame(width: 120, height: 120)
+                                .onTapGesture {
+                                    isShowingImagePicker = true
+                                }
+                        }
+//                        Image("ic_profile_img")
+//                            .resizable()
+//                            .frame(width: 100, height: 100)
+//                            .aspectRatio(contentMode: .fit)
+//                            .clipShape(Circle())
+//                            .onTapGesture {
+//                                isShowingImagePicker = true
+//                            }
+                    }
+                    
+                    
+                    Text(vm.userModel?.full_name ?? "Unknown")
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                     
-                    Text(vm.userDetails?.email ?? "Unknown")
+                    Text(vm.userModel?.email ?? "Unknown")
                         .accentColor(.white)
                         .font(.system(size: 14))
                     
@@ -59,8 +93,8 @@ struct MyProfileView: View {
                     .foregroundColor(Color.gray)
                 
                 TextField("Phone number", text: Binding(
-                    get: { vm.userDetails?.phone_no ?? "" },
-                    set: { vm.userDetails?.phone_no = $0 }
+                    get: { vm.userModel?.phone_no ?? "" },
+                    set: { vm.userModel?.phone_no = $0 }
                 ))
                 .font(.system(size: 15))
                 .disabled(!isEditable)
@@ -79,8 +113,8 @@ struct MyProfileView: View {
                     .foregroundColor(Color.gray)
                 
                 TextField("Email", text: Binding(
-                    get: { vm.userDetails?.email ?? "" },
-                    set: { vm.userDetails?.email = $0 }
+                    get: { vm.userModel?.email ?? "" },
+                    set: { vm.userModel?.email = $0 }
                 ))
                 .font(.system(size: 15))
                 .disabled(!isEditable)
@@ -139,6 +173,9 @@ struct MyProfileView: View {
             
         }
         .padding()
+        .onAppear{
+            vm.getCache()
+        }
         
         
         .navigationBarTitle("My Profile")

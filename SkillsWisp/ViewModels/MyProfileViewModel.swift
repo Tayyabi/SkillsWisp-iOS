@@ -12,7 +12,7 @@ import SwiftUI
 class MyProfileViewModel: ObservableObject {
     
     @Published var savedEntities: [UsersEntity] = []
-    @Published var userDetails: UsersEntity?
+    @Published var userModel: UserModel?
     
     private let persistenceController = PersistenceController.shared
     private var viewContext: NSManagedObjectContext {
@@ -23,6 +23,20 @@ class MyProfileViewModel: ObservableObject {
         self.fetchUser()
     }
     
+    func getCache() {
+        
+        guard let user_id = UserDefaults.standard.string(forKey: "user_id"),
+              let full_name = UserDefaults.standard.string(forKey: "full_name"),
+              let email = UserDefaults.standard.string(forKey: "email"),
+              let phone_no = UserDefaults.standard.string(forKey: "phone_no"),
+              let picture_url = UserDefaults.standard.string(forKey: "picture_url")
+        else {
+            return
+        }
+        
+        userModel = UserModel(user_id: user_id, full_name: full_name, email: email, phone_no: phone_no, pic_url: picture_url)
+        
+    }
     
     func fetchUser() {
         
@@ -43,7 +57,7 @@ class MyProfileViewModel: ObservableObject {
         do {
             savedEntities = try viewContext.fetch(fetchRequest)
             if (savedEntities.count > 0) {
-                userDetails = savedEntities.first
+                //userModel = savedEntities.first
             }
             
         } catch {

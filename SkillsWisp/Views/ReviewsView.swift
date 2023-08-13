@@ -202,12 +202,14 @@ struct ReviewsView: View {
                     
                     Button(action: {
                         
-                        guard let noteid = dataStore.note_id,
+                        guard let noteId = dataStore.note_id,
+                              let standardId = dataStore.standard_id,
+                              let subjectId = dataStore.subject_id,
                               !comment.isEmpty else {
                             return
                         }
                         Task {
-                            try? await vm.addReview(note_id: noteid, review: comment)
+                            try? await vm.addReview(standardId: standardId, subjectId: subjectId, noteId: noteId, review: comment)
                             
                             comment = ""
                         }
@@ -241,12 +243,14 @@ struct ReviewsView: View {
         }
         .onAppear{
             Task {
-                guard let noteid = dataStore.note_id else {
+                guard let noteId = dataStore.note_id,
+                      let standardId = dataStore.standard_id,
+                      let subjectId = dataStore.note_id else {
                     return
                 }
             
-                await vm.fetchReviews(note_id:noteid)
-                await vm.fetchRatings(note_id: noteid)
+                await vm.fetchReviews(standard_id: standardId, subject_id: subjectId, note_id: noteId)
+                await vm.fetchRatings(note_id: noteId)
                 
             }
         }

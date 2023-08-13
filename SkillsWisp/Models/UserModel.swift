@@ -10,10 +10,10 @@ import Foundation
 struct UserModel: Codable {
     
     let user_id: String?
-    let full_name: String?
-    let email: String?
-    let phone_no: String?
-    let pic_url: String?
+    var full_name: String?
+    var email: String?
+    var phone_no: String?
+    var pic_url: String?
     
     init(user_id: String = "",full_name: String = "",email: String = "",phone_no: String = "",pic_url: String = "") {
         self.user_id = user_id

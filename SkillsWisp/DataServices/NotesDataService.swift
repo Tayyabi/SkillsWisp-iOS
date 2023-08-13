@@ -189,17 +189,5 @@ final class NotesDataService {
             }
         
     }
-    
-    func updateReviewCountInDB(standard_id: String, subject_id: String, note_id: String, count: Int64) async throws {
-        
-        standardsCollection.document(standard_id).collection("subjects").document(subject_id).collection("notes").document(note_id).updateData(["review_count": count]){ error in
-                if let error = error {
-                    print("Error updating document: \(error)")
-                } else {
-                    print("Document successfully updated!")
-                }
-            }
-        
-    }
 }
 

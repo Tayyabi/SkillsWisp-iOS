@@ -9,11 +9,14 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import Firebase
+import FirebaseStorage
 
 final class UserDataService {
     
     
     private let userCollection = Firestore.firestore().collection("users")
+    let storage = Storage.storage()
     
     private func userDocument(userId: String) -> DocumentReference {
         userCollection.document(userId)
@@ -22,7 +25,7 @@ final class UserDataService {
     
     
     
-    func createUserInDB(userId: String, email: String?, full_name: String, phone_no: String, photoUrl: String?) async throws {
+    func createUserInDB(userId: String, email: String?, full_name: String, phone_no: String, photoUrl: String?, completion: @escaping (Bool) -> ()) {
         
         var userData: [String: Any] = [
             "user_id": userId,
@@ -37,12 +40,46 @@ final class UserDataService {
         if let photoUrl = photoUrl {
             userData["photo_url"] = photoUrl
         }
+  
+        userDocument(userId: userId).setData(userData, merge: false){ error in
+            if let error = error {
+                print("Error createUserInDB: \(error)")
+                completion(false)
+            } else {
+                print("Account Created")
+                return completion(true)
+            }
+        }
         
         
-        try await userDocument(userId: userId).setData(userData, merge: false)
         
-        print("Account Created")
+    }
+    func uploadProfileImageToFirebase(imageData: Data,completion: @escaping (String?) -> ()) async throws {
         
+        let imageName = "\(UUID().uuidString).jpg"
+        let storageRef = storage.reference().child("profile_images/\(imageName)")
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        storageRef.putData(imageData, metadata: metadata) { metadata, error in
+            if let error = error {
+                completion(nil)
+                print("Error uploading image: \(error.localizedDescription)")
+            } else {
+                print("Image uploaded successfully!")
+                // Do something with the image URL if needed (metadata?.downloadURL())
+                storageRef.downloadURL { url, error in
+                    if let error = error {
+                        completion(nil)
+                        print("Error getting download URL: \(error.localizedDescription)")
+                    } else if let downloadURL = url {
+                        print("Download URL: \(downloadURL.absoluteString)")
+                        completion(downloadURL.absoluteString)
+                    }
+                }
+            }
+        }
     }
     
     
@@ -62,9 +99,10 @@ final class UserDataService {
                     
                     
                     let user = UserModel(user_id: userId,
-                                        full_name: data["full_name"] as? String ?? "UNKNOWN",
-                                        email:data["email"] as? String ?? "UNKNOWN",
-                                        phone_no: data["phone_no"] as? String ?? "UNKNOWN")
+                                         full_name: data["full_name"] as? String ?? "UNKNOWN",
+                                         email:data["email"] as? String ?? "UNKNOWN",
+                                         phone_no: data["phone_no"] as? String ?? "UNKNOWN",
+                                         pic_url: data["photo_url"] as? String ?? "UNKNOWN")
                     completion(user)
                     
                 }

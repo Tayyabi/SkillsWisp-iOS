@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseStorage
 
 struct CheckboxToggleStyle: ToggleStyle {
     
@@ -70,7 +72,7 @@ struct CreateAccountView: View {
                         Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 120, height: 120)
+                            .frame(width: 140, height: 140)
                             .clipShape(Circle())
                             .shadow(radius: 10)
                             .overlay(Circle().stroke(Color.yellow, lineWidth: 1))
@@ -84,7 +86,7 @@ struct CreateAccountView: View {
                         Image("ic_profile_img")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 120, height: 120)
+                            .frame(width: 140, height: 140)
                             .clipShape(Circle())
                             .shadow(radius: 10)
                             .overlay(Circle().stroke(Color.yellow, lineWidth: 1))
@@ -284,8 +286,21 @@ struct CreateAccountView: View {
                         .scaleEffect(2)
                 }
                 
+                if vm.isSuccessfull {
+                    AccountSuccessView()
+                }
+                
             }
-            .sheet(isPresented: $isShowingImagePicker) {
+            .sheet(isPresented: $isShowingImagePicker, onDismiss: {
+                
+                guard let image = selectedImage,
+                      let imageData = image.jpegData(compressionQuality: 0.5) else {
+                    print("Failed to get image data.")
+                    return
+                    
+                }
+                vm.imageData = imageData
+            }) {
                 ImagePicker(selectedImage: $selectedImage)
                 
             }

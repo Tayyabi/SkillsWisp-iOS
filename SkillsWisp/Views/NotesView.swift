@@ -45,7 +45,7 @@ struct NotesView: View {
                             }
                             Task {
                                 await vm.addLike(note_id:noteId, like:true)
-                                await vm.updateLikesCount(standard_id: standardId, subject_id: subjectId, note_id: noteId, count: likeCount)
+                                await vm.updateLikesCount(standard_id: standardId, subject_id: subjectId, note_id: noteId, count: likeCount+1)
                             }
                         }, label: {
                             
