@@ -9,7 +9,7 @@ import Foundation
 
 struct NoteModel: Codable {
     
-    let notesId: String
+    let noteId: String?
     let name: String?
     let chapter: String?
     let rating: Double
@@ -19,10 +19,10 @@ struct NoteModel: Codable {
     let bookmark: Bool?
     let thumbnail: String?
     
-    init(notesId: String, name: String?, chapter: String?, rating: Double,
+    init(noteId: String, name: String?, chapter: String?, rating: Double,
          localUrl: String?, likesCount: Int,reviewCount: Int, bookmark: Bool, thumbnail: String?) {
         
-        self.notesId = notesId
+        self.noteId = noteId
         self.name = name
         self.chapter = chapter
         self.rating = rating
@@ -36,7 +36,7 @@ struct NoteModel: Codable {
     
     init(data: [String: Any]) {
         
-        self.notesId = data["notes_id"] as? String ?? "UNKNOWN"
+        self.noteId = data["note_id"] as? String
         self.name = data["name"] as? String
         self.chapter = data["chapter"] as? String
         self.rating = data["rating"] as! Double

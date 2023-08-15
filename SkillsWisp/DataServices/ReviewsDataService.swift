@@ -24,14 +24,6 @@ final class ReviewsDataService {
             throw URLError(.badServerResponse)
         }
         
-        let name = UserDefaults.standard.string(forKey: "full_name") ?? "UnKnown"
-        let reviewData: [String: Any] = [
-            
-            "name": name,
-            "pic_url": "",
-            "review": review,
-            "date_created": Timestamp(),
-        ]
         let userID: [String: Any] = [
             "user_id": user.uid
         ]
@@ -42,16 +34,14 @@ final class ReviewsDataService {
         try await ratingsreviewsCollection.document(note_id).collection("user_id").document(user.uid).setData(userID, merge: false)
         let reviewDocRef = ratingsreviewsCollection.document(note_id).collection("user_id").document(user.uid).collection("user_reviews")
         
-        
         var ref: DocumentReference? = nil
-        ref = reviewDocRef.addDocument(data: reviewData) { error in
+        ref = try reviewDocRef.addDocument(from: review, encoder: Coders.encoder) { error in
             if let error = error {
                 print("Error: addReviewInDB: \(error)")
             } else {
                 print("addReviewInDB: Review added with ID: \(ref!.documentID)")
             }
         }
-        
         print("addReviewInDB: Review Created")
         
         
@@ -135,7 +125,7 @@ final class ReviewsDataService {
         }
     }
     func fetchRatingsFromDB(note_id: String,
-                           completion: @escaping ([RatingModel]?) -> ()) async throws {
+                            completion: @escaping ([RatingModel]?) -> ()) async throws {
         
         let reviewDocRef = ratingsreviewsCollection.document(note_id).collection("user_id")
         
@@ -212,12 +202,12 @@ final class ReviewsDataService {
     func updateReviewCountInDB(standard_id: String, subject_id: String, note_id: String, count: Int64) async throws {
         
         standardsCollection.document(standard_id).collection("subjects").document(subject_id).collection("notes").document(note_id).updateData(["review_count": count]){ error in
-                if let error = error {
-                    print("Error updating document: \(error)")
-                } else {
-                    print("Document successfully updated!")
-                }
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("Document successfully updated!")
             }
+        }
         
     }
 }

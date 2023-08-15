@@ -14,6 +14,8 @@ class NotesViewModel: ObservableObject {
     
     @Published var likes: [LikeModel] = []
     @Published var bookmarks: [BookmarkModel] = []
+    @Published var isLiked: Bool = false
+    @Published var isBookmark: Bool = false
     
     let notesDataService = NotesDataService()
     
@@ -35,12 +37,39 @@ class NotesViewModel: ObservableObject {
     func addLike(note_id: String, like: Bool) async {
         
         do {
+            let name = UserDefaults.standard.string(forKey: "full_name") ?? "UnKnown"
+            let like = LikeModel(name: name, like: like)
             try await notesDataService.addLikesInDB(note_id: note_id, like: like)
         }
         catch{
             print("Error addLike: \(error)")
         }
         
+    }
+    
+    func isLiked(note_id: String) async {
+        do {
+            let isTrue = try await notesDataService.checkUserLike(note_id: note_id)
+            
+            await MainActor.run {
+                self.isLiked = isTrue
+            }
+        }
+        catch {
+            print("Error isLiked: \(error)")
+        }
+    }
+    func isBookmarked(note_id: String) async {
+        do {
+            let isBookmark = try await notesDataService.checkUserBookmark(note_id: note_id)
+            
+            await MainActor.run {
+                self.isBookmark = isBookmark
+            }
+        }
+        catch {
+            print("Error isLiked: \(error)")
+        }
     }
     func fetchLikes(note_id: String) async {
         
@@ -78,9 +107,11 @@ class NotesViewModel: ObservableObject {
     
     
     
-    func addBookmark(note_id: String, bookmark: Bool) async throws {
+    func addBookmark(note_id: String, bookmark: Bool) async {
         
         do {
+            let name = UserDefaults.standard.string(forKey: "full_name") ?? "UnKnown"
+            let bookmark = BookmarkModel(name: name, isBookmark: bookmark)
             try await notesDataService.addBookmarksInDB(note_id: note_id, isBookmark: bookmark)
         }
         catch{
@@ -150,7 +181,7 @@ class NotesViewModel: ObservableObject {
                 print("Notes exists")
                 
                 if let note = notes.first {
-                    noteModel = NoteModel(notesId: note.notes_id?.uuidString ?? "UNKNOWN", name: note.name, chapter: note.chapter, rating: note.rating, localUrl: note.local_url, likesCount: Int(note.likes_count), reviewCount: 0, bookmark: note.bookmark, thumbnail: "")
+                    noteModel = NoteModel(noteId: note.notes_id?.uuidString ?? "UNKNOWN", name: note.name, chapter: note.chapter, rating: note.rating, localUrl: note.local_url, likesCount: Int(note.likes_count), reviewCount: 0, bookmark: note.bookmark, thumbnail: "")
                 }
             }
         } catch {

@@ -14,6 +14,7 @@ struct UserModel: Codable {
     var email: String
     var phoneNo: String?
     var picUrl: String?
+    var dateCreated: Date?
     
     init(userId: String = "",fullName: String = "",email: String = "",phoneNo: String = "",picUrl: String = "") {
         self.userId = userId
@@ -21,6 +22,15 @@ struct UserModel: Codable {
         self.email = email
         self.phoneNo = phoneNo
         self.picUrl = picUrl
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case userId
+        case fullName
+        case email
+        case phoneNo
+        case picUrl
+        case dateCreated
     }
     
 }

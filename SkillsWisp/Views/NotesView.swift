@@ -40,7 +40,8 @@ struct NotesView: View {
                             guard let noteId = dataStore.note_id,
                                   let subjectId = dataStore.subject_id,
                                   let standardId = dataStore.standard_id,
-                                  let likeCount = vm.noteModel?.likesCount else {
+                                  let likeCount = vm.noteModel?.likesCount,
+                                  !vm.isLiked else {
                                 return
                             }
                             Task {
@@ -50,9 +51,9 @@ struct NotesView: View {
                         }, label: {
                             
                             Image(systemName: "hand.thumbsup")
-                                .foregroundColor(.black)
+                                .foregroundColor(vm.isLiked ? .white : .black)
                                 .padding()
-                                .background(Circle().foregroundColor(.white))
+                                .background(Circle().foregroundColor(vm.isLiked ? Color("clr_purple_mimosa") : .white))
                         })
                         Text("\(vm.noteModel?.likesCount ?? 0)")
                             .font(.system(size: 14))
@@ -91,10 +92,19 @@ struct NotesView: View {
                     
                     Spacer()
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        guard let noteId = dataStore.note_id,
+                              !vm.isBookmark else {
+                            return
+                            
+                        }
+                        Task {
+                            await vm.addBookmark(note_id: noteId, bookmark: true)
+                        }
+                    }, label: {
                         
-                        Image(systemName: vm.noteModel?.bookmark ?? false ? "bookmark.fill": "bookmark")
-                            .foregroundColor(vm.noteModel?.bookmark ?? false ? .red: .black)
+                        Image(systemName: vm.isBookmark ? "bookmark.fill": "bookmark")
+                            .foregroundColor(vm.isBookmark ? .red: .black)
                             .padding()
                             .background(Circle().foregroundColor(.white))
                     })
@@ -118,9 +128,14 @@ struct NotesView: View {
             
         }
         .onAppear{
-            //vm.fetchNoteById(id: dataStore.note_id ?? "")
-            if let note = dataStore.selectedNote {
-                vm.populateNote(note: note)
+            Task {
+                //vm.fetchNoteById(id: dataStore.note_id ?? "")
+                if let note = dataStore.selectedNote {
+                    vm.populateNote(note: note)
+                }
+                guard let noteId = dataStore.note_id else { return }
+                await vm.isLiked(note_id: noteId)
+                await vm.isBookmarked(note_id: noteId)
             }
         }
         .navigationTitle("Notes")

@@ -32,9 +32,12 @@ class ReviewsViewModel: ObservableObject {
     func addReview(standardId: String, subjectId: String, noteId: String, review: String) async throws {
         
         do {
+            let name = UserDefaults.standard.string(forKey: "full_name") ?? "UnKnown"
+            let picUrl = UserDefaults.standard.string(forKey: "pictrue_url") ?? "UnKnown"
+            let revieww = ReviewModel(review: review, name: name, picUrl: picUrl)
+            try await reviewDataService.addReviewInDB(note_id: noteId, review: revieww)
             
-            
-            try await reviewDataService.addReviewInDB(note_id: noteId, review: review)
+           // try await reviewDataService.addReviewInDB(note_id: noteId, review: review)
             
             await fetchReviews(standard_id: standardId, subject_id: subjectId, note_id: noteId)
             

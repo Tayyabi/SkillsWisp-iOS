@@ -8,7 +8,7 @@
 import Foundation
 struct SubjectModel: Codable {
     
-    let subjectId: String
+    let subjectId: String?
     let name: String?
     let description: String?
     
@@ -21,7 +21,7 @@ struct SubjectModel: Codable {
     
     
     init(data: [String: Any]) {
-        self.subjectId = data["subject_id"] as? String ?? "UNKNOWN"
+        self.subjectId = data["subject_id"] as? String
         self.name = data["name"] as? String
         self.description = data["description"] as? String
         
