@@ -25,12 +25,12 @@ struct UserModel: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case userId
-        case fullName
-        case email
-        case phoneNo
-        case picUrl
-        case dateCreated
+        case userId = "user_id"
+        case fullName = "full_name"
+        case email = "email"
+        case phoneNo  = "phone_no"
+        case picUrl = "photo_url"
+        case dateCreated = "date_created"
     }
     
 }

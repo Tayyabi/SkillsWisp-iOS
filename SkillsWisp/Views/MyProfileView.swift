@@ -52,21 +52,21 @@ struct MyProfileView: View {
                     }
                     else {
                         
-                        if ((vm.userModel?.picUrl) != nil){
+                        if(vm.userModel?.picUrl != nil) {
                             RemoteImage(url: URL(string: vm.userModel?.picUrl ?? "")!)
                                 .frame(width: 120, height: 120)
                                 .onTapGesture {
                                     isShowingImagePicker = true
                                 }
                         }
-//                        Image("ic_profile_img")
-//                            .resizable()
-//                            .frame(width: 100, height: 100)
-//                            .aspectRatio(contentMode: .fit)
-//                            .clipShape(Circle())
-//                            .onTapGesture {
-//                                isShowingImagePicker = true
-//                            }
+                        //                        Image("ic_profile_img")
+                        //                            .resizable()
+                        //                            .frame(width: 100, height: 100)
+                        //                            .aspectRatio(contentMode: .fit)
+                        //                            .clipShape(Circle())
+                        //                            .onTapGesture {
+                        //                                isShowingImagePicker = true
+                        //                            }
                     }
                     
                     
@@ -117,7 +117,7 @@ struct MyProfileView: View {
                     set: { vm.userModel?.email = $0 }
                 ))
                 .font(.system(size: 15))
-                .disabled(!isEditable)
+                .disabled(true)
                 
             }
             .padding(.top)
@@ -153,6 +153,14 @@ struct MyProfileView: View {
                 VStack {
                     Button(action: {
                         self.isEditable.toggle()
+                        
+                        guard let name = vm.userModel?.fullName,
+                              let phone = vm.userModel?.phoneNo else {
+                            return
+                        }
+                        Task {
+                            await vm.updateUser(fullName: name, phoneNo: phone)
+                        }
                     }, label: {
                         Text("Confirm")
                             .font(.headline)

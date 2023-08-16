@@ -70,6 +70,31 @@ final class UserDataService {
         
         
     }
+    
+    func updateUserInDB(full_name: String, phone_no: String, photoUrl: String, completion: @escaping (Bool) -> ()) {
+        
+        guard let user = Auth.auth().currentUser else { return }
+        var userData: [String: Any] = [
+            "phone_no": phone_no,
+            "full_name": full_name,
+            
+        ]
+        if !photoUrl.isEmpty {
+            userData["photo_url"] = photoUrl
+        }
+        
+        userDocument(userId: user.uid).updateData(userData){ error in
+            if let error = error {
+                print("Error updating document: \(error)")
+                completion(false)
+            } else {
+                print("Document successfully updated!")
+                completion(true)
+            }
+        }
+        
+    }
+    
     func uploadProfileImageToFirebase(imageData: Data,completion: @escaping (String?) -> ()) async throws {
         
         let imageName = "\(UUID().uuidString).jpg"
@@ -99,7 +124,7 @@ final class UserDataService {
     }
     
     func fetchUserFromDB(userId: String) async throws -> UserModel? {
-        return try await userDocument(userId: userId).getDocument(as: UserModel.self, decoder: Coders.decoder)
+        return try await userDocument(userId: userId).getDocument(as: UserModel.self)
     }
     
 //    func fetchUserFrom DB(userId: String, completion: @escaping (UserModel?) -> Void)  async throws {
