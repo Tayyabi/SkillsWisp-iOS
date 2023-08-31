@@ -127,6 +127,7 @@ final class UserDataService {
         return try await userDocument(userId: userId).getDocument(as: UserModel.self)
     }
     
+    
 //    func fetchUserFrom DB(userId: String, completion: @escaping (UserModel?) -> Void)  async throws {
 //
 //        userDocument(userId: userId).getDocument { (document, error) in

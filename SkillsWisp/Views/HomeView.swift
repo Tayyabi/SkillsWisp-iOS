@@ -300,23 +300,24 @@ struct HomeView: View {
             }
             
             .navigationBarItems(
-                leading: NavigationLink(destination: {
-                    SettingsView()
-                },label: {
-                    
+                leading: NavigationLink(destination: SettingsView(), label: {
                     Image("ic_menu")
                         .resizable()
                         .frame(width: 30, height: 30)
                     
                 }),
-                trailing: NavigationLink(destination: MyProfileView(),label: {
+                trailing: NavigationLink(destination: ProfileView(),label: {
                     
-                    Image("ic_profile")
+                    /*Image("ic_profile")
                         .resizable()
                         .clipShape(Circle())
                         .frame(width: 35, height: 35)
-                        .shadow(radius: 10)
-                    
+                        .shadow(radius: 10)*/
+                    let picture_url = UserDefaults.standard.string(forKey: "picture_url") ?? ""
+                    RemoteImage(url: URL(string: picture_url)!)
+                        .clipShape(Circle())
+                        .frame(width: 35, height: 35)
+                                            
                 })
             )
         }

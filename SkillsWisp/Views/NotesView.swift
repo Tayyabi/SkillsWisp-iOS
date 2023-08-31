@@ -45,7 +45,7 @@ struct NotesView: View {
                                 return
                             }
                             Task {
-                                await vm.addLike(note_id:noteId, like:true)
+                                await vm.addLike(standard_id: standardId, subject_id: subjectId, note_id:noteId, like:true)
                                 await vm.updateLikesCount(standard_id: standardId, subject_id: subjectId, note_id: noteId, count: likeCount+1)
                             }
                         }, label: {
@@ -94,12 +94,14 @@ struct NotesView: View {
                     
                     Button(action: {
                         guard let noteId = dataStore.note_id,
+                              let subjectId = dataStore.subject_id,
+                              let standardId = dataStore.standard_id,
                               !vm.isBookmark else {
                             return
                             
                         }
                         Task {
-                            await vm.addBookmark(note_id: noteId, bookmark: true)
+                            await vm.addBookmark(standard_id: standardId, subject_id: subjectId, note_id:noteId, bookmark:true)
                         }
                     }, label: {
                         

@@ -24,8 +24,8 @@ struct SettingsView: View {
                         .frame(height: 130)
                     
                     HStack {
-                        Image("ic_setting_profile")
-                            .aspectRatio(contentMode: .fit)
+                        let picture_url = UserDefaults.standard.string(forKey: "picture_url") ?? ""
+                        RemoteImage(url: URL(string: picture_url)!)
                             .frame(width: 80, height: 80)
                             .clipShape(Circle())
                         
@@ -46,7 +46,7 @@ struct SettingsView: View {
                         Spacer()
                         
                         NavigationLink(destination: {
-                            MyProfileView()
+                            ProfileView()
                         }, label: {
                             Image("ic_right_arrow")
                         })

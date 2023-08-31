@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A30117ED2A90E9E700E34766 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30117EC2A90E9E700E34766 /* BookmarkViewModel.swift */; };
+		A30117EF2A9146D200E34766 /* IdsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30117EE2A9146D200E34766 /* IdsModel.swift */; };
 		A31837302A5045A00011810A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318372F2A5045A00011810A /* LoginViewModel.swift */; };
 		A31837342A504D340011810A /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31837332A504D340011810A /* CreateAccountViewModel.swift */; };
-		A31837362A507E000011810A /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31837352A507E000011810A /* MyProfileViewModel.swift */; };
+		A31837362A507E000011810A /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31837352A507E000011810A /* ProfileViewModel.swift */; };
 		A31837382A51A5A30011810A /* StandardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31837372A51A5A30011810A /* StandardViewModel.swift */; };
 		A318373A2A51B5D00011810A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31837392A51B5D00011810A /* HomeViewModel.swift */; };
 		A31837742A59728A0011810A /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31837732A59728A0011810A /* NotesViewModel.swift */; };
@@ -68,7 +70,7 @@
 		A3A26D372A210857005C9B1C /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D362A210857005C9B1C /* AboutUsView.swift */; };
 		A3A26D392A2108D0005C9B1C /* ContactUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D382A2108D0005C9B1C /* ContactUsView.swift */; };
 		A3A26D3B2A211065005C9B1C /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D3A2A211065005C9B1C /* BookmarkView.swift */; };
-		A3A26D3D2A211A52005C9B1C /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D3C2A211A51005C9B1C /* MyProfileView.swift */; };
+		A3A26D3D2A211A52005C9B1C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D3C2A211A51005C9B1C /* ProfileView.swift */; };
 		A3A26D3F2A2123B3005C9B1C /* NotesCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D3E2A2123B3005C9B1C /* NotesCommentsView.swift */; };
 		A3A26D412A212C09005C9B1C /* OTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A26D402A212C09005C9B1C /* OTPTextField.swift */; };
 		A3A4F50B2A7ABA9700873675 /* RatingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F50A2A7ABA9700873675 /* RatingModel.swift */; };
@@ -104,9 +106,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A30117EC2A90E9E700E34766 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
+		A30117EE2A9146D200E34766 /* IdsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdsModel.swift; sourceTree = "<group>"; };
 		A318372F2A5045A00011810A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A31837332A504D340011810A /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
-		A31837352A507E000011810A /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
+		A31837352A507E000011810A /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		A31837372A51A5A30011810A /* StandardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardViewModel.swift; sourceTree = "<group>"; };
 		A31837392A51B5D00011810A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A31837732A59728A0011810A /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
@@ -154,7 +158,7 @@
 		A3A26D362A210857005C9B1C /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
 		A3A26D382A2108D0005C9B1C /* ContactUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsView.swift; sourceTree = "<group>"; };
 		A3A26D3A2A211065005C9B1C /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
-		A3A26D3C2A211A51005C9B1C /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
+		A3A26D3C2A211A51005C9B1C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A3A26D3E2A2123B3005C9B1C /* NotesCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCommentsView.swift; sourceTree = "<group>"; };
 		A3A26D402A212C09005C9B1C /* OTPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPTextField.swift; sourceTree = "<group>"; };
 		A3A4F50A2A7ABA9700873675 /* RatingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingModel.swift; sourceTree = "<group>"; };
@@ -217,13 +221,14 @@
 			children = (
 				A318372F2A5045A00011810A /* LoginViewModel.swift */,
 				A31837332A504D340011810A /* CreateAccountViewModel.swift */,
-				A31837352A507E000011810A /* MyProfileViewModel.swift */,
+				A31837352A507E000011810A /* ProfileViewModel.swift */,
 				A31837372A51A5A30011810A /* StandardViewModel.swift */,
 				A31837392A51B5D00011810A /* HomeViewModel.swift */,
 				A31837732A59728A0011810A /* NotesViewModel.swift */,
 				A31837752A597C310011810A /* SubjectViewModel.swift */,
 				A3945AE02A72CCFF004E87F4 /* ReviewsViewModel.swift */,
 				A3945AE42A751897004E87F4 /* RatingViewModel.swift */,
+				A30117EC2A90E9E700E34766 /* BookmarkViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -344,7 +349,7 @@
 				A3A26D382A2108D0005C9B1C /* ContactUsView.swift */,
 				A344C7D42A19161300205657 /* HomeView.swift */,
 				A344C7CC2A18F19700205657 /* LoginView.swift */,
-				A3A26D3C2A211A51005C9B1C /* MyProfileView.swift */,
+				A3A26D3C2A211A51005C9B1C /* ProfileView.swift */,
 				A344C7D62A1A0B2500205657 /* StandardView.swift */,
 				A3A26D3E2A2123B3005C9B1C /* NotesCommentsView.swift */,
 				A3A011F82A361AC400F59BB6 /* NotesView.swift */,
@@ -379,6 +384,7 @@
 				A3A4F50A2A7ABA9700873675 /* RatingModel.swift */,
 				A3A4F50E2A7C00D300873675 /* LikeModel.swift */,
 				A3A4F5102A7C03C800873675 /* BookmarkModel.swift */,
+				A30117EE2A9146D200E34766 /* IdsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -559,19 +565,21 @@
 				A31837742A59728A0011810A /* NotesViewModel.swift in Sources */,
 				A3945AD72A6C2061004E87F4 /* HomeDataService.swift in Sources */,
 				A31837DC2A5AB4710011810A /* SubjectEntity+CoreDataProperties.swift in Sources */,
-				A3A26D3D2A211A52005C9B1C /* MyProfileView.swift in Sources */,
+				A3A26D3D2A211A52005C9B1C /* ProfileView.swift in Sources */,
 				A3A26D3B2A211065005C9B1C /* BookmarkView.swift in Sources */,
 				A3A011F72A36081D00F59BB6 /* ReviewsView.swift in Sources */,
 				A31837DE2A5AB4710011810A /* NotesEntity+CoreDataProperties.swift in Sources */,
 				A3945AE32A742BFC004E87F4 /* ReviewModel.swift in Sources */,
 				A3EF5E1E2A0938CA0044C2A6 /* Persistence.swift in Sources */,
+				A30117ED2A90E9E700E34766 /* BookmarkViewModel.swift in Sources */,
 				A3A26D412A212C09005C9B1C /* OTPTextField.swift in Sources */,
 				A38A7A2B2A17D5B80011CD8A /* WelcomeView.swift in Sources */,
 				A3A26D352A210708005C9B1C /* TermsConditionView.swift in Sources */,
+				A30117EF2A9146D200E34766 /* IdsModel.swift in Sources */,
 				A31837DB2A5AB4710011810A /* SubjectEntity+CoreDataClass.swift in Sources */,
 				A3945AE52A751898004E87F4 /* RatingViewModel.swift in Sources */,
 				A344C7CD2A18F19700205657 /* LoginView.swift in Sources */,
-				A31837362A507E000011810A /* MyProfileViewModel.swift in Sources */,
+				A31837362A507E000011810A /* ProfileViewModel.swift in Sources */,
 				A31837342A504D340011810A /* CreateAccountViewModel.swift in Sources */,
 				A3945AD92A6C3417004E87F4 /* StandardModel.swift in Sources */,
 				A3A26D2F2A1D140C005C9B1C /* SubjectView.swift in Sources */,

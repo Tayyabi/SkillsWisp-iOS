@@ -6,23 +6,21 @@
 //
 
 import Foundation
+import Firebase
 
 struct BookmarkModel: Codable {
     
     var bookmarkId: String? = UUID().uuidString
-    let name: String?
     let isBookmark: Bool
+    var dateCreated = Timestamp()
     
-    init(name: String?, isBookmark: Bool) {
-        self.name = name
+    init(isBookmark: Bool) {
         self.isBookmark = isBookmark
     }
     
     
     init(data: [String: Any]) {
-        self.name = data["name"] as? String
         self.isBookmark = data["is_bookmark"] as? Bool ?? false
-        
     }
     
 }

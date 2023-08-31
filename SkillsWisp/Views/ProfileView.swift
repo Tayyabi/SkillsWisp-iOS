@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MyProfileView: View {
+struct ProfileView: View {
     
     @State var phoneno: String = ""
     @State var email: String = ""
@@ -17,7 +17,7 @@ struct MyProfileView: View {
     @State private var selectedImage: UIImage?
     @State private var isShowingImagePicker = false
     
-    @StateObject var vm = MyProfileViewModel()
+    @StateObject var vm = ProfileViewModel()
     
     var body: some View {
         
@@ -33,13 +33,8 @@ struct MyProfileView: View {
                 
                 VStack {
                     
-//                    if ((vm.userModel?.pic_url) != nil){
-//                        RemoteImage(url: URL(string: vm.userModel?.pic_url ?? "")!)
-//                            .frame(width: 100, height: 100)
-//                    }
                     
                     if let image = selectedImage {
-                        
                         
                         Image(uiImage: image)
                             .resizable()
@@ -59,14 +54,6 @@ struct MyProfileView: View {
                                     isShowingImagePicker = true
                                 }
                         }
-                        //                        Image("ic_profile_img")
-                        //                            .resizable()
-                        //                            .frame(width: 100, height: 100)
-                        //                            .aspectRatio(contentMode: .fit)
-                        //                            .clipShape(Circle())
-                        //                            .onTapGesture {
-                        //                                isShowingImagePicker = true
-                        //                            }
                     }
                     
                     
@@ -197,11 +184,25 @@ struct MyProfileView: View {
                 .background(Circle().foregroundColor(.gray).opacity(0.2))
             
         })
+        
+        .sheet(isPresented: $isShowingImagePicker, onDismiss: {
+            
+            guard let image = selectedImage,
+                  let imageData = image.jpegData(compressionQuality: 0.5) else {
+                print("Failed to get image data.")
+                return
+                
+            }
+            vm.imageData = imageData
+        }) {
+            ImagePicker(selectedImage: $selectedImage)
+            
+        }
     }
 }
 
 struct MyProfileScreen_Previews: PreviewProvider {
     static var previews: some View {
-        MyProfileView()
+        ProfileView()
     }
 }

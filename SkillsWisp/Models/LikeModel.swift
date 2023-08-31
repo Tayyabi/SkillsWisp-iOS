@@ -11,18 +11,15 @@ import Firebase
 struct LikeModel: Codable {
     
     var like_id: String? = UUID().uuidString
-    let name: String?
-    let like: Bool
+    let isLike: Bool
     var dateCreated = Timestamp()
     
-    init(name: String?, like: Bool) {
-        self.name = name
-        self.like = like
+    init(isLike: Bool) {
+        self.isLike = isLike
     }
     
     init(data: [String: Any]) {
-        self.name = data["name"] as? String
-        self.like = data["like"] as? Bool ?? false
+        self.isLike = data["isLike"] as? Bool ?? false
         
     }
     

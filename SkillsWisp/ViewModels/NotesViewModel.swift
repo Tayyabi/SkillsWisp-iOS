@@ -34,12 +34,12 @@ class NotesViewModel: ObservableObject {
     
     
     
-    func addLike(note_id: String, like: Bool) async {
+    func addLike(standard_id: String, subject_id: String,note_id: String, like: Bool) async {
         
         do {
             let name = UserDefaults.standard.string(forKey: "full_name") ?? "UnKnown"
-            let like = LikeModel(name: name, like: like)
-            try await notesDataService.addLikesInDB(note_id: note_id, like: like)
+            let like = LikeModel(isLike: like)
+            try await notesDataService.addLikesInDB(standard_id: standard_id, subject_id: subject_id, note_id: note_id, like: like)
         }
         catch{
             print("Error addLike: \(error)")
@@ -107,12 +107,12 @@ class NotesViewModel: ObservableObject {
     
     
     
-    func addBookmark(note_id: String, bookmark: Bool) async {
+    func addBookmark(standard_id: String, subject_id: String, note_id: String, bookmark: Bool) async {
         
         do {
-            let name = UserDefaults.standard.string(forKey: "full_name") ?? "UnKnown"
-            let bookmark = BookmarkModel(name: name, isBookmark: bookmark)
-            try await notesDataService.addBookmarksInDB(note_id: note_id, isBookmark: bookmark)
+            let bookmark = BookmarkModel(isBookmark: bookmark)
+            try await notesDataService.addBookmarksInDB(standard_id: standard_id, subject_id: subject_id,
+                                                        note_id: note_id, isBookmark: bookmark)
         }
         catch{
             print("Error addLike: \(error)")
@@ -142,22 +142,22 @@ class NotesViewModel: ObservableObject {
     
     
     
-//    func fetchAllNotes(){
-//        let fetchRequest: NSFetchRequest<NotesEntity> = NotesEntity.fetchRequest()
-//
-//        do {
-//            let fetchedNotes = try self.viewContext.fetch(fetchRequest)
-//
-//            savedEntities = fetchedNotes
-//            for note in fetchedNotes {
-//                let name = note.name
-//                //let description = subject.descrip
-//            }
-//
-//        } catch {
-//            print("Error fetching users: \(error.localizedDescription)")
-//        }
-//    }
+    /*func fetchAllNotes(){
+        let fetchRequest: NSFetchRequest<NotesEntity> = NotesEntity.fetchRequest()
+
+        do {
+            let fetchedNotes = try self.viewContext.fetch(fetchRequest)
+
+            savedEntities = fetchedNotes
+            for note in fetchedNotes {
+                let name = note.name
+                //let description = subject.descrip
+            }
+
+        } catch {
+            print("Error fetching users: \(error.localizedDescription)")
+        }
+    }*/
     
     func populateNote(note: NoteModel) {
         print("populateNote: "+(note.localUrl ?? ""))

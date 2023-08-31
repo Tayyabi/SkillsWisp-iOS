@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import SwiftUI
 
-class MyProfileViewModel: ObservableObject {
+class ProfileViewModel: ObservableObject {
     
     @Published var savedEntities: [UsersEntity] = []
     @Published var userModel: UserModel?

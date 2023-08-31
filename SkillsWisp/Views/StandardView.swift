@@ -84,7 +84,6 @@ struct StandardView: View {
                         VStack{
                             Button(action: {
                                 //if let subject_id = subject.subjectId {
-                                    print("standard_id: \(dataStore.standard_id)")
                                     dataStore.subject_id = subject.subjectId
                                     shouldNavigate = true
                                // }

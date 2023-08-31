@@ -19,9 +19,10 @@ final class NotesDataService {
     
     private let ratingsreviewsCollection = Firestore.firestore().collection("ratings_reviews")
     private let standardsCollection = Firestore.firestore().collection("standards")
+    private let userCollection = Firestore.firestore().collection("users")
     
     
-    func addLikesInDB(note_id: String, like: LikeModel) async throws {
+    func addLikesInDB(standard_id: String, subject_id: String,note_id: String, like: LikeModel) async throws {
         
         
         guard let user = Auth.auth().currentUser else { return }
@@ -46,10 +47,16 @@ final class NotesDataService {
             }
         }
         
+        try await userCollection.document(user.uid).collection("user_likes").document(note_id)
+            .setData([
+                "standard_id":standard_id,
+                "note_id":note_id,
+                "subject_id": subject_id], merge: false)
+        
     }
     
     
-    func addLikesInDB(note_id: String, like: Bool) async throws {
+    /*func addLikesInDB(note_id: String, like: Bool) async throws {
         
         
         guard let user = Auth.auth().currentUser else { return }
@@ -79,7 +86,7 @@ final class NotesDataService {
             }
         }
         
-    }
+    }*/
     
     func fetchLikesFromDB(note_id: String,
                            completion: @escaping ([LikeModel]?) -> ()) async throws {
@@ -120,9 +127,80 @@ final class NotesDataService {
     }
     
     
+//    func fetchUserBookmarkNoteId(completion: @escaping ([IdsModel]?) -> ()) async throws {
+//
+//        guard let user = Auth.auth().currentUser else { return }
+//
+//        let bookmarkIdRef =   userCollection.document(user.uid).collection("user_bookmarks")
+//
+//
+//        bookmarkIdRef.getDocuments { (querySnapshot, error) in
+//            if let error = error {
+//                print("Error fetchUserPosts: \(error)")
+//                completion(nil)
+//                return
+//            }
+//
+//            var ids: [IdsModel] = []
+//
+//            for doc in querySnapshot!.documents {
+//                let data = doc.data()
+//
+//                let id = IdsModel(data: data)
+//
+//                ids.append(id)
+//            }
+//
+//            completion(ids)
+//        }
+//    }
     
+    func fetchUserBookmarkNoteId() async throws -> [IdsModel]? {
+        guard let user = Auth.auth().currentUser else { throw UserError.userNotLogin }
+        
+        let bookmarkIdRef = userCollection.document(user.uid).collection("user_bookmarks")
+        
+        do {
+            let querySnapshot = try await bookmarkIdRef.getDocuments()
+            
+            var ids: [IdsModel] = []
+            
+            for doc in querySnapshot.documents {
+                let data = doc.data()
+                let id = IdsModel(data: data)
+                ids.append(id)
+            }
+            
+            return ids
+        } catch {
+            throw error
+        }
+    }
     
-    func addBookmarksInDB(note_id: String, isBookmark: BookmarkModel) async throws {
+    func fetchOneNoteFromDB(standard_id: String, subject_id: String, note_id: String, completion: @escaping (NoteModel?) -> ()) async throws {
+        
+        let subjectDocRef = standardsCollection.document(standard_id)
+        let noteDocumentSnapshot = try await subjectDocRef
+                    .collection("subjects")
+                    .document(subject_id)
+                    .collection("notes")
+                    .document(note_id)
+                    .getDocument()
+        
+        
+        if noteDocumentSnapshot.exists {
+            guard let data = noteDocumentSnapshot.data() else { return }
+            let note = NoteModel(data: data)
+            
+            return completion(note)
+        }
+        else{
+            return completion(nil)
+        }
+    }
+
+    
+    func addBookmarksInDB(standard_id: String, subject_id: String,note_id: String, isBookmark: BookmarkModel) async throws {
         
         
         guard let user = Auth.auth().currentUser else { return }
@@ -143,10 +221,16 @@ final class NotesDataService {
                 print("addBookmarksInDB: bookmark added with ID: \(ref!.documentID)")
             }
         }
+        
+        try await userCollection.document(user.uid).collection("user_bookmarks").document(note_id)
+            .setData([
+                "standard_id":standard_id,
+                "note_id":note_id,
+                "subject_id": subject_id], merge: false)
     }
     
     
-    func addBookmarksInDB(note_id: String, isBookmark: Bool) async throws {
+    /*func addBookmarksInDB(note_id: String, isBookmark: Bool) async throws {
         
         
         guard let user = Auth.auth().currentUser else { return }
@@ -175,7 +259,10 @@ final class NotesDataService {
                 print("addBookmarksInDB: bookmark added with ID: \(ref!.documentID)")
             }
         }
-    }
+        
+    }*/
+    
+    
     func checkUserLike(note_id: String) async throws -> Bool {
         
         guard let user = Auth.auth().currentUser else { throw UserError.userNotLogin }

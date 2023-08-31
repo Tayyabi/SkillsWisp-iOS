@@ -8,79 +8,98 @@
 import SwiftUI
 
 struct BookmarkView: View {
+    
+    @State var thumbnails: [String] = ["bn_class_1","bn_class_2", "bn_class_3", "bn_class_4"]
+    
+    @StateObject var vm = BookmarkViewModel()
+    @State var shouldNavigate = false
+    
     var body: some View {
         
-        ScrollView(showsIndicators: false) {
-            VStack {
-                
-                
-                ForEach(1..<10){ index in
+        ZStack {
+            ScrollView(showsIndicators: false) {
+                VStack {
                     
-                    HStack {
+                    
+                    ForEach(vm.notes.indices, id: \.self){ index in
                         
-                        Image("bn_maths")
-                            .renderingMode(.original)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 90,height: 90)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                            .overlay(RoundedRectangle(cornerRadius: 20))
-                        
-                        
-                        VStack(alignment: .leading) {
+                        let note = vm.notes[index]
+                        HStack {
                             
-                            Text("9th Class Physics")
-                                .foregroundColor(.black)
-                                .fontWeight(.semibold)
-                                .font(.title3)
+                            Image("\(thumbnails[index % thumbnails.count])")
+                                .renderingMode(.original)
+                                .resizable()
+                                .frame(width: 90,height: 90)
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
                             
-                            Text("All Chapters")
-                                .foregroundColor(.gray)
-                            Spacer()
                             
-                        }
-                        .padding(.top, 8)
-                        
-                        Spacer()
-                        
-                        VStack(alignment: .trailing) {
-                            HStack {
-                                Image(systemName: "star.fill")
-                                    .foregroundColor(.yellow)
+                            VStack(alignment: .leading) {
                                 
-                                Text("4.9")
-                                    .font(.system(size: 14))
+                                Text(note.name ?? "")
+                                    .foregroundColor(.black)
+                                    .fontWeight(.semibold)
+                                    .font(.title3)
+                                
+                                Text("\(note.chapter ?? "")")
+                                    .foregroundColor(.gray)
+                                Spacer()
+                                
                             }
                             .padding(.top, 8)
                             
-                            
                             Spacer()
                             
-                            Button(action: {
+                            VStack(alignment: .trailing) {
+                                HStack {
+                                    Image(systemName: "star.fill")
+                                        .foregroundColor(.yellow)
+                                    
+                                    Text("\(String(format: "%.1f", note.rating))")
+                                        .font(.system(size: 14))
+                                }
+                                .padding(.top, 8)
                                 
                                 
-                            }, label: {
+                                Spacer()
                                 
-                                Image("ic_bookmark")
+                                Button(action: {
+                                    
+                                    
+                                }, label: {
+                                    
+                                    Image("ic_bookmark")
+                                    
+                                })
                                 
-                            })
+                            }
+                            
                             
                         }
+                        .frame(height: 100)
+                        .padding()
+                        .background(Color.white.cornerRadius(20))
+                        .padding([.top, .leading, .trailing], 10)
                         
                         
                     }
-                    .frame(height: 100)
-                    .padding()
-                    .background(Color.white.cornerRadius(20))
-                    .padding([.top, .leading, .trailing], 10)
+                    Spacer()
                     
                     
                 }
-                Spacer()
-                
-                
+                .background(Color.gray.opacity(0.1))
             }
-            .background(Color.gray.opacity(0.1))
+            if vm.isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                    .scaleEffect(2)
+            }
+        }
+        
+        .onAppear{
+            vm.isLoading = true
+            Task {
+                await vm.fetchNotes()
+            }
         }
     }
 }
