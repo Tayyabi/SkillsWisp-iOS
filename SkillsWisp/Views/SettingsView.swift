@@ -19,7 +19,7 @@ struct SettingsView: View {
             VStack{
                 
                 ZStack {
-                    Image("bg_maths")
+                    Image("bg_setting")
                         .resizable()
                         .frame(height: 130)
                     
@@ -56,7 +56,7 @@ struct SettingsView: View {
                 }
                 
                 
-                NavigationLink(destination: BookmarkView(), label: {
+                /*NavigationLink(destination: BookmarkView(), label: {
                     HStack {
                         Text("Bookmarked Notes")
                             .foregroundColor(Color.black)
@@ -69,12 +69,12 @@ struct SettingsView: View {
                     .padding(20)
                     .background(Color.gray.opacity(0.2).cornerRadius(10))
                     .padding(.top)
-                })
-                
+                })*/
                 
                 
                 HStack {
                     Text("Invite Friends")
+                        .font(.system(size: 15))
                         .foregroundColor(Color.black)
                     Spacer()
                     Image("ic_right_arrow")
@@ -84,9 +84,11 @@ struct SettingsView: View {
                 }
                 .padding(20)
                 .background(Color.gray.opacity(0.2).cornerRadius(10))
+                .padding(.top)
                 
                 HStack {
                     Text("Push Notifications")
+                        .font(.system(size: 15))
                         .foregroundColor(Color.black)
                     Spacer()
                     
@@ -97,6 +99,7 @@ struct SettingsView: View {
                 NavigationLink(destination: ContactUsView(), label: {
                     HStack {
                         Text("Contact Us")
+                            .font(.system(size: 15))
                             .foregroundColor(Color.black)
                         Spacer()
                         Image("ic_right_arrow")
@@ -112,6 +115,7 @@ struct SettingsView: View {
                 NavigationLink(destination: AboutUsView(), label: {
                     HStack {
                         Text("About Us")
+                            .font(.system(size: 15))
                             .foregroundColor(Color.black)
                         Spacer()
                         Image("ic_right_arrow")
@@ -126,6 +130,7 @@ struct SettingsView: View {
                 NavigationLink(destination: TermsConditionView(), label: {
                     HStack {
                         Text("Privacy Policy")
+                            .font(.system(size: 15))
                             .foregroundColor(Color.black)
                         Spacer()
                         Image("ic_right_arrow")

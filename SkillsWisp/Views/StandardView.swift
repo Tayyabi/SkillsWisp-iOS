@@ -99,7 +99,8 @@ struct StandardView: View {
                                         
                                         Text("\(subject.name ?? "")")
                                             .foregroundColor(.white)
-                                            .fontWeight(.semibold)
+                                            .fontWeight(
+                                                .semibold)
                                             .frame(
                                                 minWidth: 0,
                                                 maxWidth: .infinity,

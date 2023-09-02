@@ -41,7 +41,8 @@ struct SubjectView: View {
                 ZStack{
                     
                     Image("bg_matric")
-                        .aspectRatio(contentMode: .fit)
+                        .resizable()
+                        .frame(height: 250)
                     
                     
                     HStack {
@@ -71,6 +72,7 @@ struct SubjectView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 200, height: 200)
+                            .padding(.top,20)
                         
                         
                     }

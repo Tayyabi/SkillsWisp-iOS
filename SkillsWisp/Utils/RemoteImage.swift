@@ -13,7 +13,7 @@ struct RemoteImage: View {
 
     @State private var image: UIImage? = nil
 
-    init(url: URL, placeholder: Image = Image("ic_profile_img")) {
+    init(url: URL, placeholder: Image = Image("ic_profile_g")) {
         self.url = url
         self.placeholder = placeholder
     }

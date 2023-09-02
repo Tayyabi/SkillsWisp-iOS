@@ -31,7 +31,6 @@ struct NotesView: View {
                     
                     Color.gray.opacity(0.1)
                     PDFViewWrapper(pdfURL: URL(string: vm.noteModel?.localUrl ?? "https://d1.islamhouse.com/data/en/ih_books/single/en_Sahih_Al-Bukhari.pdf")!)
-                                .edgesIgnoringSafeArea(.all)
                     
                     
                     VStack{

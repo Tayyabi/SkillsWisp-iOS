@@ -25,7 +25,7 @@ struct ProfileView: View {
             
             ZStack {
                 
-                Image("bg_matric")
+                Image("bg_profile")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(height: 200)
@@ -34,26 +34,26 @@ struct ProfileView: View {
                 VStack {
                     
                     
-                    if let image = selectedImage {
-                        
-                        Image(uiImage: image)
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(Circle())
-                            .onTapGesture {
-                                isShowingImagePicker = true
-                            }
-                    }
-                    else {
-                        
-                        if(vm.userModel?.picUrl != nil) {
-                            RemoteImage(url: URL(string: vm.userModel?.picUrl ?? "")!)
-                                .frame(width: 120, height: 120)
-                                .onTapGesture {
-                                    isShowingImagePicker = true
-                                }
+                    Group {
+                        if let image = selectedImage {
+                            
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                                
                         }
+                        else {
+                            
+                            if(vm.userModel?.picUrl != nil) {
+                                RemoteImage(url: URL(string: vm.userModel?.picUrl ?? "")!)
+                                    
+                            }
+                        }
+                    }
+                    .frame(width: 110, height: 110)
+                    .onTapGesture {
+                        isShowingImagePicker = true
                     }
                     
                     
@@ -65,6 +65,7 @@ struct ProfileView: View {
                     Text(vm.userModel?.email ?? "Unknown")
                         .accentColor(.white)
                         .font(.system(size: 14))
+                        .foregroundColor(.white)
                     
                 }
             }

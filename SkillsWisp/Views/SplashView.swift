@@ -41,7 +41,11 @@ struct SplashView: View {
             
             ZStack{
                 
-                Color("clr_fantasy")
+//                Color("clr_fantasy")
+//                    .edgesIgnoringSafeArea(.all)
+                Image("bg_splash")
+                    .resizable()
+                    .frame(width: .infinity, height: .infinity)
                     .edgesIgnoringSafeArea(.all)
                 
                 
@@ -75,18 +79,19 @@ struct SplashView: View {
                         VStack{
                             
                             Spacer()
-                            Text("**Discover your limitless potential with us**")
+                            Text("**Crafting Your Academic Journey**")
                                 .padding([.leading,.trailing,.top])
-                                .font(.title2)
+                                .font(.title)
                                 .multilineTextAlignment(.center)
                                 .frame(alignment: .center)
                             
                             
-                            Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.")
+                            Text("Stay organized, study smarter, and achieve more with the XYRON NOTES app.")
                                 .multilineTextAlignment(.center)
                                 .font(.system(size: 14))
                                 .foregroundColor(Color.gray)
                                 .padding([.leading, .trailing])
+                                .padding(.top, 5)
                             
                             Spacer()
                             

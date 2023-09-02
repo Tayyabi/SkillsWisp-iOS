@@ -64,36 +64,32 @@ struct CreateAccountView: View {
                     
                     
                     Text("Create an account")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.semibold)
                         .padding(.all)
                     
-                    if let image = selectedImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 140, height: 140)
-                            .clipShape(Circle())
-                            .shadow(radius: 10)
-                            .overlay(Circle().stroke(Color.yellow, lineWidth: 1))
-                            .padding()
-                            .onTapGesture {
-                                isShowingImagePicker = true
-                            }
+                    Group {
+                        if let image = selectedImage {
+                            Image(uiImage: image)
+                                .resizable()
+                                
+                            
+                        }
+                        else {
+                            
+                            Image("ic_profile_g")
+                                .resizable()
+                                
+                        }
                     }
-                    else {
-                        
-                        Image("ic_profile_img")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 140, height: 140)
-                            .clipShape(Circle())
-                            .shadow(radius: 10)
-                            .overlay(Circle().stroke(Color.yellow, lineWidth: 1))
-                            .padding()
-                            .onTapGesture {
-                                isShowingImagePicker = true
-                            }
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 130, height: 130)
+                    .clipShape(Circle())
+                    .shadow(radius: 10)
+                    .overlay(Circle().stroke(Color.yellow, lineWidth: 1))
+                    .padding()
+                    .onTapGesture {
+                        isShowingImagePicker = true
                     }
                     
                     
@@ -118,13 +114,13 @@ struct CreateAccountView: View {
                                 
                             
                         }
-                        .padding(14)
+                        /*.padding(14)
                         .background(Color("clr_light_grey"))
                         .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(isNameValid ? .red : Color.clear, lineWidth: 1)
-                        )
+                        )*/
                         
                         
                         
@@ -146,12 +142,12 @@ struct CreateAccountView: View {
                             }
                             
                         }
-                        .padding(14)
+                        /*.padding(14)
                         .background(Color("clr_light_grey").cornerRadius(10))
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(isEmailValid ? .red : Color.clear, lineWidth: 1)
-                        )
+                        )*/
                         
                         
                         HStack {
@@ -172,12 +168,12 @@ struct CreateAccountView: View {
                             }
                             
                         }
-                        .padding(14)
+                        /*.padding(14)
                         .background(Color("clr_light_grey").cornerRadius(10))
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(isPhoneValid ? .red : Color.clear, lineWidth: 1)
-                        )
+                        )*/
                         
                         HStack {
                             
@@ -197,14 +193,15 @@ struct CreateAccountView: View {
                             }
                             
                         }
-                        .padding(14)
-                        .background(Color("clr_light_grey").cornerRadius(10))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(isPasswordValid ? .red : Color.clear, lineWidth: 1)
-                        )
+                        
                         
                     }
+                    .padding(14)
+                    .background(Color("clr_light_grey").cornerRadius(10))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(isPasswordValid ? .red : Color.clear, lineWidth: 1)
+                    )
                     
                     Group {
                         HStack {

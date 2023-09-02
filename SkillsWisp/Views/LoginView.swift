@@ -45,6 +45,10 @@ struct LoginView: View {
                         VStack(alignment: .leading) {
                             TextField("Email", text: $email)
                                 .font(.system(size: 15))
+                                .onChange(of: email) { newValue in
+                                    isEmailValid = false
+                                }
+                            
                             if isEmailValid {
                                 Text("Please enter email")
                                     .font(.system(size: 10))
@@ -67,7 +71,10 @@ struct LoginView: View {
                         VStack(alignment: .leading) {
                             SecureField("Password", text: $password)
                                 .font(.system(size: 15))
-                            if isEmailValid {
+                                .onChange(of: password) { newValue in
+                                    isPasswordValid = false
+                                }
+                            if isPasswordValid {
                                 Text("Please enter valid password")
                                     .font(.system(size: 10))
                                     .foregroundColor(.red)
@@ -80,7 +87,7 @@ struct LoginView: View {
                     .background(Color("clr_light_grey").cornerRadius(10))
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(isEmailValid ? .red : Color.clear, lineWidth: 1)
+                            .stroke(isPasswordValid ? .red : Color.clear, lineWidth: 1)
                     )
                     
                     HStack{

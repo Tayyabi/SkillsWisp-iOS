@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_past_paper.png",
+      "filename" : "ic_past_paper@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "ic_past_paper@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "ic_past_paper@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

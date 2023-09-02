@@ -29,14 +29,6 @@ struct HomeView: View {
         GridItem(.flexible(), spacing: 15, alignment: nil),
     ]
     
-    
-//    @State var classes: [Notes] = [
-//        Notes(name: "9th Class Physics", background: "bn_class_1"),
-//        Notes(name: "9th Class Physics", background: "bn_class_2"),
-//        Notes(name: "9th Class Physics", background: "bn_class_3"),
-//        Notes(name: "9th Class Physics", background: "bn_class_4")
-//    ]
-    
     var body: some View {
         
         NavigationView {
@@ -133,90 +125,81 @@ struct HomeView: View {
                             pinnedViews: [],
                             content: {
                                 
-                                HStack {
-                                    
-                                    Image("ic_past_paper")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .padding(8)
-                                        .background(Color("clr_tropical_blue").cornerRadius(radius: 6, corners: .allCorners))
-                                    
-                                    Text("Past Papers")
-                                        .font(.system(size: 14))
-                                    
-                                }
-                                .frame(
-                                    minWidth: 0,
-                                    maxWidth: .infinity
-                                )
-                                .padding()
-                                .background(Color.white.cornerRadius(radius: 6, corners: .allCorners))
-                                .shadow(radius: 1)
-                                
-                                
-                                HStack {
+                                Group {
                                     
                                     
-                                    Image("ic_guess_paper")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .padding(8)
-                                        .background(Color("clr_v_light_purple")
-                                            .cornerRadius(radius: 6, corners: .allCorners))
+                                    
+                                    HStack {
+                                        
+                                        Image("ic_downloads")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                            .padding(8)
+                                            .background(Color("clr_v_light_purple")
+                                                .cornerRadius(radius: 6, corners: .allCorners))
+                                        
+                                        Text("Downloads")
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.black)
+                                            .padding(.leading)
+                                        
+                                    }
                                     
                                     
-                                    Text("Guess Papers")
-                                        .font(.system(size: 14))
-                                    
-                                }
-                                .frame(
-                                    minWidth: 0,
-                                    maxWidth: .infinity
-                                )
-                                .padding()
-                                .background(Color.white.cornerRadius(radius: 6, corners: .allCorners))
-                                .shadow(radius: 1)
-                                
-                                
-                                
-                                
-                                
-                                HStack {
-                                    
-                                    Image("ic_date_sheet")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .padding(8)
-                                        .background(Color("clr_light_orange")
-                                            .cornerRadius(radius: 6, corners: .allCorners))
+                                    NavigationLink(destination: BookmarkView(), label: {
+                                        HStack {
+                                            
+                                            Image(systemName: "bookmark.fill")
+                                                .foregroundColor(.red)
+                                                .frame(width: 20, height: 20)
+                                                .padding(8)
+                                                .background(Color("clr_pale_pink")
+                                                    .cornerRadius(radius: 6, corners: .allCorners))
+                                            
+                                            
+                                            Text("Bookmarked")
+                                                .font(.system(size: 14))
+                                                .foregroundColor(.black)
+                                                .padding(.leading)
+                                            
+                                        }
+                                    })
                                     
                                     
-                                    Text("Date Sheet")
-                                        .font(.system(size: 14))
-                                    
-                                }
-                                .frame(
-                                    minWidth: 0,
-                                    maxWidth: .infinity
-                                )
-                                .padding()
-                                .background(Color.white.cornerRadius(radius: 6, corners: .allCorners))
-                                .shadow(radius: 1)
-                                
-                                
-                                HStack {
-                                    
-                                    
-                                    Image("ic_bookmark")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .padding(8)
-                                        .background(Color("clr_pale_pink")
-                                            .cornerRadius(radius: 6, corners: .allCorners))
+                                    HStack {
+                                        
+                                        Image("ic_date_sheet")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                            .padding(8)
+                                            .background(Color("clr_light_orange")
+                                                .cornerRadius(radius: 6, corners: .allCorners))
+                                        
+                                        
+                                        Text("Date Sheet")
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.black)
+                                            .padding(.leading)
+                                        
+                                    }
                                     
                                     
-                                    Text("Bookmarked")
-                                        .font(.system(size: 14))
+                                    HStack {
+                                        
+                                        Image("ic_past_paper")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                            .padding(8)
+                                            .background(Color("clr_tropical_blue").cornerRadius(radius: 6, corners: .allCorners))
+                                        
+                                        Text("Past Papers")
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.black)
+                                            .padding(.leading)
+                                        
+                                    }
+                                    
+                                    
                                     
                                 }
                                 .frame(
@@ -309,15 +292,14 @@ struct HomeView: View {
                 trailing: NavigationLink(destination: ProfileView(),label: {
                     
                     /*Image("ic_profile")
-                        .resizable()
-                        .clipShape(Circle())
-                        .frame(width: 35, height: 35)
-                        .shadow(radius: 10)*/
+                     .resizable()
+                     .clipShape(Circle())
+                     .frame(width: 35, height: 35)
+                     .shadow(radius: 10)*/
                     let picture_url = UserDefaults.standard.string(forKey: "picture_url") ?? ""
                     RemoteImage(url: URL(string: picture_url)!)
-                        .clipShape(Circle())
                         .frame(width: 35, height: 35)
-                                            
+                    
                 })
             )
         }
