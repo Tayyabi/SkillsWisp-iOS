@@ -100,7 +100,7 @@ struct CreateAccountView: View {
                                 .foregroundColor(Color.gray)
                             VStack(alignment: .leading) {
                                 TextField("Full Name", text: $name)
-                                    .font(.system(size: 15))
+                                    .font(.system(size: 16))
                                     .onChange(of: name) { newValue in
                                         isNameValid = false
                                     }
@@ -129,7 +129,7 @@ struct CreateAccountView: View {
                                 .foregroundColor(Color.gray)
                             VStack(alignment: .leading) {
                                 TextField("Email", text: $email)
-                                    .font(.system(size: 15))
+                                    .font(.system(size: 16))
                                     .onChange(of: email) { newValue in
                                         isEmailValid = false
                                     }
@@ -156,7 +156,7 @@ struct CreateAccountView: View {
                                 .foregroundColor(Color.gray)
                             VStack(alignment: .leading) {
                                 TextField("Phone Number", text: $phoneNo)
-                                    .font(.system(size: 15))
+                                    .font(.system(size: 16))
                                     .onChange(of: phoneNo) { newValue in
                                         isPhoneValid = false
                                     }
@@ -181,7 +181,7 @@ struct CreateAccountView: View {
                                 .foregroundColor(Color.gray)
                             VStack(alignment: .leading) {
                                 SecureField("Password", text: $password)
-                                    .font(.system(size: 15))
+                                    .font(.system(size: 16))
                                     .onChange(of: password) { newValue in
                                         isPasswordValid = false
                                     }
@@ -196,7 +196,7 @@ struct CreateAccountView: View {
                         
                         
                     }
-                    .padding(14)
+                    .padding(16)
                     .background(Color("clr_light_grey").cornerRadius(10))
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)

@@ -40,7 +40,7 @@ struct NoteModel: Codable {
         self.name = data["name"] as? String
         self.chapter = data["chapter"] as? String
         self.rating = data["rating"] as! Double
-        self.localUrl = data["local_url"] as? String
+        self.localUrl = data["url"] as? String
         self.likesCount = data["likes_count"] as? Int
         self.reviewCount = data["review_count"] as? Int
         self.bookmark = data["bookmark"] as? Bool

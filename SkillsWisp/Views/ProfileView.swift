@@ -28,7 +28,7 @@ struct ProfileView: View {
                 Image("bg_profile")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(height: 200)
+                    .frame(height: 210)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                 
                 VStack {
@@ -39,18 +39,18 @@ struct ProfileView: View {
                             
                             Image(uiImage: image)
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
                                 .clipShape(Circle())
                                 
                         }
                         else {
                             
                             if(vm.userModel?.picUrl != nil) {
-                                RemoteImage(url: URL(string: vm.userModel?.picUrl ?? "")!)
-                                    
+                                RemoteImage(url: URL(string: vm.userModel?.picUrl ?? ""))
+                                
                             }
                         }
                     }
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 110, height: 110)
                     .onTapGesture {
                         isShowingImagePicker = true
@@ -69,69 +69,72 @@ struct ProfileView: View {
                     
                 }
             }
+            .padding()
             
-            Text("Profile Details")
-                .foregroundColor(.black)
-                .fontWeight(.semibold)
-                .padding(.top)
-            
-            HStack {
-                
-                Image(systemName: "phone")
-                    .foregroundColor(Color.gray)
-                
-                TextField("Phone number", text: Binding(
-                    get: { vm.userModel?.phoneNo ?? "" },
-                    set: { vm.userModel?.phoneNo = $0 }
-                ))
-                .font(.system(size: 15))
-                .disabled(!isEditable)
-                
-            }
-            .padding(.top)
-            
-            
-            Divider()
-                .padding(.top)
-            
-            
-            HStack {
-                
-                Image(systemName: "envelope")
-                    .foregroundColor(Color.gray)
-                
-                TextField("Email", text: Binding(
-                    get: { vm.userModel?.email ?? "" },
-                    set: { vm.userModel?.email = $0 }
-                ))
-                .font(.system(size: 15))
-                .disabled(true)
-                
-            }
-            .padding(.top)
-            
-            Divider()
-                .padding(.top)
-            
-            
-            
-            Button(action: {
-                
-            }, label: {
+            Group {
+                Text("Profile Details")
+                    .foregroundColor(.black)
+                    .fontWeight(.semibold)
+
                 
                 HStack {
                     
-                    Image(systemName: "lock")
+                    Image(systemName: "phone")
                         .foregroundColor(Color.gray)
                     
-                    Text("Change Password")
-                        .font(.system(size: 15))
-                        .foregroundColor(Color.gray)
+                    TextField("Phone number", text: Binding(
+                        get: { vm.userModel?.phoneNo ?? "" },
+                        set: { vm.userModel?.phoneNo = $0 }
+                    ))
+                    .font(.system(size: 15))
+                    .disabled(!isEditable)
                     
-                }.padding(.top)
+                }
                 
-            })
-            
+                
+                
+                Divider()
+                    
+                
+                
+                HStack {
+                    
+                    Image(systemName: "envelope")
+                        .foregroundColor(Color.gray)
+                    
+                    TextField("Email", text: Binding(
+                        get: { vm.userModel?.email ?? "" },
+                        set: { vm.userModel?.email = $0 }
+                    ))
+                    .font(.system(size: 15))
+                    .disabled(true)
+                    
+                }
+                
+                
+                Divider()
+                   
+                
+                
+                
+                Button(action: {
+                    
+                }, label: {
+                    
+                    HStack {
+                        
+                        Image(systemName: "lock")
+                            .foregroundColor(Color.gray)
+                        
+                        Text("Change Password")
+                            .font(.system(size: 15))
+                            .foregroundColor(Color.gray)
+                        
+                    }
+                    
+                })
+                
+            }.padding([.top, .leading, .trailing])
             
             
             
@@ -166,9 +169,11 @@ struct ProfileView: View {
                 }
                 .frame(maxWidth: .infinity)
             }
+           
+            Image("bg_profile_bottom")
             
         }
-        .padding()
+        .edgesIgnoringSafeArea(.bottom)
         .onAppear{
             vm.getCache()
         }

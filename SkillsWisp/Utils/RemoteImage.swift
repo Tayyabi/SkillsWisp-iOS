@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct RemoteImage: View {
-    private var url: URL
+    private var url: URL?
     private var placeholder: Image
 
     @State private var image: UIImage? = nil
 
-    init(url: URL, placeholder: Image = Image("ic_profile_g")) {
+    init(url: URL?, placeholder: Image = Image("ic_profile_g")) {
         self.url = url
         self.placeholder = placeholder
     }
@@ -32,6 +32,9 @@ struct RemoteImage: View {
     }
 
     private func fetchImage() {
+        guard let url = url else {
+            return
+        }
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 return

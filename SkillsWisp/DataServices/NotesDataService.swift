@@ -321,6 +321,28 @@ final class NotesDataService {
         }
     }
     
+    func downloadPDF(urlString: String, completion: @escaping (Data?, Error?) -> Void) {
+        
+        guard let url = URL(string: urlString) else {
+            completion(nil, NSError(domain: "Invalid URL", code: 0, userInfo: nil))
+            return
+        }
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                completion(nil, error)
+            } else if let data = data {
+                completion(data, nil)
+            }
+        }
+        
+        task.resume()
+    }
+
+    
     func updateLikesCountInDB(standard_id: String, subject_id: String, note_id: String, count: Int) async throws {
         
         standardsCollection.document(standard_id).collection("subjects").document(subject_id).collection("notes").document(note_id).updateData(["likes_count": count]){ error in

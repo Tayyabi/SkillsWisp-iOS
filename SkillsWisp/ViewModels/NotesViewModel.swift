@@ -16,6 +16,7 @@ class NotesViewModel: ObservableObject {
     @Published var bookmarks: [BookmarkModel] = []
     @Published var isLiked: Bool = false
     @Published var isBookmark: Bool = false
+    @Published var isLoading = false
     
     let notesDataService = NotesDataService()
     
@@ -27,6 +28,8 @@ class NotesViewModel: ObservableObject {
     private var viewContext: NSManagedObjectContext {
         return persistenceController.container.viewContext
     }
+    
+    let manager = LocalFileManager.instacne
     
     init() {
         //savedEntity = NotesEntity(context: viewContext)
@@ -136,6 +139,44 @@ class NotesViewModel: ObservableObject {
             print("Error fetchBookmarks: \(error)")
         }
         
+    }
+    
+    
+    func downloadNote(note: NoteModel) async {
+        
+        guard let url = note.localUrl else {
+            return
+        }
+        
+        notesDataService.downloadPDF(urlString: url) { (data, error) in
+            
+            if let error = error {
+                print("Error downloading PDF: \(error.localizedDescription)")
+            } else if let data = data {
+                
+                let name = self.manager.generateUniqueFilename()
+                self.manager.saveImage(data: data, name: "\(name).pdf")
+                
+                self.saveDownloadedUrl(note: note)
+                
+            }
+        }
+
+    }
+    
+    func saveDownloadedUrl(note: NoteModel) {
+        
+        let path = manager.getPathForImage(name: "\(String(describing: note.noteId)).pdf")
+        let download = DownloadsEntity(context: viewContext)
+        download.note_id = note.noteId
+        download.local_url = path?.path
+        download.name = note.name
+        download.rating = note.rating
+        download.chapter = note.chapter
+        download.type = "pdf"
+        
+        self.isLoading = false
+        saveData()
     }
     
     

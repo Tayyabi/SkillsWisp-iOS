@@ -81,7 +81,18 @@ struct NotesView: View {
                 
                 HStack {
                     Spacer()
-                    Button(action: {}, label: {
+                    Button(action: {
+                        
+                        guard let note = vm.noteModel else {
+                            return
+                        }
+                        vm.isLoading = true
+                        Task {
+                            
+                            await vm.downloadNote(note: note)
+                        }
+                        
+                    }, label: {
                         
                         Image(systemName: "square.and.arrow.down")
                             .foregroundColor(.black)

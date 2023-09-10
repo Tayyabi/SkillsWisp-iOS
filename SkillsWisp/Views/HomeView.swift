@@ -128,22 +128,24 @@ struct HomeView: View {
                                 Group {
                                     
                                     
-                                    
-                                    HStack {
+                                    NavigationLink(destination: DownloadedNotesView(), label: {
                                         
-                                        Image("ic_downloads")
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                                            .padding(8)
-                                            .background(Color("clr_v_light_purple")
-                                                .cornerRadius(radius: 6, corners: .allCorners))
-                                        
-                                        Text("Downloads")
-                                            .font(.system(size: 14))
-                                            .foregroundColor(.black)
-                                            .padding(.leading)
-                                        
-                                    }
+                                        HStack {
+                                            
+                                            Image("ic_downloads")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                                .padding(8)
+                                                .background(Color("clr_v_light_purple")
+                                                    .cornerRadius(radius: 6, corners: .allCorners))
+                                            
+                                            Text("Downloads")
+                                                .font(.system(size: 14))
+                                                .foregroundColor(.black)
+                                                .padding(.leading)
+                                            
+                                        }
+                                    })
                                     
                                     
                                     NavigationLink(destination: BookmarkView(), label: {
@@ -165,39 +167,42 @@ struct HomeView: View {
                                         }
                                     })
                                     
+                                    NavigationLink(destination: AllDateSheetsView(), label: {
+                                        HStack {
+                                            
+                                            Image("ic_date_sheet")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                                .padding(8)
+                                                .background(Color("clr_light_orange")
+                                                    .cornerRadius(radius: 6, corners: .allCorners))
+                                            
+                                            
+                                            Text("Date Sheet")
+                                                .font(.system(size: 14))
+                                                .foregroundColor(.black)
+                                                .padding(.leading)
+                                            
+                                        }
+                                    })
                                     
-                                    HStack {
-                                        
-                                        Image("ic_date_sheet")
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                                            .padding(8)
-                                            .background(Color("clr_light_orange")
-                                                .cornerRadius(radius: 6, corners: .allCorners))
-                                        
-                                        
-                                        Text("Date Sheet")
-                                            .font(.system(size: 14))
-                                            .foregroundColor(.black)
-                                            .padding(.leading)
-                                        
-                                    }
                                     
-                                    
-                                    HStack {
-                                        
-                                        Image("ic_past_paper")
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                                            .padding(8)
-                                            .background(Color("clr_tropical_blue").cornerRadius(radius: 6, corners: .allCorners))
-                                        
-                                        Text("Past Papers")
-                                            .font(.system(size: 14))
-                                            .foregroundColor(.black)
-                                            .padding(.leading)
-                                        
-                                    }
+                                    NavigationLink(destination: PastPaperView(), label: {
+                                        HStack {
+                                            
+                                            Image("ic_past_paper")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                                .padding(8)
+                                                .background(Color("clr_tropical_blue").cornerRadius(radius: 6, corners: .allCorners))
+                                            
+                                            Text("Past Papers")
+                                                .font(.system(size: 14))
+                                                .foregroundColor(.black)
+                                                .padding(.leading)
+                                            
+                                        }
+                                    })
                                     
                                     
                                     
@@ -297,8 +302,9 @@ struct HomeView: View {
                      .frame(width: 35, height: 35)
                      .shadow(radius: 10)*/
                     let picture_url = UserDefaults.standard.string(forKey: "picture_url") ?? ""
-                    RemoteImage(url: URL(string: picture_url)!)
-                        .frame(width: 35, height: 35)
+                    RemoteImage(url: URL(string: picture_url))
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 40, height: 40)
                     
                 })
             )

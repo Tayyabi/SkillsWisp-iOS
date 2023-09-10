@@ -44,7 +44,7 @@ struct LoginView: View {
                             .foregroundColor(Color.gray)
                         VStack(alignment: .leading) {
                             TextField("Email", text: $email)
-                                .font(.system(size: 15))
+                                .font(.system(size: 16))
                                 .onChange(of: email) { newValue in
                                     isEmailValid = false
                                 }
@@ -57,7 +57,7 @@ struct LoginView: View {
                         }
                         
                     }
-                    .padding(14)
+                    .padding(16)
                     .background(Color("clr_light_grey").cornerRadius(10))
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
@@ -70,7 +70,7 @@ struct LoginView: View {
                             .foregroundColor(Color.gray)
                         VStack(alignment: .leading) {
                             SecureField("Password", text: $password)
-                                .font(.system(size: 15))
+                                .font(.system(size: 16))
                                 .onChange(of: password) { newValue in
                                     isPasswordValid = false
                                 }
@@ -83,7 +83,7 @@ struct LoginView: View {
                         
                         
                     }
-                    .padding(14)
+                    .padding(16)
                     .background(Color("clr_light_grey").cornerRadius(10))
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)

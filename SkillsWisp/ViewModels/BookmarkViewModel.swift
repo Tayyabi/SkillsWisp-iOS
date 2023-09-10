@@ -13,7 +13,7 @@ import FirebaseFirestoreSwift
 class BookmarkViewModel: ObservableObject {
     
     @Published var notes: [NoteModel] = []
-    @Published var isLoading = true
+    @Published var isLoading = false
     var ids: [IdsModel] = []
     
     let notesDataService = NotesDataService()
