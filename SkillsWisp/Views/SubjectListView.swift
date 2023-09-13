@@ -10,6 +10,9 @@ import SwiftUI
 struct SubjectListView: View {
     
     @State var shouldNavigate = false
+    @ObservedObject var passClass: PassClass
+    
+    @ObservedObject var paper = PassPaper()
     @State var selectedYear = 2023
     @State var years = [2023,2022,2021,2020]
     @StateObject var vm = SubjectListViewModel()
@@ -68,49 +71,50 @@ struct SubjectListView: View {
                         ForEach(vm.subjects.indices, id: \.self) { index in
                             
                             let subject = vm.subjects[index]
-                            
-                            Button(action: {
-                                shouldNavigate = true
-                            }, label: {
-                                VStack {
-                                    
-                                    HStack {
+                            if (subject.year == selectedYear) {
+                                Button(action: {
+                                    paper.paper = subject
+                                    shouldNavigate = true
+                                }, label: {
+                                    VStack {
                                         
-                                        Image("ic_past_paper")
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                                            .padding(10)
-                                            .background(Color("clr_tropical_blue")
-                                                .cornerRadius(radius: 6, corners: .allCorners))
-                                        
-                                        
-                                        HStack(alignment: .center) {
+                                        HStack {
                                             
-                                            Text("\(subject.name ?? "")")
-                                                .font(.system(size: 15))
-                                                .fontWeight(.semibold)
-                                                .foregroundColor(.black)
+                                            Image("ic_past_paper")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                                .padding(10)
+                                                .background(Color("clr_tropical_blue")
+                                                    .cornerRadius(radius: 6, corners: .allCorners))
                                             
-                                            Spacer()
+                                            
+                                            HStack(alignment: .center) {
+                                                
+                                                Text("\(subject.name ?? "")")
+                                                    .font(.system(size: 15))
+                                                    .fontWeight(.semibold)
+                                                    .foregroundColor(.black)
+                                                
+                                                Spacer()
+                                                
+                                            }
+                                            
+                                            NavigationLink(destination: PastPaperDateSheetView(paper: paper),isActive: $shouldNavigate) {
+                                                EmptyView()
+                                            }
+                                            .hidden()
                                             
                                         }
+                                        .padding(10)
                                         
-                                        NavigationLink(destination: DateSheetView(),isActive: $shouldNavigate) {
-                                            EmptyView()
-                                        }
-                                        .hidden()
+                                        
+                                        Divider()
+                                            .padding([.leading, .trailing], 15)
+                                        
                                         
                                     }
-                                    .padding(10)
-                                    
-                                    
-                                    Divider()
-                                        .padding([.leading, .trailing], 15)
-                                    
-                                    
-                                }
-                            })
-                            
+                                })
+                            }
                         }
                         
                     }
@@ -120,8 +124,11 @@ struct SubjectListView: View {
             
         }
         .onAppear{
+            guard let paperId = passClass.classs?.past_paper_id else {
+                return
+            }
             Task {
-                await vm.fetchSubjectsFromDB()
+                await vm.fetchSubjectsFromDB(paperId: paperId)
             }
         }
     }
@@ -129,6 +136,6 @@ struct SubjectListView: View {
 
 struct SubjectListView_Previews: PreviewProvider {
     static var previews: some View {
-        SubjectListView()
+        SubjectListView(passClass: PassClass())
     }
 }

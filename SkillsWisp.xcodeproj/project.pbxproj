@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A30117ED2A90E9E700E34766 /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30117EC2A90E9E700E34766 /* BookmarkViewModel.swift */; };
 		A30117EF2A9146D200E34766 /* IdsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30117EE2A9146D200E34766 /* IdsModel.swift */; };
+		A30C3A032AB20B2E0018CDF3 /* PastPaperDateSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C3A022AB20B2E0018CDF3 /* PastPaperDateSheetViewModel.swift */; };
+		A30C3A052AB20DCE0018CDF3 /* PDFViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C3A042AB20DCE0018CDF3 /* PDFViewWrapper.swift */; };
 		A31837302A5045A00011810A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318372F2A5045A00011810A /* LoginViewModel.swift */; };
 		A31837342A504D340011810A /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31837332A504D340011810A /* CreateAccountViewModel.swift */; };
 		A31837362A507E000011810A /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31837352A507E000011810A /* ProfileViewModel.swift */; };
@@ -90,11 +92,10 @@
 		A3EDE3F72AA7923400F14D58 /* DownloadsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE3F62AA7923400F14D58 /* DownloadsViewModel.swift */; };
 		A3EDE4132AA8DF2500F14D58 /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE4122AA8DF2500F14D58 /* LocalFileManager.swift */; };
 		A3EDE4192AAB75E400F14D58 /* AllDateSheetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE4182AAB75E400F14D58 /* AllDateSheetsView.swift */; };
-		A3EDE41B2AAB7C7800F14D58 /* DateSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE41A2AAB7C7700F14D58 /* DateSheetView.swift */; };
+		A3EDE41B2AAB7C7800F14D58 /* PastPaperDateSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE41A2AAB7C7700F14D58 /* PastPaperDateSheetView.swift */; };
 		A3EDE41D2AAB85E800F14D58 /* PastPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE41C2AAB85E800F14D58 /* PastPaperView.swift */; };
 		A3EDE41F2AAB8F8700F14D58 /* SubjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE41E2AAB8F8700F14D58 /* SubjectListView.swift */; };
 		A3EDE4212AAC6DE000F14D58 /* AllDateSheetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE4202AAC6DE000F14D58 /* AllDateSheetsViewModel.swift */; };
-		A3EDE4232AAC6E4F00F14D58 /* DateSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE4222AAC6E4F00F14D58 /* DateSheetModel.swift */; };
 		A3EDE4252AAC6F6400F14D58 /* DateSheetDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE4242AAC6F6400F14D58 /* DateSheetDataService.swift */; };
 		A3EF5E152A0938C60044C2A6 /* SkillsWispApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EF5E142A0938C60044C2A6 /* SkillsWispApp.swift */; };
 		A3EF5E192A0938CA0044C2A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3EF5E182A0938CA0044C2A6 /* Assets.xcassets */; };
@@ -125,6 +126,8 @@
 /* Begin PBXFileReference section */
 		A30117EC2A90E9E700E34766 /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
 		A30117EE2A9146D200E34766 /* IdsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdsModel.swift; sourceTree = "<group>"; };
+		A30C3A022AB20B2E0018CDF3 /* PastPaperDateSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastPaperDateSheetViewModel.swift; sourceTree = "<group>"; };
+		A30C3A042AB20DCE0018CDF3 /* PDFViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewWrapper.swift; sourceTree = "<group>"; };
 		A318372F2A5045A00011810A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A31837332A504D340011810A /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		A31837352A507E000011810A /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -195,11 +198,10 @@
 		A3EDE3F62AA7923400F14D58 /* DownloadsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewModel.swift; sourceTree = "<group>"; };
 		A3EDE4122AA8DF2500F14D58 /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
 		A3EDE4182AAB75E400F14D58 /* AllDateSheetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDateSheetsView.swift; sourceTree = "<group>"; };
-		A3EDE41A2AAB7C7700F14D58 /* DateSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSheetView.swift; sourceTree = "<group>"; };
+		A3EDE41A2AAB7C7700F14D58 /* PastPaperDateSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastPaperDateSheetView.swift; sourceTree = "<group>"; };
 		A3EDE41C2AAB85E800F14D58 /* PastPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastPaperView.swift; sourceTree = "<group>"; };
 		A3EDE41E2AAB8F8700F14D58 /* SubjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectListView.swift; sourceTree = "<group>"; };
 		A3EDE4202AAC6DE000F14D58 /* AllDateSheetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDateSheetsViewModel.swift; sourceTree = "<group>"; };
-		A3EDE4222AAC6E4F00F14D58 /* DateSheetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSheetModel.swift; sourceTree = "<group>"; };
 		A3EDE4242AAC6F6400F14D58 /* DateSheetDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSheetDataService.swift; sourceTree = "<group>"; };
 		A3EF5E112A0938C60044C2A6 /* SkillsWisp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillsWisp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3EF5E142A0938C60044C2A6 /* SkillsWispApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillsWispApp.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				A3EDE4202AAC6DE000F14D58 /* AllDateSheetsViewModel.swift */,
 				A31ECC4F2AACCAD800B4B44A /* PastPaperViewModel.swift */,
 				A31ECC572AADAF5C00B4B44A /* SubjectListViewModel.swift */,
+				A30C3A022AB20B2E0018CDF3 /* PastPaperDateSheetViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				A34521DF2A88DEFD00D2DD57 /* RemoteImage.swift */,
 				A34C200D2A89065B00FCFCF5 /* Coders.swift */,
 				A3EDE4122AA8DF2500F14D58 /* LocalFileManager.swift */,
+				A30C3A042AB20DCE0018CDF3 /* PDFViewWrapper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -404,7 +408,7 @@
 				A3A4F5122A7FF03400873675 /* AccountSuccessView.swift */,
 				A3EDE3F42AA7915800F14D58 /* DownloadedNotesView.swift */,
 				A3EDE4182AAB75E400F14D58 /* AllDateSheetsView.swift */,
-				A3EDE41A2AAB7C7700F14D58 /* DateSheetView.swift */,
+				A3EDE41A2AAB7C7700F14D58 /* PastPaperDateSheetView.swift */,
 				A3EDE41C2AAB85E800F14D58 /* PastPaperView.swift */,
 				A3EDE41E2AAB8F8700F14D58 /* SubjectListView.swift */,
 			);
@@ -433,7 +437,6 @@
 				A3A4F50E2A7C00D300873675 /* LikeModel.swift */,
 				A3A4F5102A7C03C800873675 /* BookmarkModel.swift */,
 				A30117EE2A9146D200E34766 /* IdsModel.swift */,
-				A3EDE4222AAC6E4F00F14D58 /* DateSheetModel.swift */,
 				A31ECC532AACCB6000B4B44A /* PastPaperModel.swift */,
 				A31ECC552AADAD0700B4B44A /* PastSubjectModel.swift */,
 			);
@@ -593,6 +596,7 @@
 				A34D1E4F2A4359230090C0DE /* RatingView.swift in Sources */,
 				A3A26D332A1E66D4005C9B1C /* SettingsView.swift in Sources */,
 				A3945AE12A72CCFF004E87F4 /* ReviewsViewModel.swift in Sources */,
+				A30C3A032AB20B2E0018CDF3 /* PastPaperDateSheetViewModel.swift in Sources */,
 				A3945ADF2A72C31B004E87F4 /* ReviewsDataService.swift in Sources */,
 				A3A011F92A361AC400F59BB6 /* NotesView.swift in Sources */,
 				A318373A2A51B5D00011810A /* HomeViewModel.swift in Sources */,
@@ -607,7 +611,6 @@
 				A34C200E2A89065B00FCFCF5 /* Coders.swift in Sources */,
 				A3EDE3F52AA7915800F14D58 /* DownloadedNotesView.swift in Sources */,
 				A31837D72A5AB4710011810A /* StandardEntity+CoreDataClass.swift in Sources */,
-				A3EDE4232AAC6E4F00F14D58 /* DateSheetModel.swift in Sources */,
 				A38A79E02A0A20780011CD8A /* TextBootcamp.swift in Sources */,
 				A344C7D72A1A0B2500205657 /* StandardView.swift in Sources */,
 				A31ECC522AACCB1600B4B44A /* PastPaperDataService.swift in Sources */,
@@ -626,7 +629,7 @@
 				A31837DC2A5AB4710011810A /* SubjectEntity+CoreDataProperties.swift in Sources */,
 				A3A26D3D2A211A52005C9B1C /* ProfileView.swift in Sources */,
 				A3A26D3B2A211065005C9B1C /* BookmarkView.swift in Sources */,
-				A3EDE41B2AAB7C7800F14D58 /* DateSheetView.swift in Sources */,
+				A3EDE41B2AAB7C7800F14D58 /* PastPaperDateSheetView.swift in Sources */,
 				A3A011F72A36081D00F59BB6 /* ReviewsView.swift in Sources */,
 				A31837DE2A5AB4710011810A /* NotesEntity+CoreDataProperties.swift in Sources */,
 				A3945AE32A742BFC004E87F4 /* ReviewModel.swift in Sources */,
@@ -634,6 +637,7 @@
 				A30117ED2A90E9E700E34766 /* BookmarkViewModel.swift in Sources */,
 				A3EDE4212AAC6DE000F14D58 /* AllDateSheetsViewModel.swift in Sources */,
 				A3EDE4132AA8DF2500F14D58 /* LocalFileManager.swift in Sources */,
+				A30C3A052AB20DCE0018CDF3 /* PDFViewWrapper.swift in Sources */,
 				A3A26D412A212C09005C9B1C /* OTPTextField.swift in Sources */,
 				A38A7A2B2A17D5B80011CD8A /* WelcomeView.swift in Sources */,
 				A3A26D352A210708005C9B1C /* TermsConditionView.swift in Sources */,

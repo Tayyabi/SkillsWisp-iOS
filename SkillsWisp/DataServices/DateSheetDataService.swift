@@ -16,7 +16,7 @@ final class DateSheetDataService {
     private let dateSheetsCollection = Firestore.firestore().collection("date_sheets")
     
     
-    func fetchDateSheetsFromDB(completion: @escaping ([DateSheetModel]?) -> ())  async throws {
+    func fetchDateSheetsFromDB(completion: @escaping ([PastSubjectModel]?) -> ())  async throws {
         
         dateSheetsCollection.getDocuments { (querySnapshot, error) in
             
@@ -26,13 +26,13 @@ final class DateSheetDataService {
                 return
             }
             
-            var dateSheets: [DateSheetModel] = []
+            var dateSheets: [PastSubjectModel] = []
             
             for document in querySnapshot!.documents {
                 let data = document.data()
                 print("data", data)
                 
-                let dateSheet = DateSheetModel(data: data)
+                let dateSheet = PastSubjectModel(data: data)
                 dateSheets.append(dateSheet)
             }
             completion(dateSheets)

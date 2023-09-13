@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+class PassClass: ObservableObject {
+    @Published var classs: PastPaperModel?
+}
+
 
 struct PastPaperView: View {
     
     @State var shouldNavigate = false
+    @ObservedObject var passClass = PassClass()
     
     @StateObject var vm = PastPaperViewModel()
     
@@ -38,11 +43,12 @@ struct PastPaperView: View {
                                 
                                 let matric = vm.matric[index]
                                 Button(action: {
+                                    passClass.classs = matric
                                     shouldNavigate = true
                                 }, label: {
                                     VStack {
                                         
-                                        NavigationLink(destination: SubjectListView(),isActive: $shouldNavigate) {
+                                        NavigationLink(destination: SubjectListView(passClass: passClass),isActive: $shouldNavigate) {
                                             EmptyView()
                                         }
                                         .hidden()
@@ -50,8 +56,9 @@ struct PastPaperView: View {
                                         Image("ic_notes")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(width: 50, height: 50)
-                                            .padding(10)
+                                            .frame(width: 45, height: 45)
+                                            .padding(20)
+                                            .background(Color("clr_v_light_purple").opacity(0.5).cornerRadius(radius: 10, corners: .allCorners))
                                         
                                         
                                         Text("\(matric.classs ?? "")")
@@ -60,8 +67,6 @@ struct PastPaperView: View {
                                         
                                         
                                     }
-                                    .padding()
-                                    .background(Color("clr_v_light_purple").opacity(0.5).cornerRadius(radius: 10, corners: .allCorners))
                                     
                                 })
                             }
@@ -90,11 +95,12 @@ struct PastPaperView: View {
                                 
                                 let intermediate = vm.intermediate[index]
                                 Button(action: {
+                                    passClass.classs = intermediate
                                     shouldNavigate = true
                                 }, label: {
                                     VStack {
                                         
-                                        NavigationLink(destination: SubjectListView(),isActive: $shouldNavigate) {
+                                        NavigationLink(destination: SubjectListView(passClass: passClass),isActive: $shouldNavigate) {
                                             EmptyView()
                                         }
                                         .hidden()
@@ -102,17 +108,16 @@ struct PastPaperView: View {
                                         Image("ic_notes_orange")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(width: 50, height: 50)
-                                        
-                                            .padding(10)
+                                            .frame(width: 45, height: 45)
+                                            .padding(20)
+                                            .background(Color("clr_light_orange").opacity(0.5).cornerRadius(radius: 10, corners: .allCorners))
                                         
                                         
                                         Text("\(intermediate.classs ?? "")")
                                             .foregroundColor(.black)
                                             .font(.system(size: 14))
                                     }
-                                    .padding()
-                                    .background(Color("clr_light_orange").opacity(0.5).cornerRadius(radius: 10, corners: .allCorners))
+                                    
                                     
                                 })
                                 
@@ -143,11 +148,12 @@ struct PastPaperView: View {
                                 
                                 let bachelors = vm.bachelors[index]
                                 Button(action: {
+                                    passClass.classs = bachelors
                                     shouldNavigate = true
                                 }, label: {
                                     VStack {
                                         
-                                        NavigationLink(destination: SubjectListView(),isActive: $shouldNavigate) {
+                                        NavigationLink(destination: SubjectListView(passClass: passClass),isActive: $shouldNavigate) {
                                             EmptyView()
                                         }
                                         .hidden()
@@ -155,17 +161,16 @@ struct PastPaperView: View {
                                         Image("ic_notes_green")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
-                                            .frame(width: 50, height: 50)
-                                        
-                                            .padding(10)
+                                            .frame(width: 45, height: 45)
+                                            .padding(20)
+                                            .background(Color("clr_aqua_squeeze").opacity(0.5).cornerRadius(radius: 10, corners: .allCorners))
                                         
                                         
                                         Text("\(bachelors.classs ?? "")")
                                             .foregroundColor(.black)
                                             .font(.system(size: 14))
                                     }
-                                    .padding()
-                                    .background(Color("clr_aqua_squeeze").opacity(0.5).cornerRadius(radius: 10, corners: .allCorners))
+                                    
                                 })
                                 
                             }
@@ -191,6 +196,6 @@ struct PastPaperView: View {
 
 struct PastPaperView_Previews: PreviewProvider {
     static var previews: some View {
-        PastPaperView()
+        PastPaperView(passClass: PassClass())
     }
 }

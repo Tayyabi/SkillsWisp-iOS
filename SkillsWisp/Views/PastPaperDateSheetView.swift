@@ -7,7 +7,15 @@
 
 import SwiftUI
 
-struct DateSheetView: View {
+class PassPaper: ObservableObject {
+    @Published var paper: PastSubjectModel?
+}
+
+struct PastPaperDateSheetView: View {
+    
+    @ObservedObject var paper: PassPaper
+    
+    //@StateObject var vm = PastPaperDateSheetViewModel()
     
     var body: some View {
         
@@ -17,11 +25,14 @@ struct DateSheetView: View {
             ZStack(alignment: .bottomTrailing) {
                 
                 Color.gray.opacity(0.1)
-                Image("bn_date_sheet")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
                 
-                
+                if (paper.paper?.type == "picture") {
+                    RemoteImage(url:  URL(string: paper.paper?.url ?? ""),placeholder: Image("bn_date_sheet"))
+                        .aspectRatio(contentMode: .fill)
+                }
+                else {
+                    PDFViewWrapper(pdfURL: URL(string: paper.paper?.url ?? "https://firebasestorage.googleapis.com/v0/b/skillswisp.appspot.com/o/Muhammad_Mobile_Dev_CV.pdf?alt=media&token=8e29db90-9cf4-4d46-a93a-13d03df3b307")!)
+                }
                 
             }
             
@@ -73,10 +84,10 @@ struct DateSheetView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
-    
-    
-    struct DateSheetView_Previews: PreviewProvider {
-        static var previews: some View {
-            DateSheetView()
-        }
+
+
+struct DateSheetView_Previews: PreviewProvider {
+    static var previews: some View {
+        PastPaperDateSheetView(paper: PassPaper())
     }
+}

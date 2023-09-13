@@ -11,6 +11,8 @@ struct AllDateSheetsView: View {
     
     @State var shouldNavigate = false
     
+    @ObservedObject var paper = PassPaper()
+    
     @StateObject var vm = AllDateSheetsViewModel()
     
     var body: some View {
@@ -26,6 +28,7 @@ struct AllDateSheetsView: View {
                         let dateSheet = vm.dateSheets[index]
                         
                         Button(action: {
+                            paper.paper = dateSheet
                             shouldNavigate = true
                         }, label: {
                             VStack {
@@ -42,17 +45,16 @@ struct AllDateSheetsView: View {
                                     
                                     HStack(alignment: .center) {
                                         
-                                        Text("\(dateSheet.classs ?? "" )")
+                                        Text("\(dateSheet.name ?? "" )")
                                             .font(.system(size: 15))
                                             .fontWeight(.semibold)
                                             .foregroundColor(.black)
                                         
                                         Spacer()
                                         
-                                        
                                     }
                                     
-                                    NavigationLink(destination: DateSheetView(),isActive: $shouldNavigate) {
+                                    NavigationLink(destination: PastPaperDateSheetView(paper: paper),isActive: $shouldNavigate) {
                                         EmptyView()
                                     }
                                     .hidden()
@@ -67,8 +69,6 @@ struct AllDateSheetsView: View {
                                 
                             }
                         })
-                        
-                        
                         
                     }
                     

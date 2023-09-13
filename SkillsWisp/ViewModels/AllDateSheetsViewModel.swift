@@ -12,7 +12,7 @@ import FirebaseFirestoreSwift
 
 class AllDateSheetsViewModel: ObservableObject {
     
-    @Published var dateSheets: [DateSheetModel] = []
+    @Published var dateSheets: [PastSubjectModel] = []
     @Published var isLoading = true
    
     

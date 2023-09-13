@@ -4,7 +4,6 @@
 //
 //  Created by M Tayyab on 20/05/2023.
 //
-
 import SwiftUI
 
 class DataStore: ObservableObject {
@@ -303,6 +302,7 @@ struct HomeView: View {
                      .shadow(radius: 10)*/
                     let picture_url = UserDefaults.standard.string(forKey: "picture_url") ?? ""
                     RemoteImage(url: URL(string: picture_url))
+                        .clipShape(Circle())
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
                     

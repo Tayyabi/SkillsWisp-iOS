@@ -16,9 +16,11 @@ class SubjectListViewModel: ObservableObject {
     
     let pastPaperDataService = PastPaperDataService()
     
-    func fetchSubjectsFromDB() async {
+    func fetchSubjectsFromDB(paperId: String) async {
         
-        try? await pastPaperDataService.fetchSubjectsFromDB(paperId: "ZUWngRxY7kZInVmjQs44",
+        print("fetchSubjectsFromDB: \(paperId)")
+        
+        try? await pastPaperDataService.fetchSubjectsFromDB(paperId: paperId,
                                                             completion: { subjects in
             
             guard let subjects = subjects else {

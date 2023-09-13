@@ -46,6 +46,7 @@ struct ProfileView: View {
                             
                             if(vm.userModel?.picUrl != nil) {
                                 RemoteImage(url: URL(string: vm.userModel?.picUrl ?? ""))
+                                    .clipShape(Circle())
                                 
                             }
                         }

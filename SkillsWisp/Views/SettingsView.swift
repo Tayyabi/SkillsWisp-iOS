@@ -26,6 +26,7 @@ struct SettingsView: View {
                     HStack {
                         let picture_url = UserDefaults.standard.string(forKey: "picture_url") ?? ""
                         RemoteImage(url: URL(string: picture_url)!)
+                            .clipShape(Circle())
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 80, height: 80)
                             .clipShape(Circle())

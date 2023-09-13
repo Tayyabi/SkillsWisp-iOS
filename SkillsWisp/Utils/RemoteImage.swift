@@ -22,11 +22,10 @@ struct RemoteImage: View {
         if let image = image {
             Image(uiImage: image)
                 .resizable()
-                .clipShape(Circle())
+                
         } else {
             placeholder
                 .resizable()
-                .clipShape(Circle())
                 .onAppear(perform: fetchImage)
         }
     }

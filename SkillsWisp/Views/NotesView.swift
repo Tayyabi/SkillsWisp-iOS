@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PDFKit
 
 
 struct NotesView: View {
@@ -30,7 +29,7 @@ struct NotesView: View {
                 ZStack(alignment: .bottomTrailing) {
                     
                     Color.gray.opacity(0.1)
-                    PDFViewWrapper(pdfURL: URL(string: vm.noteModel?.localUrl ?? "https://d1.islamhouse.com/data/en/ih_books/single/en_Sahih_Al-Bukhari.pdf")!)
+                    PDFViewWrapper(pdfURL: URL(string: vm.noteModel?.localUrl ?? "https://firebasestorage.googleapis.com/v0/b/skillswisp.appspot.com/o/Muhammad_Mobile_Dev_CV.pdf?alt=media&token=8e29db90-9cf4-4d46-a93a-13d03df3b307")!)
                     
                     
                     VStack{
@@ -154,21 +153,6 @@ struct NotesView: View {
         .navigationBarTitleDisplayMode(.inline)
         
     }
-}
-
-struct PDFViewWrapper: UIViewRepresentable {
-    let pdfURL: URL
-
-    func makeUIView(context: Context) -> PDFView {
-        
-        let pdfView = PDFView()
-        pdfView.document = PDFDocument(url: pdfURL)
-        pdfView.displayMode = .singlePageContinuous // or .continuous
-        pdfView.autoScales = true
-        return pdfView
-    }
-
-    func updateUIView(_ pdfView: PDFView, context: Context) {}
 }
 
 struct NotesScreen_Previews: PreviewProvider {
