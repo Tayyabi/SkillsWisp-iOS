@@ -6,7 +6,8 @@
 //
 
 import Foundation
-struct SubjectModel: Codable {
+struct SubjectModel: Codable, Hashable {
+    
     
     let subjectId: String?
     let name: String?

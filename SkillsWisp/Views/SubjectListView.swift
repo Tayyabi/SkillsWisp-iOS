@@ -99,11 +99,6 @@ struct SubjectListView: View {
                                                 
                                             }
                                             
-                                            NavigationLink(destination: PastPaperDateSheetView(paper: paper),isActive: $shouldNavigate) {
-                                                EmptyView()
-                                            }
-                                            .hidden()
-                                            
                                         }
                                         .padding(10)
                                         
@@ -116,6 +111,11 @@ struct SubjectListView: View {
                                 })
                             }
                         }
+                        NavigationLink(destination: PastPaperDateSheetView(paper: paper,
+                                                isDateSheet: false, pastPaperId: passClass.classs?.past_paper_id ?? ""),isActive: $shouldNavigate) {
+                            EmptyView()
+                        }
+                        .hidden()
                         
                     }
                     .padding(10)

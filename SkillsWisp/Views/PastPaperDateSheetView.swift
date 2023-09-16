@@ -15,14 +15,17 @@ struct PastPaperDateSheetView: View {
     
     @ObservedObject var paper: PassPaper
     
-    //@StateObject var vm = PastPaperDateSheetViewModel()
+    @State var isDateSheet = true
+    @State var pastPaperId : String?
+    
+    @StateObject var vm = PastPaperDateSheetViewModel()
     
     var body: some View {
         
         
         VStack {
             
-            ZStack(alignment: .bottomTrailing) {
+            ZStack(alignment: .center) {
                 
                 Color.gray.opacity(0.1)
                 
@@ -40,8 +43,6 @@ struct PastPaperDateSheetView: View {
                 Spacer()
                 Button(action: {
                     
-                    
-                    
                 }, label: {
                     
                     Image(systemName: "square.and.arrow.down")
@@ -53,11 +54,24 @@ struct PastPaperDateSheetView: View {
                 Spacer()
                 
                 Button(action: {
-                    
+                    guard let id = paper.paper?.id,
+                          !vm.isBookmark else {
+                        return
+                    }
+                    vm.isBookmark = true
+                    Task {
+                        if (isDateSheet) {
+                            await vm.addBookmark(dateSheetId:id, isBookmark:true)
+                        }
+                        else {
+                            guard let pastPaperId = pastPaperId else { return }
+                            await vm.addBookmarkPastPaper(pastPaperId: pastPaperId, subjectId: id, isBookmark: true)
+                        }
+                    }
                 }, label: {
                     
-                    Image(systemName: true ? "bookmark.fill": "bookmark")
-                        .foregroundColor(true ? .red: .black)
+                    Image(systemName: vm.isBookmark ? "bookmark.fill": "bookmark")
+                        .foregroundColor(vm.isBookmark ? .red: .black)
                         .padding()
                         .background(Circle().foregroundColor(.white))
                 })
@@ -79,6 +93,20 @@ struct PastPaperDateSheetView: View {
         }
         .onAppear{
             
+            print("isDateSheet: \(isDateSheet)")
+            
+            guard let id = paper.paper?.id else {
+                return
+            }
+            Task {
+                //vm.fetchNoteById(id: dataStore.note_id ?? "")
+                if (isDateSheet) {
+                    await vm.isBookmarked(dateSheetId: id)
+                }
+                else {
+                    await vm.isBookmarkedPastPaper(subjectId: id)
+                }
+            }
         }
         .navigationTitle("Date Sheet")
         .navigationBarTitleDisplayMode(.inline)

@@ -113,7 +113,8 @@ class NotesViewModel: ObservableObject {
     func addBookmark(standard_id: String, subject_id: String, note_id: String, bookmark: Bool) async {
         
         do {
-            let bookmark = BookmarkModel(isBookmark: bookmark)
+            
+            
             try await notesDataService.addBookmarksInDB(standard_id: standard_id, subject_id: subject_id,
                                                         note_id: note_id, isBookmark: bookmark)
         }

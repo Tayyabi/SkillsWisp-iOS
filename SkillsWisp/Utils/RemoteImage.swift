@@ -11,23 +11,38 @@ struct RemoteImage: View {
     private var url: URL?
     private var placeholder: Image
 
+    @State var isLoading = true
     @State private var image: UIImage? = nil
 
     init(url: URL?, placeholder: Image = Image("ic_profile_g")) {
         self.url = url
         self.placeholder = placeholder
+        
     }
 
     var body: some View {
-        if let image = image {
-            Image(uiImage: image)
-                .resizable()
+        ZStack(alignment: .center) {
+           
+            
+            if isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                    .scaleEffect(2)
+            }
+            else {
                 
-        } else {
-            placeholder
-                .resizable()
-                .onAppear(perform: fetchImage)
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                    
+                } else {
+                    placeholder
+                        .resizable()
+                }
+            }
         }
+        .onAppear(perform: fetchImage)
+        
     }
 
     private func fetchImage() {
@@ -40,6 +55,7 @@ struct RemoteImage: View {
             }
 
             DispatchQueue.main.async {
+                isLoading = false
                 image = UIImage(data: data)
             }
         }.resume()

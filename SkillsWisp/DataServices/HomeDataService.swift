@@ -58,8 +58,9 @@ final class HomeDataService {
                 let subject = SubjectModel(data: data)
                 subjects.append(subject)
             }
-            completion(subjects)
             print("Fetched subjects: \(subjects)")
+            completion(subjects)
+           
         }
     }
     
@@ -84,8 +85,9 @@ final class HomeDataService {
                 
                 notes.append(note)
             }
-            completion(notes)
             print("Fetched subjects: \(notes)")
+            completion(notes)
+           
         }
     }
 }

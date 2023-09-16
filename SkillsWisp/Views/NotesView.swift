@@ -11,7 +11,7 @@ import SwiftUI
 struct NotesView: View {
     
     //let pdfURL = Bundle.main.url(forResource: "example", withExtension: "pdf")!
-    @ObservedObject var dataStore: DataStore1
+    @ObservedObject var dataStore: StandSubjNoteDataStore
     @StateObject var vm = NotesViewModel()
     @State var shouldNavigate = false
     
@@ -157,6 +157,6 @@ struct NotesView: View {
 
 struct NotesScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NotesView(dataStore: DataStore1())
+        NotesView(dataStore: StandSubjNoteDataStore())
     }
 }

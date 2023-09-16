@@ -7,9 +7,10 @@
 
 import Foundation
 
+
 struct PastSubjectModel: Codable {
     
-    var subject_id: String? = UUID().uuidString
+    var id: String? = UUID().uuidString
     let name: String?
     let url: String?
     let type: String?
@@ -21,17 +22,16 @@ struct PastSubjectModel: Codable {
         self.year = year
         self.type = type
     }
-//    init() {
-//        self.name = ""
-//        self.url = ""
-//        self.year = 0
-//        self.type = ""
-//    }
     
     
-    init(data: [String: Any]) {
+    init(data: [String: Any], isSub: Bool) {
         
-        self.subject_id = data["subject_id"] as? String
+        if(isSub) {
+            self.id = data["subject_id"] as? String
+        }
+        else{
+            self.id = data["date_sheet_id"] as? String
+        }
         self.name = data["name"] as? String
         self.url = data["url"] as? String
         self.type = data["type"] as? String

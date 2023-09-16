@@ -200,10 +200,12 @@ final class NotesDataService {
     }
 
     
-    func addBookmarksInDB(standard_id: String, subject_id: String,note_id: String, isBookmark: BookmarkModel) async throws {
+    func addBookmarksInDB(standard_id: String, subject_id: String,note_id: String, isBookmark: Bool) async throws {
         
         
         guard let user = Auth.auth().currentUser else { return }
+        
+        let bookmark = BookmarkModel(isBookmark: isBookmark, userId: user.uid)
         
         let userID: [String: Any] = [
             "user_id": user.uid
@@ -214,7 +216,7 @@ final class NotesDataService {
         
         
         var ref: DocumentReference? = nil
-        ref = try bookmarkDocRef.addDocument(from: isBookmark, encoder: Coders.encoder) { error in
+        ref = try bookmarkDocRef.addDocument(from: bookmark, encoder: Coders.encoder) { error in
             if let error = error {
                 print("Error: addBookmarksInDB: \(error)")
             } else {

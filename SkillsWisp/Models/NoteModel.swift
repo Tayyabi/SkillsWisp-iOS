@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NoteModel: Codable {
+struct NoteModel: Codable, Hashable {
     
     let noteId: String?
     let name: String?
@@ -39,7 +39,7 @@ struct NoteModel: Codable {
         self.noteId = data["note_id"] as? String
         self.name = data["name"] as? String
         self.chapter = data["chapter"] as? String
-        self.rating = data["rating"] as! Double
+        self.rating = data["rating"] as? Double ?? 0.0
         self.localUrl = data["url"] as? String
         self.likesCount = data["likes_count"] as? Int
         self.reviewCount = data["review_count"] as? Int

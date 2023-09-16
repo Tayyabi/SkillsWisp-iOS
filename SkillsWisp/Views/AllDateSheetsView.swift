@@ -54,11 +54,6 @@ struct AllDateSheetsView: View {
                                         
                                     }
                                     
-                                    NavigationLink(destination: PastPaperDateSheetView(paper: paper),isActive: $shouldNavigate) {
-                                        EmptyView()
-                                    }
-                                    .hidden()
-                                    
                                 }
                                 .padding(10)
                                 
@@ -71,6 +66,10 @@ struct AllDateSheetsView: View {
                         })
                         
                     }
+                    NavigationLink(destination: PastPaperDateSheetView(paper: paper),isActive: $shouldNavigate) {
+                        EmptyView()
+                    }
+                    .hidden()
                     
                 }
             }

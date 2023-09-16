@@ -12,7 +12,7 @@ struct RatingView: View {
     @Binding var confirm: Bool
     @State var selected: Int = -1
     
-    @ObservedObject var dataStore: DataStore1
+    @ObservedObject var dataStore: StandSubjNoteDataStore
     @StateObject var vm = RatingViewModel()
     
     var body: some View {
@@ -77,6 +77,6 @@ struct RatingView: View {
 struct ReviewPopup_Previews: PreviewProvider {
     @State static var confirm: Bool = false
     static var previews: some View {
-        RatingView(confirm: $confirm, dataStore: DataStore1())
+        RatingView(confirm: $confirm, dataStore: StandSubjNoteDataStore())
     }
 }

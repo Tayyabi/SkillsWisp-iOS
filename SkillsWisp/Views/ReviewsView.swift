@@ -13,7 +13,7 @@ struct ReviewsView: View {
     @State var comment: String = ""
     @State var showReview: Bool = false
     
-    @ObservedObject var dataStore: DataStore1
+    @ObservedObject var dataStore: StandSubjNoteDataStore
     @StateObject var vm = ReviewsViewModel()
     
     var body: some View {
@@ -259,6 +259,6 @@ struct ReviewsView: View {
 
 struct ReviewsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewsView(dataStore: DataStore1())
+        ReviewsView(dataStore: StandSubjNoteDataStore())
     }
 }

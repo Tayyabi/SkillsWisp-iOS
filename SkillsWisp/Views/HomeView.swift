@@ -12,7 +12,7 @@ class DataStore: ObservableObject {
 
 struct HomeView: View {
     
-    @StateObject private var dataStore = DataStore1()
+    @StateObject private var dataStore = StandSubjNoteDataStore()
     
     @State var icons: [String] = ["ic_matric","ic_inter","ic_bachelors"]
     @State var backgrounds: [String] = ["clr_aqua_squeeze","clr_yellow_green","clr_tropical_blue"]
@@ -30,7 +30,7 @@ struct HomeView: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             
             ScrollView(showsIndicators: false) {
                 
@@ -103,13 +103,13 @@ struct HomeView: View {
                                             )
                                         })
                                         
-                                        NavigationLink(destination:StandardView(dataStore: dataStore),isActive: $shouldNavigate) {
-                                            EmptyView()
-                                        }
-                                        .hidden()
+                                        
                                     }.padding(.trailing,10)
                                 }
-                                
+                                NavigationLink(destination:StandardView(dataStore: dataStore),isActive: $shouldNavigate) {
+                                    EmptyView()
+                                }
+                                .hidden()
                             }
                         }
                         .frame(height: 150)
