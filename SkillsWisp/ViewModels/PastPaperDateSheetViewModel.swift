@@ -15,6 +15,9 @@ class PastPaperDateSheetViewModel: ObservableObject {
     @Published var pastPaper: PastSubjectModel?
     @Published var isBookmark: Bool = false
     
+    let manager = LocalFileManager.instacne
+    @Published var isLoading = false
+    
     let dateSheetDataService = DateSheetDataService()
     let pastPaperDataService = PastPaperDataService()
     
@@ -84,5 +87,60 @@ class PastPaperDateSheetViewModel: ObservableObject {
             print("Error isLiked: \(error)")
         }
     }
+    
+    
+    
+    
+    func downloadDateSheetPastPaper(paper: PastSubjectModel, isDateSheet: Bool) async {
+        
+        guard let url = paper.url else {
+            return
+        }
+        
+        dateSheetDataService.downloadDateSheetPastPaper(urlString: url) { (data, error) in
+            
+            if let error = error {
+                print("Error downloading PDF: \(error.localizedDescription)")
+            } else if let data = data {
+                
+                let name = self.manager.generateUniqueFilename()
+                self.manager.saveImage(data: data, name: "\(name).pdf")
+                
+                self.saveDownloadedUrl(paper: paper, isDateSheet: isDateSheet)
+                
+            }
+        }
+
+    }
+    
+    func saveDownloadedUrl(paper: PastSubjectModel, isDateSheet: Bool) {
+        
+        let path = manager.getPathForImage(name: "\(String(describing: paper.id)).pdf")
+        let download = DownloadsEntity(context: viewContext)
+        download.id = paper.id
+        download.local_url = path?.path
+        download.name = paper.name
+        download.rating = 0.0
+        download.chapter = ""
+        download.type = "pdf"
+        download.category = isDateSheet ? "DATE_SHEET" : "PAST_PAPER"
+        
+        
+        //self.isLoading = false
+        saveData()
+    }
+    
+    func saveData() {
+        
+        do {
+            try viewContext.save()
+            print("Saved Successfully")
+        }
+        catch let error {
+            print("Error saving. \(error)")
+        }
+        
+    }
+    
     
 }

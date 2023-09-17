@@ -129,7 +129,7 @@ struct HomeView: View {
                                             Group {
                                                 
                                                 
-                                                NavigationLink(destination: DownloadedNotesView(), label: {
+                                                NavigationLink(destination: DownloadsView(), label: {
                                                     
                                                     HStack {
                                                         
@@ -320,6 +320,7 @@ struct HomeView: View {
                     
                 })
             )
+            .navigationBarTitleDisplayMode(.inline)
         }
         .navigationBarHidden(true)
         

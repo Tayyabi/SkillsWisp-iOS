@@ -11,6 +11,9 @@
 		A30117EF2A9146D200E34766 /* IdsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30117EE2A9146D200E34766 /* IdsModel.swift */; };
 		A30C3A032AB20B2E0018CDF3 /* PastPaperDateSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C3A022AB20B2E0018CDF3 /* PastPaperDateSheetViewModel.swift */; };
 		A30C3A052AB20DCE0018CDF3 /* PDFViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C3A042AB20DCE0018CDF3 /* PDFViewWrapper.swift */; };
+		A30C3A0C2AB709800018CDF3 /* DownloadsEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C3A0A2AB709800018CDF3 /* DownloadsEntity+CoreDataClass.swift */; };
+		A30C3A0D2AB709800018CDF3 /* DownloadsEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C3A0B2AB709800018CDF3 /* DownloadsEntity+CoreDataProperties.swift */; };
+		A30C3A0F2AB738380018CDF3 /* IdsPastPaperMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30C3A0E2AB738380018CDF3 /* IdsPastPaperMode.swift */; };
 		A31837302A5045A00011810A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318372F2A5045A00011810A /* LoginViewModel.swift */; };
 		A31837342A504D340011810A /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31837332A504D340011810A /* CreateAccountViewModel.swift */; };
 		A31837362A507E000011810A /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31837352A507E000011810A /* ProfileViewModel.swift */; };
@@ -32,8 +35,6 @@
 		A31ECC542AACCB6000B4B44A /* PastPaperModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31ECC532AACCB6000B4B44A /* PastPaperModel.swift */; };
 		A31ECC562AADAD0700B4B44A /* PastSubjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31ECC552AADAD0700B4B44A /* PastSubjectModel.swift */; };
 		A31ECC582AADAF5C00B4B44A /* SubjectListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31ECC572AADAF5C00B4B44A /* SubjectListViewModel.swift */; };
-		A31ECC632AADD2C400B4B44A /* DownloadsEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31ECC612AADD2C400B4B44A /* DownloadsEntity+CoreDataClass.swift */; };
-		A31ECC642AADD2C400B4B44A /* DownloadsEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31ECC622AADD2C400B4B44A /* DownloadsEntity+CoreDataProperties.swift */; };
 		A344C7CD2A18F19700205657 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A344C7CC2A18F19700205657 /* LoginView.swift */; };
 		A344C7CF2A18FE1F00205657 /* login_gif.gif in Resources */ = {isa = PBXBuildFile; fileRef = A344C7CE2A18FE1F00205657 /* login_gif.gif */; };
 		A344C7D12A18FE7600205657 /* GifImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A344C7D02A18FE7600205657 /* GifImage.swift */; };
@@ -88,7 +89,7 @@
 		A3A4F5112A7C03C800873675 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F5102A7C03C800873675 /* BookmarkModel.swift */; };
 		A3A4F5132A7FF03400873675 /* AccountSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4F5122A7FF03400873675 /* AccountSuccessView.swift */; };
 		A3E4995A2A502C7E00CA4A8B /* SkillsWisp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3E499582A502C7E00CA4A8B /* SkillsWisp.xcdatamodeld */; };
-		A3EDE3F52AA7915800F14D58 /* DownloadedNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE3F42AA7915800F14D58 /* DownloadedNotesView.swift */; };
+		A3EDE3F52AA7915800F14D58 /* DownloadsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE3F42AA7915800F14D58 /* DownloadsView.swift */; };
 		A3EDE3F72AA7923400F14D58 /* DownloadsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE3F62AA7923400F14D58 /* DownloadsViewModel.swift */; };
 		A3EDE4132AA8DF2500F14D58 /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE4122AA8DF2500F14D58 /* LocalFileManager.swift */; };
 		A3EDE4192AAB75E400F14D58 /* AllDateSheetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EDE4182AAB75E400F14D58 /* AllDateSheetsView.swift */; };
@@ -128,6 +129,9 @@
 		A30117EE2A9146D200E34766 /* IdsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdsModel.swift; sourceTree = "<group>"; };
 		A30C3A022AB20B2E0018CDF3 /* PastPaperDateSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastPaperDateSheetViewModel.swift; sourceTree = "<group>"; };
 		A30C3A042AB20DCE0018CDF3 /* PDFViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewWrapper.swift; sourceTree = "<group>"; };
+		A30C3A0A2AB709800018CDF3 /* DownloadsEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadsEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A30C3A0B2AB709800018CDF3 /* DownloadsEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadsEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A30C3A0E2AB738380018CDF3 /* IdsPastPaperMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdsPastPaperMode.swift; sourceTree = "<group>"; };
 		A318372F2A5045A00011810A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A31837332A504D340011810A /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		A31837352A507E000011810A /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -149,8 +153,6 @@
 		A31ECC532AACCB6000B4B44A /* PastPaperModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastPaperModel.swift; sourceTree = "<group>"; };
 		A31ECC552AADAD0700B4B44A /* PastSubjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastSubjectModel.swift; sourceTree = "<group>"; };
 		A31ECC572AADAF5C00B4B44A /* SubjectListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectListViewModel.swift; sourceTree = "<group>"; };
-		A31ECC612AADD2C400B4B44A /* DownloadsEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadsEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A31ECC622AADD2C400B4B44A /* DownloadsEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DownloadsEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A344C7CC2A18F19700205657 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A344C7CE2A18FE1F00205657 /* login_gif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = login_gif.gif; sourceTree = "<group>"; };
 		A344C7D02A18FE7600205657 /* GifImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage.swift; sourceTree = "<group>"; };
@@ -194,7 +196,7 @@
 		A3A4F5102A7C03C800873675 /* BookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkModel.swift; sourceTree = "<group>"; };
 		A3A4F5122A7FF03400873675 /* AccountSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSuccessView.swift; sourceTree = "<group>"; };
 		A3E499592A502C7E00CA4A8B /* SkillsWisp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillsWisp.xcdatamodel; sourceTree = "<group>"; };
-		A3EDE3F42AA7915800F14D58 /* DownloadedNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedNotesView.swift; sourceTree = "<group>"; };
+		A3EDE3F42AA7915800F14D58 /* DownloadsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsView.swift; sourceTree = "<group>"; };
 		A3EDE3F62AA7923400F14D58 /* DownloadsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewModel.swift; sourceTree = "<group>"; };
 		A3EDE4122AA8DF2500F14D58 /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
 		A3EDE4182AAB75E400F14D58 /* AllDateSheetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDateSheetsView.swift; sourceTree = "<group>"; };
@@ -406,7 +408,7 @@
 				A3A26D342A210707005C9B1C /* TermsConditionView.swift */,
 				A38A7A2A2A17D5B80011CD8A /* WelcomeView.swift */,
 				A3A4F5122A7FF03400873675 /* AccountSuccessView.swift */,
-				A3EDE3F42AA7915800F14D58 /* DownloadedNotesView.swift */,
+				A3EDE3F42AA7915800F14D58 /* DownloadsView.swift */,
 				A3EDE4182AAB75E400F14D58 /* AllDateSheetsView.swift */,
 				A3EDE41A2AAB7C7700F14D58 /* PastPaperDateSheetView.swift */,
 				A3EDE41C2AAB85E800F14D58 /* PastPaperView.swift */,
@@ -418,8 +420,8 @@
 		A3F8FF272A2B2E5D0080DD82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A31ECC612AADD2C400B4B44A /* DownloadsEntity+CoreDataClass.swift */,
-				A31ECC622AADD2C400B4B44A /* DownloadsEntity+CoreDataProperties.swift */,
+				A30C3A0A2AB709800018CDF3 /* DownloadsEntity+CoreDataClass.swift */,
+				A30C3A0B2AB709800018CDF3 /* DownloadsEntity+CoreDataProperties.swift */,
 				A31837CF2A5AB4710011810A /* StandardEntity+CoreDataClass.swift */,
 				A31837D02A5AB4710011810A /* StandardEntity+CoreDataProperties.swift */,
 				A31837D12A5AB4710011810A /* UsersEntity+CoreDataClass.swift */,
@@ -439,6 +441,7 @@
 				A30117EE2A9146D200E34766 /* IdsModel.swift */,
 				A31ECC532AACCB6000B4B44A /* PastPaperModel.swift */,
 				A31ECC552AADAD0700B4B44A /* PastSubjectModel.swift */,
+				A30C3A0E2AB738380018CDF3 /* IdsPastPaperMode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -609,7 +612,7 @@
 				A3A26D372A210857005C9B1C /* AboutUsView.swift in Sources */,
 				A3EDE41F2AAB8F8700F14D58 /* SubjectListView.swift in Sources */,
 				A34C200E2A89065B00FCFCF5 /* Coders.swift in Sources */,
-				A3EDE3F52AA7915800F14D58 /* DownloadedNotesView.swift in Sources */,
+				A3EDE3F52AA7915800F14D58 /* DownloadsView.swift in Sources */,
 				A31837D72A5AB4710011810A /* StandardEntity+CoreDataClass.swift in Sources */,
 				A38A79E02A0A20780011CD8A /* TextBootcamp.swift in Sources */,
 				A344C7D72A1A0B2500205657 /* StandardView.swift in Sources */,
@@ -623,11 +626,11 @@
 				A38A79E42A0D36600011CD8A /* SplashView.swift in Sources */,
 				A344C7D52A19161400205657 /* HomeView.swift in Sources */,
 				A31837D92A5AB4710011810A /* UsersEntity+CoreDataClass.swift in Sources */,
-				A31ECC642AADD2C400B4B44A /* DownloadsEntity+CoreDataProperties.swift in Sources */,
 				A31837742A59728A0011810A /* NotesViewModel.swift in Sources */,
 				A3945AD72A6C2061004E87F4 /* HomeDataService.swift in Sources */,
 				A31837DC2A5AB4710011810A /* SubjectEntity+CoreDataProperties.swift in Sources */,
 				A3A26D3D2A211A52005C9B1C /* ProfileView.swift in Sources */,
+				A30C3A0F2AB738380018CDF3 /* IdsPastPaperMode.swift in Sources */,
 				A3A26D3B2A211065005C9B1C /* BookmarkView.swift in Sources */,
 				A3EDE41B2AAB7C7800F14D58 /* PastPaperDateSheetView.swift in Sources */,
 				A3A011F72A36081D00F59BB6 /* ReviewsView.swift in Sources */,
@@ -644,11 +647,12 @@
 				A30117EF2A9146D200E34766 /* IdsModel.swift in Sources */,
 				A31ECC582AADAF5C00B4B44A /* SubjectListViewModel.swift in Sources */,
 				A31837DB2A5AB4710011810A /* SubjectEntity+CoreDataClass.swift in Sources */,
-				A31ECC632AADD2C400B4B44A /* DownloadsEntity+CoreDataClass.swift in Sources */,
 				A3945AE52A751898004E87F4 /* RatingViewModel.swift in Sources */,
 				A3EDE4192AAB75E400F14D58 /* AllDateSheetsView.swift in Sources */,
 				A31ECC542AACCB6000B4B44A /* PastPaperModel.swift in Sources */,
 				A344C7CD2A18F19700205657 /* LoginView.swift in Sources */,
+				A30C3A0C2AB709800018CDF3 /* DownloadsEntity+CoreDataClass.swift in Sources */,
+				A30C3A0D2AB709800018CDF3 /* DownloadsEntity+CoreDataProperties.swift in Sources */,
 				A3EDE41D2AAB85E800F14D58 /* PastPaperView.swift in Sources */,
 				A31837362A507E000011810A /* ProfileViewModel.swift in Sources */,
 				A31837342A504D340011810A /* CreateAccountViewModel.swift in Sources */,

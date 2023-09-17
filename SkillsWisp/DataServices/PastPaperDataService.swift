@@ -117,5 +117,26 @@ final class PastPaperDataService {
         
     }
     
+    
+    func fetchOnePastPaperFromDB(past_paper_id: String, subject_id: String, completion: @escaping (PastSubjectModel?) -> ()) async throws {
+        
+        let pastPaperDocRef = pastPapersCollection.document(past_paper_id)
+        let pastPaperDocumentSnapshot = try await pastPaperDocRef
+                    .collection("subjects")
+                    .document(subject_id)
+                    .getDocument()
+        
+        
+        if pastPaperDocumentSnapshot.exists {
+            guard let data = pastPaperDocumentSnapshot.data() else { return }
+            let pastPaper = PastSubjectModel(data: data, isSub: true)
+            
+            return completion(pastPaper)
+        }
+        else{
+            return completion(nil)
+        }
+    }
+    
 }
 

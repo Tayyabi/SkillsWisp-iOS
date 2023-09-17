@@ -85,7 +85,7 @@ struct NotesView: View {
                         guard let note = vm.noteModel else {
                             return
                         }
-                        vm.isLoading = true
+                        //vm.isLoading = true
                         Task {
                             
                             await vm.downloadNote(note: note)

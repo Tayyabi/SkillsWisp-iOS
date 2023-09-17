@@ -14,6 +14,8 @@ import FirebaseFirestoreSwift
 class DownloadsViewModel: ObservableObject {
     
     @Published var notes: [NoteModel] = []
+    @Published var dateSheets: [NoteModel] = []
+    @Published var pastPapers: [NoteModel] = []
     @Published var isLoading = false
     
     private let persistenceController = PersistenceController.shared
@@ -45,7 +47,15 @@ class DownloadsViewModel: ObservableObject {
             let fetchedDownloads = try self.viewContext.fetch(fetchRequest)
             
             for download in fetchedDownloads {
-                notes.append(NoteModel(noteId: download.note_id ?? "UnKnown", name: download.name, chapter: download.chapter, rating: download.rating, localUrl: download.local_url, likesCount: 0, reviewCount: 0, bookmark: false, thumbnail: ""))
+                if (download.category == "NOTE") {
+                    notes.append(NoteModel(noteId: download.id ?? "UnKnown", name: download.name, chapter: download.chapter, rating: download.rating, localUrl: download.local_url, likesCount: 0, reviewCount: 0, bookmark: false, thumbnail: ""))
+                }
+                else if (download.category == "DATE_SHEET") {
+                    dateSheets.append(NoteModel(noteId: download.id ?? "UnKnown", name: download.name, chapter: download.chapter, rating: download.rating, localUrl: download.local_url, likesCount: 0, reviewCount: 0, bookmark: false, thumbnail: ""))
+                }
+                else if (download.category == "PAST_PAPER") {
+                    pastPapers.append(NoteModel(noteId: download.id ?? "UnKnown", name: download.name, chapter: download.chapter, rating: download.rating, localUrl: download.local_url, likesCount: 0, reviewCount: 0, bookmark: false, thumbnail: ""))
+                }
             }
         } catch {
             print("Error fetchStandards: \(error.localizedDescription)")

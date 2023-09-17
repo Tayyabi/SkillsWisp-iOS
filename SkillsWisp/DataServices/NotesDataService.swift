@@ -198,6 +198,54 @@ final class NotesDataService {
             return completion(nil)
         }
     }
+    
+    func fetchUserBookmarkPastPaperId() async throws -> [IdsPastPaperModel]? {
+        guard let user = Auth.auth().currentUser else { throw UserError.userNotLogin }
+        
+        let bookmarkIdRef = userCollection.document(user.uid).collection("past_papers_bookmarks")
+        
+        do {
+            let querySnapshot = try await bookmarkIdRef.getDocuments()
+            
+            var ids: [IdsPastPaperModel] = []
+            
+            for doc in querySnapshot.documents {
+                let data = doc.data()
+                let id = IdsPastPaperModel(data: data)
+                ids.append(id)
+            }
+            
+            return ids
+        } catch {
+            throw error
+        }
+    }
+    
+    
+    func fetchUserBookmarkDateSheetId() async throws -> [String]? {
+        guard let user = Auth.auth().currentUser else { throw UserError.userNotLogin }
+        
+        let bookmarkIdRef = userCollection.document(user.uid).collection("date_sheet_bookmarks")
+        
+        do {
+            let querySnapshot = try await bookmarkIdRef.getDocuments()
+            
+            var ids: [String] = []
+            
+            for doc in querySnapshot.documents {
+                let data = doc.data()
+                let id = data["date_sheet_id"] as? String ?? ""
+                ids.append(id)
+            }
+            
+            return ids
+        } catch {
+            throw error
+        }
+    }
+    
+    
+    
 
     
     func addBookmarksInDB(standard_id: String, subject_id: String,note_id: String, isBookmark: Bool) async throws {

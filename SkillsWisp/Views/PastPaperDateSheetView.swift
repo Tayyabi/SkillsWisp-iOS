@@ -42,7 +42,13 @@ struct PastPaperDateSheetView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    
+                    guard let paper = paper.paper else {
+                        return
+                    }
+                    //vm.isLoading = true
+                    Task {
+                        await vm.downloadDateSheetPastPaper(paper: paper, isDateSheet: isDateSheet)
+                    }
                 }, label: {
                     
                     Image(systemName: "square.and.arrow.down")

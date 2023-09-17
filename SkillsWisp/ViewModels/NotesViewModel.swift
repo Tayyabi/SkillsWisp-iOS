@@ -169,14 +169,15 @@ class NotesViewModel: ObservableObject {
         
         let path = manager.getPathForImage(name: "\(String(describing: note.noteId)).pdf")
         let download = DownloadsEntity(context: viewContext)
-        download.note_id = note.noteId
+        download.id = note.noteId
         download.local_url = path?.path
         download.name = note.name
         download.rating = note.rating
         download.chapter = note.chapter
         download.type = "pdf"
+        download.category = "NOTE"
         
-        self.isLoading = false
+        //self.isLoading = false
         saveData()
     }
     

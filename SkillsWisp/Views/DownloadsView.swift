@@ -1,28 +1,30 @@
 //
-//  BookmarkScreen.swift
+//  DownloadedNotesView.swift
 //  SkillsWisp
 //
-//  Created by M Tayyab on 26/05/2023.
+//  Created by M Tayyab on 05/09/2023.
 //
 
 import SwiftUI
 
-struct BookmarkView: View {
+struct DownloadsView: View {
     
     @State var thumbnails: [String] = ["bn_class_1","bn_class_2", "bn_class_3", "bn_class_4"]
     @State var selectedOption = "All"
     @State var options = ["All","Notes","Past Papers","Date Sheet"]
     
-    @StateObject var vm = BookmarkViewModel()
+    @StateObject var vm = DownloadsViewModel()
     @State var shouldNavigate = false
     
     var body: some View {
         
+        
+        
         ZStack {
+            
             Color.gray.opacity(0.1)
             
             VStack(alignment: .leading) {
-                
                 VStack(alignment: .leading) {
                     
                     Text("Filter by: ")
@@ -65,9 +67,9 @@ struct BookmarkView: View {
                                                 )
                                         )
                                         :
-                                        AnyView(
-                                            Color("clr_light_grey").cornerRadius(10)
-                                        )
+                                            AnyView(
+                                                Color("clr_light_grey").cornerRadius(10)
+                                            )
                                     )
                             })
                         }
@@ -79,7 +81,9 @@ struct BookmarkView: View {
                 .padding()
                 .background(Color.white)
                 
+                
                 ScrollView(showsIndicators: false) {
+                    
                     VStack(alignment: .leading, spacing: 10) {
                         
                         if(selectedOption == "All" || selectedOption == "Notes") {
@@ -87,15 +91,17 @@ struct BookmarkView: View {
                                 .fontWeight(.semibold)
                                 .font(.system(size: 15))
                             
+                            
                             ForEach(vm.notes.indices, id: \.self){ index in
                                 
                                 let note = vm.notes[index]
                                 HStack {
                                     
-                                    Image("\(thumbnails[index % thumbnails.count])")
+                                    Image("ic_downloaded_thumb")
                                         .renderingMode(.original)
                                         .resizable()
-                                        .frame(width: 90,height: 90)
+                                        .frame(width: 90,height: 110)
+                                        .aspectRatio(contentMode: .fill)
                                         .clipShape(RoundedRectangle(cornerRadius: 10))
                                     
                                     
@@ -108,39 +114,27 @@ struct BookmarkView: View {
                                         Text("\(note.chapter ?? "")")
                                             .foregroundColor(.gray)
                                             .font(.system(size: 13))
+                                        
                                         Spacer()
                                         
-                                    }
-                                    .padding(.top, 6)
-                                    
-                                    Spacer()
-                                    
-                                    VStack(alignment: .trailing) {
-                                        HStack {
+                                        HStack(spacing: 5) {
                                             Image(systemName: "star.fill")
                                                 .resizable()
-                                                .foregroundColor(.yellow)
                                                 .frame(width: 14, height: 14)
+                                                .foregroundColor(Color("clr_purple_mimosa"))
                                             
                                             Text("\(String(format: "%.1f", note.rating))")
+                                                .foregroundColor(Color("clr_purple_mimosa"))
                                                 .font(.system(size: 12))
                                         }
-                                        .padding(.top, 8)
+                                        .padding([.leading,.trailing], 10)
+                                        .padding([.top, .bottom], 5)
+                                        .background(Color("clr_v_light_purple").cornerRadius(15))
                                         
-                                        
-                                        Spacer()
-                                        
-                                        Button(action: {
-                                            
-                                            
-                                        }, label: {
-                                            
-                                            Image("ic_bookmark")
-                                            
-                                        })
                                         
                                     }
                                     
+                                    Spacer()
                                     
                                 }
                                 .padding()
@@ -150,17 +144,17 @@ struct BookmarkView: View {
                             }
                         }
                         
-                        
                         if(selectedOption == "All" || selectedOption == "Past Papers") {
+                            
                             Text("Past Papers")
                                 .fontWeight(.semibold)
                                 .font(.system(size: 15))
                             
                             
-                            
                             ForEach(vm.pastPapers.indices, id: \.self){ index in
                                 
                                 let pastPaper = vm.pastPapers[index]
+                                
                                 VStack {
                                     
                                     HStack {
@@ -194,7 +188,6 @@ struct BookmarkView: View {
                                     
                                 }
                                 
-                                
                             }
                         }
                         
@@ -203,7 +196,6 @@ struct BookmarkView: View {
                             Text("Date Sheets")
                                 .fontWeight(.semibold)
                                 .font(.system(size: 15))
-                            
                             
                             
                             ForEach(vm.dateSheets.indices, id: \.self){ index in
@@ -243,39 +235,39 @@ struct BookmarkView: View {
                                     
                                 }
                                 
-                                
                             }
                         }
                         
                         
                         Spacer()
                         
-                        
                     }
                     .padding()
                     
+                    
+                   
                 }
             }
-            if vm.isLoading {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                    .scaleEffect(2)
+            
+        }
+        .onAppear{
+            //vm.isLoading = true
+            Task {
+                await vm.fetchStandards()
             }
         }
         
-        .onAppear{
-            vm.isLoading = true
-            Task {
-                await vm.fetchNotes()
-                await vm.fetchPastPapers()
-                await vm.fetchDateSheets()
-            }
+        if vm.isLoading {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                .scaleEffect(2)
         }
     }
+    
 }
 
-struct BookmarkScreen_Previews: PreviewProvider {
+struct DownloadedNotesView_Previews: PreviewProvider {
     static var previews: some View {
-        BookmarkView()
+        DownloadsView()
     }
 }

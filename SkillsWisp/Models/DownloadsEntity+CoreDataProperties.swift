@@ -2,7 +2,7 @@
 //  DownloadsEntity+CoreDataProperties.swift
 //  SkillsWisp
 //
-//  Created by M Tayyab on 10/09/2023.
+//  Created by M Tayyab on 17/09/2023.
 //
 //
 
@@ -16,12 +16,13 @@ extension DownloadsEntity {
         return NSFetchRequest<DownloadsEntity>(entityName: "DownloadsEntity")
     }
 
+    @NSManaged public var chapter: String?
     @NSManaged public var local_url: String?
     @NSManaged public var name: String?
+    @NSManaged public var id: String?
     @NSManaged public var rating: Double
-    @NSManaged public var chapter: String?
     @NSManaged public var type: String?
-    @NSManaged public var note_id: String?
+    @NSManaged public var category: String?
 
 }
 
