@@ -48,11 +48,6 @@ struct PastPaperView: View {
                                 }, label: {
                                     VStack {
                                         
-                                        NavigationLink(destination: SubjectListView(passClass: passClass),isActive: $shouldNavigate) {
-                                            EmptyView()
-                                        }
-                                        .hidden()
-                                        
                                         Image("ic_notes")
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
@@ -99,11 +94,6 @@ struct PastPaperView: View {
                                     shouldNavigate = true
                                 }, label: {
                                     VStack {
-                                        
-                                        NavigationLink(destination: SubjectListView(passClass: passClass),isActive: $shouldNavigate) {
-                                            EmptyView()
-                                        }
-                                        .hidden()
                                         
                                         Image("ic_notes_orange")
                                             .resizable()
@@ -171,10 +161,7 @@ struct PastPaperView: View {
                                 })
                                 
                             }
-                            NavigationLink(destination: SubjectListView(passClass: passClass),isActive: $shouldNavigate) {
-                                EmptyView()
-                            }
-                            .hidden()
+                            
                         }
                         .padding()
                         
@@ -191,6 +178,9 @@ struct PastPaperView: View {
             Task {
                 await vm.fetchPastPapersFromDB()
             }
+        }
+        .navigationDestination(isPresented: $shouldNavigate) {
+            SubjectListView(passClass: passClass)
         }
     }
 }

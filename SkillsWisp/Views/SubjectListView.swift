@@ -111,11 +111,6 @@ struct SubjectListView: View {
                                 })
                             }
                         }
-                        NavigationLink(destination: PastPaperDateSheetView(paper: paper,
-                                                isDateSheet: false, pastPaperId: passClass.classs?.past_paper_id ?? ""),isActive: $shouldNavigate) {
-                            EmptyView()
-                        }
-                        .hidden()
                         
                     }
                     .padding(10)
@@ -130,6 +125,10 @@ struct SubjectListView: View {
             Task {
                 await vm.fetchSubjectsFromDB(paperId: paperId)
             }
+        }
+        .navigationDestination(isPresented: $shouldNavigate) {
+            PastPaperDateSheetView(paper: paper,isDateSheet: false,
+                                   pastPaperId: passClass.classs?.past_paper_id ?? "")
         }
     }
 }
