@@ -17,6 +17,7 @@ class NotesViewModel: ObservableObject {
     @Published var isLiked: Bool = false
     @Published var isBookmark: Bool = false
     @Published var isLoading = false
+    @Published var isLogin = false
     
     let notesDataService = NotesDataService()
     
@@ -32,6 +33,7 @@ class NotesViewModel: ObservableObject {
     let manager = LocalFileManager.instacne
     
     init() {
+        isLogin = UserDefaults.standard.bool(forKey: "is_login") 
         //savedEntity = NotesEntity(context: viewContext)
     }
     

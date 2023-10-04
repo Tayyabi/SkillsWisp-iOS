@@ -264,6 +264,12 @@ struct BookmarkView: View {
         }
         
         .onAppear{
+            
+            guard vm.isLogin else {
+                print("Please login first")
+                return
+            }
+            
             vm.isLoading = true
             Task {
                 await vm.fetchNotes()

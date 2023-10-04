@@ -16,6 +16,7 @@ class LoginViewModel: ObservableObject {
     @Published var savedEntities: [UsersEntity] = []
     @Published var shouldNavigate = false
     @Published var isLoading = false
+    @Published var isAuthorizationFailed = false
     
     let userDataService = UserDataService()
     
@@ -43,10 +44,23 @@ class LoginViewModel: ObservableObject {
             }
         }
         catch {
+            
+            let  errorCode = AuthErrorCode(_nsError: error as NSError)
+            
+            switch(errorCode) {
+            case AuthErrorCode.wrongPassword:
+                print("Error signIn: wrong password")
+            case AuthErrorCode.invalidEmail:
+                print("Error signIn: invalid email")
+            default:
+                print("An error occurred: \(errorCode)")
+            }
+            
             await MainActor.run {
                 self.isLoading = false
+                self.isAuthorizationFailed = true
             }
-            print("Error signIn: \(error)")
+            
         }
         
     }
@@ -94,6 +108,8 @@ class LoginViewModel: ObservableObject {
         UserDefaults.standard.set(user.email, forKey: "email")
         UserDefaults.standard.set(user.phoneNo, forKey: "phone_no")
         UserDefaults.standard.set(user.picUrl, forKey: "picture_url")
+        UserDefaults.standard.set(true, forKey: "is_login")
+        
     }
     
     

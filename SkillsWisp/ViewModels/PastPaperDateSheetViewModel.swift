@@ -14,9 +14,10 @@ class PastPaperDateSheetViewModel: ObservableObject {
     
     @Published var pastPaper: PastSubjectModel?
     @Published var isBookmark: Bool = false
+    @Published var isLoading = false
+    @Published var isLogin = false
     
     let manager = LocalFileManager.instacne
-    @Published var isLoading = false
     
     let dateSheetDataService = DateSheetDataService()
     let pastPaperDataService = PastPaperDataService()
@@ -28,7 +29,7 @@ class PastPaperDateSheetViewModel: ObservableObject {
     }
     
     init() {
-        
+        isLogin = UserDefaults.standard.bool(forKey: "is_login")
     }
     
     func populatePaper(paper: PastSubjectModel) {

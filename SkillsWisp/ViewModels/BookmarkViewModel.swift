@@ -16,6 +16,8 @@ class BookmarkViewModel: ObservableObject {
     @Published var pastPapers: [PastSubjectModel] = []
     @Published var dateSheets: [PastSubjectModel] = []
     @Published var isLoading = false
+    @Published var isLogin = false
+    
     var ids: [IdsModel] = []
     var idsPastPaper: [IdsPastPaperModel] = []
     var idsDateSheet: [String] = []
@@ -24,6 +26,11 @@ class BookmarkViewModel: ObservableObject {
     let homeDataService = HomeDataService()
     let pastPaperDataService = PastPaperDataService()
     let dateSheetDataService = DateSheetDataService()
+    
+    
+    init() {
+        isLogin = UserDefaults.standard.bool(forKey: "is_login")
+    }
     
     func fetchNotes() async {
         

@@ -31,7 +31,6 @@ struct HomeView: View {
     
     var body: some View {
         
-        NavigationStack {
             
             ScrollView(showsIndicators: false) {
                 
@@ -297,35 +296,54 @@ struct HomeView: View {
             .navigationDestination(isPresented: $navigatePastPaper) {
                 PastPaperView()
             }
-            
-            .navigationBarItems(
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NavigationLink(destination: SettingsView(), label: {
+                        Image("ic_menu")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+
+                    })
+
+                }
+                if(vm.isLogin) {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: ProfileView(),label: {
+                            
+                            let picture_url = UserDefaults.standard.string(forKey: "picture_url") ?? ""
+                            RemoteImage(url: URL(string: picture_url))
+                                .clipShape(Circle())
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 40, height: 40)
+                            
+                        })
+                        
+                    }
+                }
+
+            }
+            /*.navigationBarItems(
                 leading: NavigationLink(destination: SettingsView(), label: {
                     Image("ic_menu")
                         .resizable()
                         .frame(width: 30, height: 30)
-                    
+
                 }),
                 trailing: NavigationLink(destination: ProfileView(),label: {
-                    
-                    /*Image("ic_profile")
-                     .resizable()
-                     .clipShape(Circle())
-                     .frame(width: 35, height: 35)
-                     .shadow(radius: 10)*/
+
                     let picture_url = UserDefaults.standard.string(forKey: "picture_url") ?? ""
                     RemoteImage(url: URL(string: picture_url))
                         .clipShape(Circle())
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
-                    
+
                 })
             )
-            .navigationBarTitleDisplayMode(.inline)
-        }
-        .navigationBarHidden(true)
+            .navigationBarTitleDisplayMode(.inline)*/
         
         
         
+            .navigationBarBackButtonHidden(true)
         
     }
 }

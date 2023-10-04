@@ -35,6 +35,12 @@ struct NotesView: View {
                     VStack{
                         
                         Button(action: {
+                            
+                            guard vm.isLogin else {
+                                print("Please login first")
+                                return
+                            }
+                            
                             guard let noteId = dataStore.note_id,
                                   let subjectId = dataStore.subject_id,
                                   let standardId = dataStore.standard_id,
@@ -42,6 +48,7 @@ struct NotesView: View {
                                   !vm.isLiked else {
                                 return
                             }
+                            
                             Task {
                                 await vm.addLike(standard_id: standardId, subject_id: subjectId, note_id:noteId, like:true)
                                 await vm.updateLikesCount(standard_id: standardId, subject_id: subjectId, note_id: noteId, count: likeCount+1)
@@ -82,6 +89,11 @@ struct NotesView: View {
                     Spacer()
                     Button(action: {
                         
+                        guard vm.isLogin else {
+                            print("Please login first")
+                            return
+                        }
+                        
                         guard let note = vm.noteModel else {
                             return
                         }
@@ -102,6 +114,12 @@ struct NotesView: View {
                     Spacer()
                     
                     Button(action: {
+                        
+                        guard vm.isLogin else {
+                            print("Please login first")
+                            return
+                        }
+                        
                         guard let noteId = dataStore.note_id,
                               let subjectId = dataStore.subject_id,
                               let standardId = dataStore.standard_id,

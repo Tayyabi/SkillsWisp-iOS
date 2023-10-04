@@ -21,19 +21,21 @@ class ReviewsViewModel: ObservableObject {
     @Published var twoStar: Int = 0
     @Published var oneStar: Int = 0
     @Published var totalRating: Double = 0
-    
     @Published var isLoading = false
+    @Published var isLogin = false
     
     let reviewDataService = ReviewsDataService()
     
-    
+    init() {
+        isLogin = UserDefaults.standard.bool(forKey: "is_login")
+    }
     
     
     func addReview(standardId: String, subjectId: String, noteId: String, review: String) async throws {
         
         do {
             let name = UserDefaults.standard.string(forKey: "full_name") ?? "UnKnown"
-            let picUrl = UserDefaults.standard.string(forKey: "pictrue_url") ?? "UnKnown"
+            let picUrl = UserDefaults.standard.string(forKey: "picture_url") ?? "UnKnown"
             let revieww = ReviewModel(review: review, name: name, picUrl: picUrl)
             try await reviewDataService.addReviewInDB(note_id: noteId, review: revieww)
             

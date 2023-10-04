@@ -125,16 +125,18 @@ struct ReviewsView: View {
                     
                     Spacer()
                     
-                    Button(action: {
-                        self.showReview.toggle()
-                    }, label: {
-                        
-                        Text("Review Now")
-                            .foregroundColor(.white)
-                            .padding(10)
-                            .background(Color("clr_purple_mimosa").cornerRadius(10))
-                        
-                    })
+                    if(vm.isLogin) {
+                        Button(action: {
+                            self.showReview.toggle()
+                        }, label: {
+                            
+                            Text("Review Now")
+                                .foregroundColor(.white)
+                                .padding(10)
+                                .background(Color("clr_purple_mimosa").cornerRadius(10))
+                            
+                        })
+                    }
                 }
                 .padding()
                 
@@ -151,20 +153,27 @@ struct ReviewsView: View {
                             VStack {
                                 HStack {
                                     
-                                    Image("bn_maths")
-                                        .renderingMode(.original)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 50,height: 50)
-                                        .clipShape(Circle())
-                                        .overlay(Circle())
                                     
+                                    let picture_url = review.picUrl ?? ""
+                                    RemoteImage(url: URL(string: picture_url))
+                                        .clipShape(Circle())
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 50, height: 50)
+                                    
+//                                    Image("bn_maths")
+//                                        .renderingMode(.original)
+//                                        .resizable()
+//                                        .aspectRatio(contentMode: .fit)
+//                                        .frame(width: 50,height: 50)
+//                                        .clipShape(Circle())
+//                                        .overlay(Circle())
+//
                                     
                                     VStack(alignment: .leading, spacing: 5) {
                                         
                                         HStack(alignment: .center) {
                                             
-                                            Text("John Smith")
+                                            Text("\(review.name ?? "Unknown")")
                                                 .foregroundColor(.black)
                                                 .fontWeight(.semibold)
                                             
@@ -192,40 +201,42 @@ struct ReviewsView: View {
                         
                     }
                 }
-                HStack{
-                    
-                    TextField("Type here", text: $comment)
-                        .font(.system(size: 16))
-                    
-                    //                Image(systemName: "person")
-                    //                    .foregroundColor(Color.gray)
-                    
-                    Button(action: {
+                if (vm.isLogin) {
+                    HStack{
                         
-                        guard let noteId = dataStore.note_id,
-                              let standardId = dataStore.standard_id,
-                              let subjectId = dataStore.subject_id,
-                              !comment.isEmpty else {
-                            return
-                        }
-                        Task {
-                            try? await vm.addReview(standardId: standardId, subjectId: subjectId, noteId: noteId, review: comment)
+                        TextField("Type here", text: $comment)
+                            .font(.system(size: 16))
+                        
+                        //                Image(systemName: "person")
+                        //                    .foregroundColor(Color.gray)
+                        
+                        Button(action: {
                             
-                            comment = ""
-                        }
-                    }, label: {
+                            guard let noteId = dataStore.note_id,
+                                  let standardId = dataStore.standard_id,
+                                  let subjectId = dataStore.subject_id,
+                                  !comment.isEmpty else {
+                                return
+                            }
+                            Task {
+                                try? await vm.addReview(standardId: standardId, subjectId: subjectId, noteId: noteId, review: comment)
+                                
+                                comment = ""
+                            }
+                        }, label: {
+                            
+                            Text("Submit")
+                                .foregroundColor(.white)
+                                .padding(10)
+                                .background(Color("clr_purple_mimosa").cornerRadius(10))
+                            
+                        })
                         
-                        Text("Submit")
-                            .foregroundColor(.white)
-                            .padding(10)
-                            .background(Color("clr_purple_mimosa").cornerRadius(10))
-                        
-                    })
-                    
+                    }
+                    .padding(10)
+                    .background(Color("clr_light_grey").cornerRadius(radius: 10, corners: .allCorners))
+                    .padding([.leading, .trailing])
                 }
-                .padding(10)
-                .background(Color("clr_light_grey").cornerRadius(radius: 10, corners: .allCorners))
-                .padding([.leading, .trailing])
                 Spacer()
                 
             }

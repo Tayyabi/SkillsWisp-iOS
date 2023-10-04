@@ -10,7 +10,7 @@ import SwiftUI
 struct CornerRadiusShape: Shape {
     var radius = CGFloat.infinity
     var corners = UIRectCorner.allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
@@ -20,7 +20,7 @@ struct CornerRadiusShape: Shape {
 struct CornerRadiusStyle: ViewModifier {
     var radius: CGFloat
     var corners: UIRectCorner
-
+    
     func body(content: Content) -> some View {
         content
             .clipShape(CornerRadiusShape(radius: radius, corners: corners))
@@ -37,15 +37,18 @@ struct SplashView: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             
             ZStack{
                 
-//                Color("clr_fantasy")
-//                    .edgesIgnoringSafeArea(.all)
+                //                Color("clr_fantasy")
+                //                    .edgesIgnoringSafeArea(.all)
                 Image("bg_splash")
                     .resizable()
-                    .frame(width: .infinity, height: .infinity)
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity,
+                           minHeight: 0,
+                           maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
                 
                 
@@ -71,10 +74,10 @@ struct SplashView: View {
                         
                         Rectangle()
                             .fill(Color.white)
-                            .frame(width: .infinity, height: 400)
+                            .frame(minWidth: 0,maxWidth: .infinity, minHeight: 0, maxHeight: 400)
                             .cornerRadius(radius: 50.0, corners: [.topLeft,.topRight])
                             .padding(.bottom, -110)
-                            
+                        
                         
                         VStack{
                             
@@ -117,12 +120,15 @@ struct SplashView: View {
                     .ignoresSafeArea(edges: .bottom)
                     
                 }
-                .frame(width: .infinity, height: .infinity)
+                .frame(minWidth: 0,
+                       maxWidth: .infinity,
+                       minHeight: 0,
+                       maxHeight: .infinity)
                 
             }
             
         }
-    
+        
     }
 }
 

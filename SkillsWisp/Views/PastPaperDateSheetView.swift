@@ -42,7 +42,8 @@ struct PastPaperDateSheetView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    guard let paper = paper.paper else {
+                    guard let paper = paper.paper,
+                          vm.isLogin else {
                         return
                     }
                     //vm.isLoading = true
@@ -61,7 +62,8 @@ struct PastPaperDateSheetView: View {
                 
                 Button(action: {
                     guard let id = paper.paper?.id,
-                          !vm.isBookmark else {
+                          !vm.isBookmark,
+                          vm.isLogin else {
                         return
                     }
                     vm.isBookmark = true

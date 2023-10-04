@@ -12,6 +12,7 @@ class HomeViewModel: ObservableObject {
     
     @Published var savedEntities: [StandardModel] = []
     @Published var data: String = ""
+    @Published var isLogin = false
     
     let homeDataService = HomeDataService()
     
@@ -21,6 +22,7 @@ class HomeViewModel: ObservableObject {
     }
     
     init() {
+        isLogin = UserDefaults.standard.bool(forKey: "is_login") 
         //deleteAllEntities()
         //addStandard()
         //fetchStandards()
